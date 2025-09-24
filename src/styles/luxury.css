@@ -1,0 +1,369 @@
+/* src/styles/luxury.css */
+
+/* Luxury Gradients */
+.th-gradient-primary {
+    background: linear-gradient(135deg, var(--th-primary) 0%, var(--th-primary-light) 100%);
+  }
+  
+  .th-gradient-secondary {
+    background: linear-gradient(135deg, var(--th-secondary) 0%, var(--th-secondary-light) 100%);
+  }
+  
+  .th-gradient-accent {
+    background: linear-gradient(135deg, var(--th-accent) 0%, var(--th-accent-light) 100%);
+  }
+  
+  .th-gradient-sunset {
+    background: linear-gradient(135deg, #FF6B6B 0%, #FFE66D 50%, #FF6B6B 100%);
+  }
+  
+  .th-gradient-ocean {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  }
+  
+  .th-gradient-forest {
+    background: linear-gradient(135deg, #134E5E 0%, #71B280 100%);
+  }
+  
+  /* Glassmorphism Effects */
+  .th-glass {
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  }
+  
+  .th-glass-dark {
+    background: rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  }
+  
+  .th-glass-primary {
+    background: rgba(230, 126, 34, 0.15);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(230, 126, 34, 0.2);
+    box-shadow: 0 8px 32px 0 rgba(230, 126, 34, 0.25);
+  }
+  
+  /* Morphism Cards */
+  .th-morphism-card {
+    background: linear-gradient(145deg, #ffffff, #f0f0f0);
+    box-shadow: 
+      20px 20px 60px #d9d9d9,
+      -20px -20px 60px #ffffff;
+    border-radius: 20px;
+    padding: 2rem;
+    transition: all 0.3s ease;
+  }
+  
+  .th-morphism-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 
+      25px 25px 75px #d9d9d9,
+      -25px -25px 75px #ffffff;
+  }
+  
+  .th-morphism-inset {
+    background: linear-gradient(145deg, #f0f0f0, #ffffff);
+    box-shadow: 
+      inset 20px 20px 60px #d9d9d9,
+      inset -20px -20px 60px #ffffff;
+    border-radius: 15px;
+    padding: 1.5rem;
+  }
+  
+  /* Luxury Animations */
+  @keyframes th-fade-in-up {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes th-fade-in-down {
+    from {
+      opacity: 0;
+      transform: translateY(-30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes th-fade-in-left {
+    from {
+      opacity: 0;
+      transform: translateX(-30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  
+  @keyframes th-fade-in-right {
+    from {
+      opacity: 0;
+      transform: translateX(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  
+  @keyframes th-scale-in {
+    from {
+      opacity: 0;
+      transform: scale(0.9);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  
+  @keyframes th-float {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+  
+  @keyframes th-pulse-glow {
+    0%, 100% {
+      box-shadow: 0 0 20px rgba(230, 126, 34, 0.3);
+    }
+    50% {
+      box-shadow: 0 0 40px rgba(230, 126, 34, 0.6);
+    }
+  }
+  
+  @keyframes th-shimmer {
+    0% {
+      background-position: -468px 0;
+    }
+    100% {
+      background-position: 468px 0;
+    }
+  }
+  
+  /* Animation Classes */
+  .th-animate-fade-in-up {
+    animation: th-fade-in-up 0.6s ease-out;
+  }
+  
+  .th-animate-fade-in-down {
+    animation: th-fade-in-down 0.6s ease-out;
+  }
+  
+  .th-animate-fade-in-left {
+    animation: th-fade-in-left 0.6s ease-out;
+  }
+  
+  .th-animate-fade-in-right {
+    animation: th-fade-in-right 0.6s ease-out;
+  }
+  
+  .th-animate-scale-in {
+    animation: th-scale-in 0.4s ease-out;
+  }
+  
+  .th-animate-float {
+    animation: th-float 3s ease-in-out infinite;
+  }
+  
+  .th-animate-pulse-glow {
+    animation: th-pulse-glow 2s ease-in-out infinite;
+  }
+  
+  /* Delayed Animations */
+  .th-animate-delay-100 { animation-delay: 0.1s; }
+  .th-animate-delay-200 { animation-delay: 0.2s; }
+  .th-animate-delay-300 { animation-delay: 0.3s; }
+  .th-animate-delay-500 { animation-delay: 0.5s; }
+  
+  /* Hover Effects */
+  .th-hover-float:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease;
+  }
+  
+  .th-hover-scale:hover {
+    transform: scale(1.05);
+    transition: all 0.3s ease;
+  }
+  
+  .th-hover-glow:hover {
+    box-shadow: 0 0 30px rgba(230, 126, 34, 0.4);
+    transition: all 0.3s ease;
+  }
+  
+  .th-hover-tilt:hover {
+    transform: perspective(1000px) rotateY(10deg) rotateX(5deg);
+    transition: all 0.3s ease;
+  }
+  
+  /* Text Effects */
+  .th-text-gradient {
+    background: linear-gradient(135deg, var(--th-primary) 0%, var(--th-accent) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 700;
+  }
+  
+  .th-text-shimmer {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 400% 100%;
+    animation: th-shimmer 1.5s infinite;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  
+  .th-text-shadow {
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .th-text-shadow-lg {
+    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Luxury Borders */
+  .th-border-gradient {
+    border: 2px solid;
+    border-image: linear-gradient(135deg, var(--th-primary), var(--th-accent)) 1;
+  }
+  
+  .th-border-shine {
+    position: relative;
+    border: 2px solid transparent;
+    background: linear-gradient(white, white) padding-box,
+                linear-gradient(135deg, var(--th-primary), var(--th-accent)) border-box;
+  }
+  
+  /* Loading States */
+  .th-skeleton {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 400% 100%;
+    animation: th-shimmer 1.5s infinite;
+    border-radius: 8px;
+  }
+  
+  .th-skeleton-text {
+    height: 1rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .th-skeleton-text:last-child {
+    width: 60%;
+  }
+  
+  .th-skeleton-avatar {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+  }
+  
+  .th-skeleton-button {
+    height: 2.5rem;
+    width: 6rem;
+    border-radius: 0.5rem;
+  }
+  
+  /* Luxury Backgrounds */
+  .th-bg-mesh {
+    background: 
+      radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+      radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
+      radial-gradient(circle at 40% 40%, rgba(120, 198, 255, 0.3) 0%, transparent 50%);
+  }
+  
+  .th-bg-dots {
+    background-image: radial-gradient(circle, #d1d5db 1px, transparent 1px);
+    background-size: 20px 20px;
+  }
+  
+  .th-bg-grid {
+    background-image: 
+      linear-gradient(rgba(0, 0, 0, 0.1) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 0, 0, 0.1) 1px, transparent 1px);
+    background-size: 20px 20px;
+  }
+  
+  /* Premium Cards */
+  .th-luxury-card {
+    background: white;
+    border-radius: 24px;
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 
+      0 4px 6px -1px rgba(0, 0, 0, 0.1),
+      0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .th-luxury-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--th-primary), var(--th-accent));
+  }
+  
+  .th-luxury-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 
+      0 20px 25px -5px rgba(0, 0, 0, 0.1),
+      0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  }
+  
+  /* Responsive Luxury */
+  @media (max-width: 768px) {
+    .th-morphism-card {
+      padding: 1.5rem;
+      box-shadow: 
+        15px 15px 45px #d9d9d9,
+        -15px -15px 45px #ffffff;
+    }
+    
+    .th-luxury-card {
+      padding: 1.5rem;
+      border-radius: 16px;
+    }
+  }
+  
+  /* Dark Theme Luxury */
+  [data-theme="dark"] .th-glass {
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  [data-theme="dark"] .th-morphism-card {
+    background: linear-gradient(145deg, #2d2d2d, #1a1a1a);
+    box-shadow: 
+      20px 20px 60px #0d0d0d,
+      -20px -20px 60px #3a3a3a;
+  }
+  
+  [data-theme="dark"] .th-luxury-card {
+    background: #1f2937;
+    color: #f9fafb;
+  }

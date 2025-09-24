@@ -1,0 +1,299 @@
+.th-auth-form {
+  width: 100%;
+  max-width: 400px;
+}
+
+.th-auth-form-wide {
+  max-width: 500px;
+}
+
+.th-auth-header {
+  text-align: center;
+  margin-bottom: var(--th-space-8);
+}
+
+.th-auth-form-title {
+  font-family: var(--th-font-heading);
+  font-size: var(--th-text-3xl);
+  font-weight: 700;
+  color: var(--th-gray-800);
+  margin-bottom: var(--th-space-3);
+}
+
+.th-auth-form-subtitle {
+  font-size: var(--th-text-base);
+  color: var(--th-gray-600);
+  line-height: var(--th-leading-relaxed);
+}
+
+.th-auth-form-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--th-space-6);
+}
+
+/* Form Groups */
+.th-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--th-space-4);
+}
+
+.th-form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.th-label {
+  font-size: var(--th-text-sm);
+  font-weight: 600;
+  color: var(--th-gray-700);
+  margin-bottom: var(--th-space-2);
+  letter-spacing: var(--th-tracking-wide);
+}
+
+/* Input Groups */
+.th-input-group {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.th-input {
+  width: 100%;
+  padding: var(--th-space-4) var(--th-space-6);
+  font-size: var(--th-text-base);
+  font-weight: 500;
+  color: var(--th-gray-800);
+  background: rgba(255, 255, 255, 0.9);
+  border: 2px solid rgba(230, 126, 34, 0.1);
+  border-radius: 12px;
+  transition: var(--th-transition-luxury);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  box-shadow: var(--th-shadow-sm);
+  --webkit-user-select: none;
+}
+
+.th-input-with-icon {
+  padding-left: var(--th-space-12);
+}
+
+.th-input:focus {
+  outline: none;
+  border-color: var(--th-primary-solid);
+  background: var(--th-white);
+  box-shadow: 0 0 0 4px rgba(230, 126, 34, 0.1), var(--th-shadow-lg);
+  transform: translateY(-2px);
+}
+
+.th-input::placeholder {
+  color: var(--th-gray-400);
+}
+
+.th-input-error {
+  border-color: var(--th-warm) !important;
+  box-shadow: 0 0 0 4px rgba(231, 76, 60, 0.1) !important;
+}
+
+.th-input-icon {
+  position: absolute;
+  left: var(--th-space-4);
+  color: var(--th-gray-400);
+  font-size: var(--th-text-base);
+  z-index: 1;
+  transition: var(--th-transition-fast);
+}
+
+.th-input:focus ~ .th-input-icon,
+.th-input-group:hover .th-input-icon {
+  color: var(--th-primary-solid);
+}
+
+.th-input-action {
+  position: absolute;
+  right: var(--th-space-4);
+  background: none;
+  border: none;
+  color: var(--th-gray-400);
+  cursor: pointer;
+  font-size: var(--th-text-base);
+  transition: var(--th-transition-fast);
+  padding: var(--th-space-2);
+  border-radius: 6px;
+}
+
+.th-input-action:hover {
+  color: var(--th-primary-solid);
+  background: rgba(230, 126, 34, 0.1);
+}
+
+/* Select */
+.th-select {
+  width: 100%;
+  padding: var(--th-space-4) var(--th-space-6);
+  font-size: var(--th-text-base);
+  font-weight: 500;
+  color: var(--th-gray-800);
+  background: rgba(255, 255, 255, 0.9);
+  border: 2px solid rgba(230, 126, 34, 0.1);
+  border-radius: 12px;
+  transition: var(--th-transition-luxury);
+  cursor: pointer;
+  appearance: none;
+  background-image: url('data:image/svg+xml;utf8,<svg fill="%23718096" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 1rem;
+  --webkit-user-select: none;
+}
+
+.th-select:focus {
+  outline: none;
+  border-color: var(--th-primary-solid);
+  background: var(--th-white);
+  box-shadow: 0 0 0 4px rgba(230, 126, 34, 0.1), var(--th-shadow-lg);
+}
+
+/* Checkbox */
+.th-checkbox-container {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--th-space-3);
+  cursor: pointer;
+  line-height: var(--th-leading-relaxed);
+}
+
+.th-checkbox {
+  width: 18px;
+  height: 18px;
+  border: 2px solid var(--th-gray-300);
+  border-radius: 4px;
+  background: var(--th-white);
+  cursor: pointer;
+  transition: var(--th-transition-fast);
+  margin: 0;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.th-checkbox:checked {
+  background: var(--th-primary-solid);
+  border-color: var(--th-primary-solid);
+}
+
+.th-checkbox-label {
+  font-size: var(--th-text-sm);
+  color: var(--th-gray-600);
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/* Form Options */
+.th-form-options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: var(--th-space-2) 0;
+}
+
+/* Links */
+.th-link {
+  color: var(--th-primary-solid);
+  text-decoration: none;
+  font-weight: 600;
+  transition: var(--th-transition-fast);
+  font-size: var(--th-text-sm);
+}
+
+.th-link:hover {
+  color: var(--th-primary-dark);
+  text-decoration: underline;
+}
+
+.th-link-primary {
+  color: var(--th-primary-solid);
+  font-weight: 700;
+}
+
+/* Alerts */
+.th-alert {
+  padding: var(--th-space-4);
+  border-radius: 12px;
+  font-size: var(--th-text-sm);
+  font-weight: 500;
+  margin-bottom: var(--th-space-4);
+}
+
+.th-alert-error {
+  background: rgba(231, 76, 60, 0.1);
+  border: 1px solid rgba(231, 76, 60, 0.2);
+  color: var(--th-warm);
+}
+
+/* Error Text */
+.th-error-text {
+  font-size: var(--th-text-xs);
+  color: var(--th-warm);
+  margin-top: var(--th-space-1);
+  font-weight: 500;
+}
+
+/* Auth Divider */
+.th-auth-divider {
+  display: flex;
+  align-items: center;
+  margin: var(--th-space-6) 0;
+  position: relative;
+}
+
+.th-auth-divider::before {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--th-gray-200);
+}
+
+.th-auth-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--th-gray-200);
+}
+
+.th-auth-divider span {
+  padding: 0 var(--th-space-4);
+  color: var(--th-gray-500);
+  font-size: var(--th-text-sm);
+  font-weight: 500;
+  background: var(--th-white);
+}
+
+/* Auth Footer */
+.th-auth-footer {
+  text-align: center;
+  margin-top: var(--th-space-4);
+}
+
+.th-auth-footer p {
+  color: var(--th-gray-600);
+  font-size: var(--th-text-sm);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .th-form-row {
+    grid-template-columns: 1fr;
+    gap: var(--th-space-6);
+  }
+  
+  .th-auth-form-wide {
+    max-width: 400px;
+  }
+  
+  .th-form-options {
+    flex-direction: column;
+    gap: var(--th-space-3);
+    align-items: flex-start;
+  }
+}

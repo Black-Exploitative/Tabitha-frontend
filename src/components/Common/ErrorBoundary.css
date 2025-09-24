@@ -1,0 +1,87 @@
+/* src/components/Common/ErrorBoundary.css */
+.th-error-boundary {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  }
+  
+  .th-error-container {
+    background: white;
+    border-radius: 16px;
+    padding: 3rem 2rem;
+    text-align: center;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    max-width: 500px;
+    width: 100%;
+  }
+  
+  .th-error-icon {
+    color: #E74C3C;
+    font-size: 4rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .th-error-title {
+    font-size: 1.875rem;
+    font-weight: 700;
+    color: #1f2937;
+    margin-bottom: 1rem;
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  .th-error-message {
+    color: #6b7280;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+    font-size: 1rem;
+  }
+  
+  .th-error-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  
+  .th-error-details {
+    margin-top: 2rem;
+    text-align: left;
+    background: #f9fafb;
+    border-radius: 8px;
+    padding: 1rem;
+  }
+  
+  .th-error-details summary {
+    cursor: pointer;
+    font-weight: 600;
+    color: #374151;
+    padding: 0.5rem;
+  }
+  
+  .th-error-stack {
+    background: #1f2937;
+    color: #f9fafb;
+    padding: 1rem;
+    border-radius: 6px;
+    overflow-x: auto;
+    font-size: 0.875rem;
+    white-space: pre-wrap;
+    margin-top: 0.5rem;
+  }
+  
+  @media (max-width: 640px) {
+    .th-error-container {
+      padding: 2rem 1.5rem;
+    }
+    
+    .th-error-title {
+      font-size: 1.5rem;
+    }
+    
+    .th-error-actions {
+      flex-direction: column;
+    }
+  }

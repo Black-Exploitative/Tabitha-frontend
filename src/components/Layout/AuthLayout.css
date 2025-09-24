@@ -1,0 +1,184 @@
+.th-auth-layout {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .th-auth-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 0;
+  }
+  
+  .th-auth-gradient {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+      135deg,
+      rgba(230, 126, 34, 0.1) 0%,
+      rgba(52, 152, 219, 0.05) 25%,
+      rgba(39, 174, 96, 0.08) 50%,
+      rgba(230, 126, 34, 0.12) 75%,
+      rgba(231, 76, 60, 0.06) 100%
+    );
+  }
+  
+  .th-auth-pattern {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+      radial-gradient(circle at 25% 25%, rgba(230, 126, 34, 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 75% 75%, rgba(39, 174, 96, 0.08) 0%, transparent 50%),
+      radial-gradient(circle at 50% 50%, rgba(52, 152, 219, 0.06) 0%, transparent 50%);
+    animation: th-pattern-float 20s ease-in-out infinite;
+  }
+  
+  @keyframes th-pattern-float {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-20px) rotate(180deg); }
+  }
+  
+  .th-auth-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: var(--th-space-6);
+    position: relative;
+    z-index: 1;
+  }
+  
+  .th-auth-brand {
+    text-align: center;
+    margin-right: var(--th-space-12);
+    flex: 1;
+    max-width: 400px;
+  }
+  
+  .th-auth-logo {
+    width: 120px;
+    height: 120px;
+    background: var(--th-primary);
+    border-radius: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto var(--th-space-6);
+    font-family: var(--th-font-luxury);
+    font-size: var(--th-text-4xl);
+    font-weight: 800;
+    color: var(--th-white);
+    box-shadow: var(--th-shadow-luxury);
+    transform: rotate(-5deg);
+    transition: var(--th-transition-luxury);
+  }
+  
+  .th-auth-logo:hover {
+    transform: rotate(0deg) scale(1.05);
+  }
+  
+  .th-auth-title {
+    font-family: var(--th-font-luxury);
+    font-size: var(--th-text-5xl);
+    font-weight: 800;
+    background: var(--th-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: var(--th-space-4);
+    letter-spacing: var(--th-tracking-tight);
+  }
+  
+  .th-auth-subtitle {
+    font-size: var(--th-text-xl);
+    color: var(--th-gray-600);
+    font-weight: 500;
+    line-height: var(--th-leading-relaxed);
+    margin-bottom: var(--th-space-8);
+  }
+  
+  .th-auth-card {
+    background: var(--th-glass-bg);
+    border: 1px solid var(--th-glass-border);
+    -webkit-backdrop-filter: var(--th-glass-backdrop);
+    backdrop-filter: var(--th-glass-backdrop);
+    border-radius: 24px;
+    padding: var(--th-space-10);
+    box-shadow: var(--th-glass-shadow);
+    width: 100%;
+    max-width: 450px;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .th-auth-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  }
+  
+  .th-auth-footer {
+    text-align: center;
+    padding: var(--th-space-6);
+    color: var(--th-gray-500);
+    font-size: var(--th-text-sm);
+    position: relative;
+    z-index: 1;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 1024px) {
+    .th-auth-container {
+      flex-direction: column;
+      text-align: center;
+    }
+    
+    .th-auth-brand {
+      margin-right: 0;
+      margin-bottom: var(--th-space-8);
+      max-width: none;
+    }
+    
+    .th-auth-logo {
+      width: 80px;
+      height: 80px;
+      font-size: var(--th-text-3xl);
+    }
+    
+    .th-auth-title {
+      font-size: var(--th-text-4xl);
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .th-auth-container {
+      padding: var(--th-space-4);
+    }
+    
+    .th-auth-card {
+      padding: var(--th-space-8);
+    }
+    
+    .th-auth-title {
+      font-size: var(--th-text-3xl);
+    }
+    
+    .th-auth-subtitle {
+      font-size: var(--th-text-lg);
+    }
+  }

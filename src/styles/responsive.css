@@ -1,0 +1,415 @@
+/* src/styles/responsive.css */
+
+/* Mobile First Responsive Design */
+
+/* Extra Small devices (phones, 576px and down) */
+@media (max-width: 575.98px) {
+    .th-container {
+      padding: 0 1rem;
+    }
+    
+    .th-page-title {
+      font-size: 1.5rem !important;
+    }
+    
+    .th-btn {
+      width: 100%;
+      justify-content: center;
+    }
+    
+    .th-btn-group {
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    
+    .th-card {
+      margin: 0 -1rem;
+      border-radius: 0;
+      border-left: none;
+      border-right: none;
+    }
+    
+    .th-table-container {
+      margin: 0 -1rem;
+      border-radius: 0;
+      border-left: none;
+      border-right: none;
+    }
+    
+    .th-modal {
+      margin: 1rem;
+      max-height: calc(100vh - 2rem);
+    }
+    
+    .th-modal-header {
+      padding: 1rem;
+    }
+    
+    .th-modal-body {
+      padding: 1rem;
+    }
+    
+    .th-modal-footer {
+      padding: 1rem;
+      flex-direction: column-reverse;
+      gap: 0.5rem;
+    }
+    
+    .th-modal-footer .th-btn {
+      width: 100%;
+    }
+    
+    /* Hide certain elements on mobile */
+    .th-hide-mobile {
+      display: none !important;
+    }
+    
+    /* Stack form elements */
+    .th-form-row {
+      flex-direction: column;
+      gap: 1rem;
+    }
+    
+    /* Responsive text sizes */
+    .th-text-responsive {
+      font-size: var(--th-text-sm);
+    }
+    
+    /* Mobile navigation */
+    .th-nav-mobile {
+      display: block;
+    }
+    
+    .th-nav-desktop {
+      display: none;
+    }
+  }
+  
+  /* Small devices (landscape phones, 576px and up) */
+  @media (min-width: 576px) {
+    .th-container {
+      max-width: 540px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+    
+    .th-btn-group {
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
+    
+    .th-card-grid {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+  }
+  
+  /* Medium devices (tablets, 768px and up) */
+  @media (min-width: 768px) {
+    .th-container {
+      max-width: 720px;
+      padding: 0 2rem;
+    }
+    
+    .th-card-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+    }
+    
+    .th-form-row {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-end;
+    }
+    
+    .th-form-row .th-form-group {
+      flex: 1;
+      margin-bottom: 0;
+    }
+    
+    .th-table-responsive {
+      overflow-x: visible;
+    }
+    
+    .th-modal {
+      max-width: 600px;
+      margin: 3rem auto;
+    }
+    
+    .th-hide-tablet {
+      display: none !important;
+    }
+    
+    .th-show-tablet {
+      display: block !important;
+    }
+    
+    /* Navigation adjustments */
+    .th-nav-mobile {
+      display: none;
+    }
+    
+    .th-nav-desktop {
+      display: flex;
+    }
+    
+    /* REMOVED CONFLICTING SIDEBAR RULES - Let Sidebar.css handle positioning */
+  }
+  
+  /* Large devices (desktops, 992px and up) */
+  @media (min-width: 992px) {
+    .th-container {
+      max-width: 960px;
+    }
+    
+    .th-card-grid {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+    
+    .th-stats-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+    
+    .th-modal-lg {
+      max-width: 800px;
+    }
+    
+    .th-hide-desktop {
+      display: none !important;
+    }
+    
+    .th-show-desktop {
+      display: block !important;
+    }
+    
+    /* Better spacing on larger screens */
+    .th-section {
+      padding: 3rem 0;
+    }
+    
+    .th-card {
+      padding: 2rem;
+    }
+    
+    /* REMOVED CONFLICTING SIDEBAR RULES - Let Sidebar.css and MainLayout.css handle this */
+  }
+  
+  /* Extra large devices (large desktops, 1200px and up) */
+  @media (min-width: 1200px) {
+    .th-container {
+      max-width: 1140px;
+    }
+    
+    .th-card-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+    
+    .th-modal-xl {
+      max-width: 1000px;
+    }
+    
+    .th-stats-grid {
+      grid-template-columns: repeat(5, 1fr);
+    }
+    
+    /* Ultra-wide specific adjustments */
+    .th-section {
+      padding: 4rem 0;
+    }
+  }
+  
+  /* Extra extra large devices (1400px and up) */
+  @media (min-width: 1400px) {
+    .th-container {
+      max-width: 1320px;
+    }
+    
+    .th-card-grid-auto {
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    }
+  }
+  
+  /* Responsive utilities */
+  .th-responsive-text {
+    font-size: clamp(1rem, 2.5vw, 1.5rem);
+  }
+  
+  .th-responsive-heading {
+    font-size: clamp(1.5rem, 4vw, 3rem);
+  }
+  
+  .th-responsive-padding {
+    padding: clamp(1rem, 4vw, 2rem);
+  }
+  
+  .th-responsive-margin {
+    margin: clamp(0.5rem, 2vw, 1rem);
+  }
+  
+  /* Container queries (when supported) */
+  @supports (container-type: inline-size) {
+    .th-card-container {
+      container-type: inline-size;
+    }
+    
+    @container (min-width: 300px) {
+      .th-card-content {
+        padding: 1.5rem;
+      }
+    }
+    
+    @container (min-width: 500px) {
+      .th-card-content {
+        padding: 2rem;
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        gap: 1rem;
+      }
+    }
+  }
+  
+  /* Print styles */
+  @media print {
+    .th-hide-print {
+      display: none !important;
+    }
+    
+    .th-show-print {
+      display: block !important;
+    }
+    
+    .th-page-break {
+      page-break-before: always;
+    }
+    
+    .th-no-page-break {
+      page-break-inside: avoid;
+    }
+    
+    .th-card,
+    .th-modal,
+    .th-dropdown-menu {
+      box-shadow: none !important;
+      border: 1px solid #000 !important;
+    }
+    
+    .th-btn {
+      border: 1px solid #000 !important;
+      background: transparent !important;
+      color: #000 !important;
+    }
+  }
+  
+  /* Landscape orientation specific */
+  @media (orientation: landscape) and (max-height: 500px) {
+    .th-modal {
+      max-height: 90vh;
+      margin: 2vh auto;
+    }
+    
+    .th-fullscreen-mobile {
+      height: 100vh;
+      padding: 1rem;
+    }
+  }
+  
+  /* High DPI displays */
+  @media (-webkit-min-device-pixel-ratio: 2),
+         (min-resolution: 192dpi) {
+    .th-high-dpi {
+      /* Styles for high DPI displays */
+    }
+  }
+  
+  /* Reduced motion preferences */
+  @media (prefers-reduced-motion: reduce) {
+    .th-animate {
+      animation: none !important;
+      transition: none !important;
+    }
+    
+    .th-hover-effects:hover {
+      transform: none !important;
+    }
+  }
+  
+  /* Dark mode media query */
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme]) {
+      /* Auto dark mode when no theme is set */
+      color-scheme: dark;
+    }
+  }
+  
+  /* Contrast preferences */
+  @media (prefers-contrast: high) {
+    .th-high-contrast {
+      border-width: 2px;
+      outline-width: 2px;
+    }
+  }
+  
+  /* Touch device specific */
+  @media (hover: none) and (pointer: coarse) {
+    .th-touch-target {
+      min-height: 44px;
+      min-width: 44px;
+    }
+    
+    .th-hover-only {
+      display: none;
+    }
+    
+    .th-btn {
+      padding: 0.875rem 1.5rem; /* Larger touch targets */
+    }
+  }
+  
+  /* Hover capable devices */
+  @media (hover: hover) and (pointer: fine) {
+    .th-hover-effects {
+      transition: all var(--th-transition-base);
+    }
+    
+    .th-hover-effects:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--th-shadow-lg);
+    }
+  }
+  
+  /* Flexible grid system */
+  .th-grid {
+    display: grid;
+    gap: 1rem;
+  }
+  
+  .th-grid-1 { grid-template-columns: 1fr; }
+  .th-grid-2 { grid-template-columns: repeat(2, 1fr); }
+  .th-grid-3 { grid-template-columns: repeat(3, 1fr); }
+  .th-grid-4 { grid-template-columns: repeat(4, 1fr); }
+  .th-grid-5 { grid-template-columns: repeat(5, 1fr); }
+  .th-grid-6 { grid-template-columns: repeat(6, 1fr); }
+  
+  .th-grid-auto {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  }
+  
+  .th-grid-auto-sm {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+  
+  .th-grid-auto-lg {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  }
+  
+  /* Responsive spacing utilities */
+  .th-p-responsive { padding: clamp(1rem, 4vw, 2rem); }
+  .th-m-responsive { margin: clamp(0.5rem, 2vw, 1rem); }
+  .th-gap-responsive { gap: clamp(0.5rem, 2vw, 1.5rem); }
+  
+  /* Responsive font sizes */
+  .th-text-responsive-sm { font-size: clamp(0.875rem, 2vw, 1rem); }
+  .th-text-responsive-md { font-size: clamp(1rem, 2.5vw, 1.25rem); }
+  .th-text-responsive-lg { font-size: clamp(1.25rem, 3vw, 1.875rem); }
+  .th-text-responsive-xl { font-size: clamp(1.875rem, 4vw, 3rem); }

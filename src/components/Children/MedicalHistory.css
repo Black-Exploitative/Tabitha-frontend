@@ -1,0 +1,728 @@
+/* src/components/Children/MedicalHistory.css */
+
+.th-medical-history {
+    padding: var(--th-space-6);
+    background: var(--th-gray-50);
+    min-height: 100vh;
+  }
+  
+  /* Header */
+  .th-medical-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: var(--th-space-6);
+    padding-bottom: var(--th-space-4);
+    border-bottom: 2px solid var(--th-gray-200);
+  }
+  
+  .th-header-content {
+    flex: 1;
+  }
+  
+  .th-medical-title {
+    display: flex;
+    align-items: center;
+    gap: var(--th-space-3);
+    font-size: var(--th-text-3xl);
+    font-weight: 700;
+    color: var(--th-gray-800);
+    margin-bottom: var(--th-space-2);
+  }
+  
+  .th-title-icon {
+    color: var(--th-primary-solid);
+    font-size: var(--th-text-2xl);
+  }
+  
+  .th-medical-subtitle {
+    font-size: var(--th-text-base);
+    color: var(--th-gray-600);
+    margin: 0;
+  }
+  
+  .th-header-actions {
+    display: flex;
+    gap: var(--th-space-3);
+  }
+  
+  /* Tabs */
+  .th-medical-tabs {
+    display: flex;
+    gap: var(--th-space-1);
+    margin-bottom: var(--th-space-6);
+    border-bottom: 2px solid var(--th-gray-200);
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  
+  .th-medical-tabs::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .th-tab-button {
+    display: flex;
+    align-items: center;
+    gap: var(--th-space-2);
+    padding: var(--th-space-3) var(--th-space-4);
+    background: transparent;
+    border: none;
+    border-bottom: 3px solid transparent;
+    cursor: pointer;
+    transition: all var(--th-transition-base);
+    white-space: nowrap;
+    font-size: var(--th-text-sm);
+    font-weight: 600;
+    color: var(--th-gray-600);
+  }
+  
+  .th-tab-button:hover {
+    background: rgba(230, 126, 34, 0.05);
+    color: var(--th-primary-solid);
+  }
+  
+  .th-tab-button.active {
+    color: var(--th-primary-solid);
+    border-bottom-color: var(--th-primary-solid);
+    background: rgba(230, 126, 34, 0.1);
+  }
+  
+  .th-tab-icon {
+    font-size: var(--th-text-base);
+  }
+  
+  /* Overview Content */
+  .th-overview-content {
+    padding: var(--th-space-4);
+  }
+  
+  .th-overview-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: var(--th-space-6);
+  }
+  
+  .th-health-card {
+    background: white;
+    border-radius: var(--th-radius-lg);
+    box-shadow: var(--th-shadow-sm);
+    border: 1px solid var(--th-gray-200);
+    overflow: hidden;
+    transition: all var(--th-transition-base);
+  }
+  
+  .th-health-card:hover {
+    box-shadow: var(--th-shadow-md);
+    transform: translateY(-2px);
+  }
+  
+  .th-card-header {
+    padding: var(--th-space-4);
+    background: linear-gradient(135deg, var(--th-primary-solid) 0%, var(--th-primary-600) 100%);
+    color: white;
+  }
+  
+  .th-card-title {
+    display: flex;
+    align-items: center;
+    gap: var(--th-space-2);
+    font-size: var(--th-text-lg);
+    font-weight: 600;
+    margin: 0;
+  }
+  
+  .th-card-icon {
+    font-size: var(--th-text-base);
+  }
+  
+  .th-card-body {
+    padding: var(--th-space-4);
+  }
+  
+  /* Health Grid */
+  .th-health-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--th-space-4);
+  }
+  
+  .th-health-item {
+    display: flex;
+    flex-direction: column;
+    gap: var(--th-space-1);
+  }
+  
+  .th-health-label {
+    font-size: var(--th-text-xs);
+    font-weight: 600;
+    color: var(--th-gray-500);
+    text-transform: uppercase;
+    letter-spacing: var(--th-tracking-wide);
+  }
+  
+  .th-health-value {
+    font-size: var(--th-text-base);
+    font-weight: 700;
+    color: var(--th-gray-800);
+  }
+  
+  /* Special health value styling */
+  .th-health-value.blood-type {
+    color: var(--th-error-solid);
+    background: rgba(231, 76, 60, 0.1);
+    padding: var(--th-space-1) var(--th-space-2);
+    border-radius: var(--th-radius-sm);
+    width: fit-content;
+  }
+  
+  .th-genotype-container {
+    display: flex;
+    align-items: center;
+    gap: var(--th-space-2);
+  }
+  
+  .th-health-value.genotype-AA {
+    color: var(--th-secondary-solid);
+  }
+  
+  .th-health-value.genotype-AS {
+    color: var(--th-warning-solid);
+  }
+  
+  .th-health-value.genotype-SS {
+    color: var(--th-error-solid);
+  }
+  
+  .th-warning-icon {
+    color: var(--th-warning-solid);
+    font-size: var(--th-text-sm);
+  }
+  
+  .th-health-value.insurance-active {
+    color: var(--th-secondary-solid);
+  }
+  
+  /* Checkup Items */
+  .th-checkup-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--th-space-2) 0;
+    border-bottom: 1px solid var(--th-gray-100);
+  }
+  
+  .th-checkup-item:last-child {
+    border-bottom: none;
+  }
+  
+  .th-checkup-label {
+    font-size: var(--th-text-sm);
+    font-weight: 600;
+    color: var(--th-gray-600);
+  }
+  
+  .th-checkup-date {
+    font-size: var(--th-text-sm);
+    font-weight: 600;
+    color: var(--th-gray-800);
+  }
+  
+  .th-checkup-date.upcoming {
+    color: var(--th-accent-solid);
+  }
+  
+  .th-immunization-status {
+    display: flex;
+    align-items: center;
+    gap: var(--th-space-1);
+    font-size: var(--th-text-sm);
+    font-weight: 600;
+  }
+  
+  .th-immunization-status.up-to-date {
+    color: var(--th-secondary-solid);
+  }
+  
+  .th-status-icon {
+    font-size: var(--th-text-xs);
+  }
+  
+  /* Alert Sections */
+  .th-alert-section {
+    margin-bottom: var(--th-space-3);
+  }
+  
+  .th-alert-section:last-child {
+    margin-bottom: 0;
+  }
+  
+  .th-alert-label {
+    display: block;
+    font-size: var(--th-text-xs);
+    font-weight: 600;
+    color: var(--th-gray-500);
+    text-transform: uppercase;
+    letter-spacing: var(--th-tracking-wide);
+    margin-bottom: var(--th-space-2);
+  }
+  
+  .th-alert-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--th-space-2);
+  }
+  
+  .th-alert-tag {
+    display: flex;
+    align-items: center;
+    gap: var(--th-space-1);
+    padding: var(--th-space-1) var(--th-space-2);
+    border-radius: var(--th-radius-full);
+    font-size: var(--th-text-xs);
+    font-weight: 600;
+  }
+  
+  .th-alert-tag.allergy {
+    background: rgba(231, 76, 60, 0.1);
+    color: var(--th-error-solid);
+    border: 1px solid rgba(231, 76, 60, 0.2);
+  }
+  
+  .th-alert-tag.condition {
+    background: rgba(243, 156, 18, 0.1);
+    color: var(--th-warning-solid);
+    border: 1px solid rgba(243, 156, 18, 0.2);
+  }
+  
+  .th-tag-icon {
+    font-size: var(--th-text-xs);
+  }
+  
+  .th-genotype-alert {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--th-space-2);
+    padding: var(--th-space-3);
+    background: rgba(243, 156, 18, 0.1);
+    border: 1px solid rgba(243, 156, 18, 0.2);
+    border-radius: var(--th-radius-md);
+  }
+  
+  .th-alert-icon {
+    color: var(--th-warning-solid);
+    font-size: var(--th-text-sm);
+    margin-top: var(--th-space-1);
+  }
+  
+  .th-alert-text {
+    font-size: var(--th-text-sm);
+    color: var(--th-gray-700);
+    line-height: var(--th-leading-relaxed);
+  }
+  
+  /* Medical Records */
+  .th-records-content {
+    padding: var(--th-space-4);
+  }
+  
+  .th-records-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--th-space-6);
+  }
+  
+  .th-section-title {
+    font-size: var(--th-text-xl);
+    font-weight: 700;
+    color: var(--th-gray-800);
+    margin: 0;
+  }
+  
+  .th-records-actions {
+    display: flex;
+    gap: var(--th-space-2);
+  }
+  
+  .th-records-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--th-space-4);
+  }
+  
+  .th-record-card {
+    background: white;
+    border-radius: var(--th-radius-lg);
+    box-shadow: var(--th-shadow-sm);
+    border: 1px solid var(--th-gray-200);
+    overflow: hidden;
+    transition: all var(--th-transition-base);
+  }
+  
+  .th-record-card:hover {
+    box-shadow: var(--th-shadow-md);
+    transform: translateY(-1px);
+  }
+  
+  .th-record-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: var(--th-space-4);
+    background: var(--th-gray-50);
+    border-bottom: 1px solid var(--th-gray-200);
+  }
+  
+  .th-record-title {
+    font-size: var(--th-text-lg);
+    font-weight: 600;
+    color: var(--th-gray-800);
+    margin: 0 0 var(--th-space-2) 0;
+  }
+  
+  .th-record-meta {
+    display: flex;
+    gap: var(--th-space-4);
+  }
+  
+  .th-record-date,
+  .th-record-provider {
+    display: flex;
+    align-items: center;
+    gap: var(--th-space-1);
+    font-size: var(--th-text-sm);
+    color: var(--th-gray-600);
+  }
+  
+  .th-meta-icon {
+    font-size: var(--th-text-xs);
+    color: var(--th-gray-500);
+  }
+  
+  .th-record-actions {
+    display: flex;
+    gap: var(--th-space-1);
+  }
+  
+  .th-record-action-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    background: transparent;
+    border: 1px solid var(--th-gray-300);
+    border-radius: var(--th-radius-sm);
+    color: var(--th-gray-600);
+    cursor: pointer;
+    transition: all var(--th-transition-base);
+  }
+  
+  .th-record-action-btn:hover {
+    background: var(--th-primary-solid);
+    border-color: var(--th-primary-solid);
+    color: white;
+  }
+  
+  .th-record-body {
+    padding: var(--th-space-4);
+  }
+  
+  .th-record-item {
+    display: flex;
+    gap: var(--th-space-2);
+    margin-bottom: var(--th-space-2);
+  }
+  
+  .th-record-item:last-child {
+    margin-bottom: 0;
+  }
+  
+  .th-record-label {
+    font-size: var(--th-text-sm);
+    font-weight: 600;
+    color: var(--th-gray-600);
+    min-width: 100px;
+    flex-shrink: 0;
+  }
+  
+  .th-record-value {
+    font-size: var(--th-text-sm);
+    color: var(--th-gray-800);
+    line-height: var(--th-leading-relaxed);
+  }
+  
+  .th-record-value.follow-up {
+    color: var(--th-accent-solid);
+    font-weight: 600;
+  }
+  
+  /* Vaccinations */
+  .th-vaccinations-content {
+    padding: var(--th-space-4);
+  }
+  
+  .th-vaccination-summary {
+    margin-bottom: var(--th-space-6);
+  }
+  
+  .th-vaccine-stats {
+    display: flex;
+    gap: var(--th-space-4);
+    justify-content: center;
+  }
+  
+  .th-vaccine-stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--th-space-1);
+    padding: var(--th-space-4);
+    background: white;
+    border-radius: var(--th-radius-lg);
+    box-shadow: var(--th-shadow-sm);
+    border: 1px solid var(--th-gray-200);
+    min-width: 120px;
+  }
+  
+  .th-vaccine-stat.completed {
+    border-color: var(--th-secondary-200);
+    background: rgba(39, 174, 96, 0.05);
+  }
+  
+  .th-vaccine-stat.due {
+    border-color: var(--th-warning-200);
+    background: rgba(243, 156, 18, 0.05);
+  }
+  
+  .th-vaccine-stat.overdue {
+    border-color: var(--th-error-200);
+    background: rgba(231, 76, 60, 0.05);
+  }
+  
+  .th-stat-number {
+    font-size: var(--th-text-3xl);
+    font-weight: 700;
+    color: var(--th-gray-800);
+  }
+  
+  .th-stat-label {
+    font-size: var(--th-text-sm);
+    font-weight: 600;
+    color: var(--th-gray-600);
+    text-transform: uppercase;
+    letter-spacing: var(--th-tracking-wide);
+  }
+  
+  .th-vaccination-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: var(--th-space-4);
+  }
+  
+  .th-vaccination-card {
+    background: white;
+    border-radius: var(--th-radius-lg);
+    box-shadow: var(--th-shadow-sm);
+    border: 1px solid var(--th-gray-200);
+    overflow: hidden;
+    transition: all var(--th-transition-base);
+  }
+  
+  .th-vaccination-card:hover {
+    box-shadow: var(--th-shadow-md);
+    transform: translateY(-2px);
+  }
+  
+  .th-vaccination-card.completed {
+    border-left: 4px solid var(--th-secondary-solid);
+  }
+  
+  .th-vaccination-card.due {
+    border-left: 4px solid var(--th-warning-solid);
+  }
+  
+  .th-vaccination-card.overdue {
+    border-left: 4px solid var(--th-error-solid);
+  }
+  
+  .th-vaccine-header {
+    padding: var(--th-space-4);
+    border-bottom: 1px solid var(--th-gray-200);
+  }
+  
+  .th-vaccine-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .th-vaccine-name {
+    font-size: var(--th-text-lg);
+    font-weight: 600;
+    color: var(--th-gray-800);
+    margin: 0;
+  }
+  
+  .th-vaccine-status {
+    display: flex;
+    align-items: center;
+    gap: var(--th-space-1);
+    padding: var(--th-space-1) var(--th-space-2);
+    border-radius: var(--th-radius-full);
+    font-size: var(--th-text-xs);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: var(--th-tracking-wide);
+  }
+  
+  .th-vaccine-status.success {
+    background: rgba(39, 174, 96, 0.1);
+    color: var(--th-secondary-solid);
+    border: 1px solid rgba(39, 174, 96, 0.2);
+  }
+  
+  .th-vaccine-status.warning {
+    background: rgba(243, 156, 18, 0.1);
+    color: var(--th-warning-solid);
+    border: 1px solid rgba(243, 156, 18, 0.2);
+  }
+  
+  .th-vaccine-status.error {
+    background: rgba(231, 76, 60, 0.1);
+    color: var(--th-error-solid);
+    border: 1px solid rgba(231, 76, 60, 0.2);
+  }
+  
+  .th-vaccine-details {
+    padding: var(--th-space-4);
+  }
+  
+  .th-vaccine-dates {
+    display: flex;
+    flex-direction: column;
+    gap: var(--th-space-2);
+    margin-bottom: var(--th-space-3);
+  }
+  
+  .th-vaccine-date {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .th-date-label {
+    font-size: var(--th-text-sm);
+    font-weight: 600;
+    color: var(--th-gray-600);
+  }
+  
+  .th-date-value {
+    font-size: var(--th-text-sm);
+    color: var(--th-gray-800);
+  }
+  
+  .th-vaccine-facility {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: var(--th-space-2);
+    border-top: 1px solid var(--th-gray-100);
+  }
+  
+  .th-facility-label {
+    font-size: var(--th-text-sm);
+    font-weight: 600;
+    color: var(--th-gray-600);
+  }
+  
+  .th-facility-value {
+    font-size: var(--th-text-sm);
+    color: var(--th-gray-800);
+  }
+  
+  /* Mobile Responsiveness */
+  @media (max-width: 768px) {
+    .th-medical-history {
+      padding: var(--th-space-4);
+    }
+  
+    .th-medical-header {
+      flex-direction: column;
+      gap: var(--th-space-4);
+    }
+  
+    .th-header-actions {
+      width: 100%;
+      justify-content: stretch;
+    }
+  
+    .th-overview-grid {
+      grid-template-columns: 1fr;
+    }
+  
+    .th-health-grid {
+      grid-template-columns: 1fr;
+    }
+  
+    .th-records-header {
+      flex-direction: column;
+      gap: var(--th-space-3);
+      align-items: stretch;
+    }
+  
+    .th-record-header {
+      flex-direction: column;
+      gap: var(--th-space-2);
+    }
+  
+    .th-record-actions {
+      align-self: flex-end;
+    }
+  
+    .th-vaccine-stats {
+      flex-direction: column;
+      align-items: stretch;
+    }
+  
+    .th-vaccination-list {
+      grid-template-columns: 1fr;
+    }
+  
+    .th-vaccine-info {
+      flex-direction: column;
+      gap: var(--th-space-2);
+      align-items: flex-start;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .th-medical-tabs {
+      flex-direction: column;
+    }
+  
+    .th-tab-button {
+      justify-content: center;
+      border-bottom: 1px solid var(--th-gray-200);
+      border-radius: var(--th-radius-sm);
+    }
+  
+    .th-tab-button.active {
+      border-bottom: 1px solid var(--th-primary-solid);
+    }
+  
+    .th-record-meta {
+      flex-direction: column;
+      gap: var(--th-space-1);
+    }
+  
+    .th-record-item {
+      flex-direction: column;
+      gap: var(--th-space-1);
+    }
+  
+    .th-record-label {
+      min-width: auto;
+    }
+  }

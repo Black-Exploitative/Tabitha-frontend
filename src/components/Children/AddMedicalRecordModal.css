@@ -1,0 +1,425 @@
+/* src/components/Children/AddMedicalRecordModal.css */
+.th-medical-modal {
+    max-width: 900px;
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+  
+  .th-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    -webkit-backdrop-filter: blur(4px);
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: var(--th-space-4);
+  }
+  
+  .th-modal-container {
+    background: white;
+    border-radius: var(--th-radius-xl);
+    box-shadow: var(--th-shadow-xl);
+    border: 1px solid var(--th-gray-200);
+    width: 100%;
+    max-width: 800px;
+    max-height: 90vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .th-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: var(--th-space-6);
+    border-bottom: 1px solid var(--th-gray-200);
+    background: linear-gradient(135deg, var(--th-gray-50) 0%, white 100%);
+    flex-shrink: 0;
+  }
+  
+  .th-modal-title-section {
+    flex: 1;
+  }
+  
+  .th-modal-title {
+    display: flex;
+    align-items: center;
+    gap: var(--th-space-2);
+    font-size: var(--th-text-xl);
+    font-weight: 700;
+    color: var(--th-gray-800);
+    margin: 0 0 var(--th-space-2) 0;
+  }
+  
+  .th-modal-icon {
+    color: var(--th-primary-solid);
+  }
+  
+  .th-modal-subtitle {
+    font-size: var(--th-text-sm);
+    color: var(--th-gray-600);
+    margin: 0;
+  }
+  
+  .th-modal-close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: transparent;
+    border: 1px solid var(--th-gray-300);
+    border-radius: var(--th-radius-md);
+    color: var(--th-gray-600);
+    cursor: pointer;
+    transition: all var(--th-transition-base);
+    flex-shrink: 0;
+  }
+  
+  .th-modal-close:hover {
+    background: var(--th-error-solid);
+    border-color: var(--th-error-solid);
+    color: white;
+  }
+  
+  .th-modal-body {
+    flex: 1;
+    overflow-y: auto;
+    padding: var(--th-space-6);
+  }
+  
+  .th-modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: var(--th-space-3);
+    padding: var(--th-space-6);
+    border-top: 1px solid var(--th-gray-200);
+    background: var(--th-gray-50);
+    flex-shrink: 0;
+  }
+  
+  /* Form Sections */
+  .th-form-section {
+    margin-bottom: var(--th-space-6);
+    padding-bottom: var(--th-space-6);
+    border-bottom: 1px solid var(--th-gray-100);
+  }
+  
+  .th-form-section:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+  
+  .th-section-title {
+    display: flex;
+    align-items: center;
+    gap: var(--th-space-2);
+    font-size: var(--th-text-lg);
+    font-weight: 600;
+    color: var(--th-gray-800);
+    margin: 0 0 var(--th-space-4) 0;
+    padding-bottom: var(--th-space-2);
+    border-bottom: 2px solid var(--th-primary-100);
+  }
+  
+  .th-section-icon {
+    color: var(--th-primary-solid);
+    font-size: var(--th-text-base);
+  }
+  
+  .th-section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--th-space-4);
+  }
+  
+  /* Form Elements */
+  .th-form-grid {
+    display: grid;
+    gap: var(--th-space-4);
+  }
+  
+  .th-grid-cols-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .th-grid-cols-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  .th-grid-cols-4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  
+  .th-form-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--th-space-2);
+  }
+  
+  .th-form-label {
+    display: flex;
+    align-items: center;
+    gap: var(--th-space-2);
+    font-size: var(--th-text-sm);
+    font-weight: 600;
+    color: var(--th-gray-700);
+  }
+  
+  .th-label-icon {
+    color: var(--th-gray-500);
+    font-size: var(--th-text-xs);
+  }
+  
+  .th-form-input,
+  .th-form-select,
+  .th-form-textarea {
+    padding: var(--th-space-3);
+    border: 1px solid var(--th-gray-300);
+    border-radius: var(--th-radius-md);
+    background: white;
+    font-size: var(--th-text-sm);
+    color: var(--th-gray-700);
+    transition: all var(--th-transition-base);
+  }
+  
+  .th-form-input:focus,
+  .th-form-select:focus,
+  .th-form-textarea:focus {
+    outline: none;
+    border-color: var(--th-primary-solid);
+    box-shadow: 0 0 0 3px rgba(230, 126, 34, 0.1);
+  }
+  
+  .th-form-textarea {
+    resize: vertical;
+    min-height: 80px;
+  }
+  
+  .th-form-error {
+    font-size: var(--th-text-xs);
+    color: var(--th-error-solid);
+    font-weight: 500;
+  }
+  
+  /* Quick Symptoms */
+  .th-quick-symptoms {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--th-space-2);
+    padding: var(--th-space-3);
+    background: var(--th-gray-50);
+    border-radius: var(--th-radius-md);
+    border: 1px solid var(--th-gray-200);
+  }
+  
+  .th-quick-label {
+    font-size: var(--th-text-sm);
+    font-weight: 500;
+    color: var(--th-gray-600);
+  }
+  
+  .th-quick-btn {
+    padding: var(--th-space-1) var(--th-space-2);
+    background: white;
+    border: 1px solid var(--th-gray-300);
+    border-radius: var(--th-radius-full);
+    font-size: var(--th-text-xs);
+    font-weight: 500;
+    color: var(--th-gray-600);
+    cursor: pointer;
+    transition: all var(--th-transition-base);
+  }
+  
+  .th-quick-btn:hover {
+    background: var(--th-primary-solid);
+    border-color: var(--th-primary-solid);
+    color: white;
+  }
+  
+  /* Symptoms List */
+  .th-symptoms-list,
+  .th-medications-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--th-space-4);
+  }
+  
+  .th-symptom-item,
+  .th-medication-item {
+    padding: var(--th-space-4);
+    background: var(--th-gray-50);
+    border-radius: var(--th-radius-md);
+    border: 1px solid var(--th-gray-200);
+  }
+  
+  .th-add-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--th-space-2);
+    padding: var(--th-space-3) var(--th-space-4);
+    background: transparent;
+    border: 2px dashed var(--th-gray-300);
+    border-radius: var(--th-radius-md);
+    font-size: var(--th-text-sm);
+    font-weight: 500;
+    color: var(--th-gray-600);
+    cursor: pointer;
+    transition: all var(--th-transition-base);
+  }
+  
+  .th-add-btn:hover {
+    border-color: var(--th-primary-solid);
+    color: var(--th-primary-solid);
+    background: rgba(230, 126, 34, 0.05);
+  }
+  
+  .th-remove-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    background: transparent;
+    border: 1px solid var(--th-gray-300);
+    border-radius: var(--th-radius-md);
+    color: var(--th-gray-600);
+    cursor: pointer;
+    transition: all var(--th-transition-base);
+  }
+  
+  .th-remove-btn:hover {
+    background: var(--th-error-solid);
+    border-color: var(--th-error-solid);
+    color: white;
+  }
+  
+  /* Vital Signs Grid */
+  .th-vitals-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--th-space-4);
+  }
+  
+  .th-vital-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--th-space-2);
+  }
+  
+  .th-input-group {
+    display: flex;
+    align-items: center;
+    gap: var(--th-space-2);
+  }
+  
+  .th-input-group .th-form-input {
+    flex: 1;
+  }
+  
+  .th-unit-select {
+    min-width: 60px;
+  }
+  
+  .th-unit {
+    font-size: var(--th-text-sm);
+    color: var(--th-gray-500);
+    font-weight: 500;
+    white-space: nowrap;
+  }
+  
+  .th-bp-group {
+    display: flex;
+    align-items: center;
+    gap: var(--th-space-2);
+  }
+  
+  .th-bp-separator {
+    font-size: var(--th-text-lg);
+    font-weight: 600;
+    color: var(--th-gray-600);
+  }
+  
+  .th-bp-unit {
+    font-size: var(--th-text-sm);
+    color: var(--th-gray-500);
+    font-weight: 500;
+  }
+  
+  /* Checkbox */
+  .th-checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: var(--th-space-2);
+    cursor: pointer;
+  }
+  
+  .th-checkbox {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+  }
+  
+  .th-checkbox-text {
+    font-size: var(--th-text-sm);
+    color: var(--th-gray-700);
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .th-modal-overlay {
+      padding: var(--th-space-2);
+    }
+  
+    .th-modal-container {
+      max-height: 95vh;
+    }
+  
+    .th-modal-header {
+      padding: var(--th-space-4);
+    }
+  
+    .th-modal-body {
+      padding: var(--th-space-4);
+    }
+  
+    .th-modal-footer {
+      padding: var(--th-space-4);
+      flex-direction: column;
+    }
+  
+    .th-grid-cols-2,
+    .th-grid-cols-3,
+    .th-grid-cols-4 {
+      grid-template-columns: 1fr;
+    }
+  
+    .th-vitals-grid {
+      grid-template-columns: 1fr;
+    }
+  
+    .th-quick-symptoms {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    .th-input-group {
+      flex-direction: column;
+      align-items: stretch;
+    }
+  
+    .th-bp-group {
+      justify-content: center;
+    }
+  }

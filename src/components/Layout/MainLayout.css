@@ -1,0 +1,208 @@
+.th-main-layout {
+  min-height: 100vh;
+  background: linear-gradient(
+    135deg,
+    var(--th-gray-50) 0%,
+    rgba(230, 126, 34, 0.03) 25%,
+    rgba(52, 152, 219, 0.02) 50%,
+    rgba(39, 174, 96, 0.03) 75%,
+    var(--th-gray-50) 100%
+  );
+  position: relative;
+}
+
+.th-layout-container {
+  display: flex;
+  padding-top: 70px; /* Account for fixed header */
+  min-height: calc(100vh - 70px);
+  position: relative;
+}
+
+.th-main-content {
+  flex: 1;
+  min-width: 0;
+  transition: var(--th-transition-luxury);
+  width: 100%;
+}
+
+.th-content-wrapper {
+  padding: var(--th-space-8) var(--th-space-6);
+  max-width: 100%;
+  margin: 0 auto;
+  animation: th-content-enter 0.6s ease-out;
+}
+
+@keyframes th-content-enter {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Mobile Sidebar Overlay */
+.th-sidebar-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 850;
+  opacity: 0;
+  animation: th-overlay-enter 0.3s ease-out forwards;
+  display: none;
+}
+
+.th-sidebar-overlay.active {
+  display: block;
+}
+
+@keyframes th-overlay-enter {
+  to { opacity: 1; }
+}
+
+/* Desktop: Sidebar takes space in the layout */
+@media (min-width: 769px) {
+  .th-layout-container {
+    padding-left: 280px; /* Space for sidebar */
+  }
+  
+  .th-main-content {
+    width: calc(100% - 280px);
+  }
+  
+  .th-sidebar-overlay {
+    display: none !important;
+  }
+}
+
+/* Mobile: No space reserved for sidebar */
+@media (max-width: 768px) {
+  .th-layout-container {
+    padding-left: 0;
+  }
+  
+  .th-main-content {
+    width: 100%;
+  }
+  
+  .th-content-wrapper {
+    padding: var(--th-space-6) var(--th-space-4);
+  }
+}
+
+@media (max-width: 480px) {
+  .th-content-wrapper {
+    padding: var(--th-space-4) var(--th-space-3);
+  }
+}
+
+/* Page Content Containers */
+.th-page-container {
+  max-width: var(--th-container-xl);
+  margin: 0 auto;
+}
+
+.th-page-header {
+  margin-bottom: var(--th-space-8);
+  padding-bottom: var(--th-space-6);
+  border-bottom: 1px solid rgba(230, 126, 34, 0.1);
+  background: rgba(255, 255, 255, 0.6);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  border-radius: 16px;
+  padding: var(--th-space-6);
+  box-shadow: var(--th-shadow-sm);
+}
+
+.th-page-title {
+  font-family: var(--th-font-luxury);
+  font-size: var(--th-text-4xl);
+  font-weight: 800;
+  background: var(--th-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: var(--th-space-3);
+  line-height: var(--th-leading-tight);
+}
+
+.th-page-subtitle {
+  font-size: var(--th-text-lg);
+  color: var(--th-gray-600);
+  margin-bottom: var(--th-space-6);
+  line-height: var(--th-leading-relaxed);
+}
+
+.th-page-actions {
+  display: flex;
+  gap: var(--th-space-3);
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+/* Grid Layouts */
+.th-grid {
+  display: grid;
+  gap: var(--th-space-6);
+}
+
+.th-grid-cols-1 { grid-template-columns: repeat(1, 1fr); }
+.th-grid-cols-2 { grid-template-columns: repeat(2, 1fr); }
+.th-grid-cols-3 { grid-template-columns: repeat(3, 1fr); }
+.th-grid-cols-4 { grid-template-columns: repeat(4, 1fr); }
+.th-grid-cols-6 { grid-template-columns: repeat(6, 1fr); }
+.th-grid-cols-12 { grid-template-columns: repeat(12, 1fr); }
+
+/* Responsive Grid */
+@media (max-width: 1024px) {
+  .th-grid-cols-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .th-grid-cols-3 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .th-grid-cols-2,
+  .th-grid-cols-3,
+  .th-grid-cols-4 {
+    grid-template-columns: 1fr;
+  }
+  
+  .th-page-title {
+    font-size: var(--th-text-3xl);
+  }
+  
+  .th-page-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .th-page-actions > * {
+    width: 100%;
+  }
+}
+
+/* Dark Mode */
+[data-theme="dark"] .th-main-layout {
+  background: linear-gradient(
+    135deg,
+    var(--th-gray-900) 0%,
+    rgba(230, 126, 34, 0.05) 25%,
+    rgba(52, 152, 219, 0.03) 50%,
+    rgba(39, 174, 96, 0.05) 75%,
+    var(--th-gray-900) 100%
+  );
+}
+
+[data-theme="dark"] .th-page-header {
+  background: rgba(255, 255, 255, 0.1);
+  border-bottom-color: rgba(255, 255, 255, 0.1);
+}

@@ -1,0 +1,386 @@
+/* src/components/Common/FileUpload.css */
+.th-upload-modal {
+    max-width: 900px;
+    max-height: 90vh;
+  }
+  
+  /* Upload Area */
+  .th-upload-area {
+    border: 2px dashed var(--th-gray-300);
+    border-radius: var(--th-radius-lg);
+    padding: var(--th-space-8);
+    text-align: center;
+    cursor: pointer;
+    transition: all var(--th-transition-base);
+    margin-bottom: var(--th-space-6);
+  }
+  
+  .th-upload-area:hover,
+  .th-upload-active {
+    border-color: var(--th-primary-solid);
+    background: rgba(230, 126, 34, 0.05);
+  }
+  
+  .th-upload-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--th-space-4);
+  }
+  
+  .th-upload-icon {
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--th-gray-100);
+    border-radius: var(--th-radius-full);
+    color: var(--th-gray-400);
+    font-size: var(--th-text-3xl);
+  }
+  
+  .th-upload-active .th-upload-icon {
+    background: var(--th-primary-100);
+    color: var(--th-primary-solid);
+  }
+  
+  .th-upload-text {
+    text-align: center;
+  }
+  
+  .th-upload-title {
+    font-size: var(--th-text-xl);
+    font-weight: 600;
+    color: var(--th-gray-800);
+    margin: 0 0 var(--th-space-2) 0;
+  }
+  
+  .th-upload-subtitle {
+    font-size: var(--th-text-base);
+    color: var(--th-gray-600);
+    margin: 0;
+  }
+  
+  .th-upload-link {
+    color: var(--th-primary-solid);
+    font-weight: 500;
+    text-decoration: underline;
+  }
+  
+  .th-upload-info {
+    text-align: center;
+  }
+  
+  .th-upload-limits {
+    font-size: var(--th-text-sm);
+    color: var(--th-gray-500);
+    margin: 0;
+  }
+  
+  /* Files Section */
+  .th-files-section {
+    margin-bottom: var(--th-space-6);
+  }
+  
+  .th-files-title {
+    font-size: var(--th-text-lg);
+    font-weight: 600;
+    color: var(--th-gray-800);
+    margin: 0 0 var(--th-space-4) 0;
+  }
+  
+  .th-files-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--th-space-4);
+  }
+  
+  .th-file-item {
+    background: white;
+    border: 1px solid var(--th-gray-200);
+    border-radius: var(--th-radius-lg);
+    overflow: hidden;
+    transition: all var(--th-transition-base);
+  }
+  
+  .th-file-item:hover {
+    box-shadow: var(--th-shadow-md);
+  }
+  
+  .th-file-pending {
+    border-color: var(--th-gray-300);
+  }
+  
+  .th-file-uploading {
+    border-color: var(--th-accent-solid);
+  }
+  
+  .th-file-success {
+    border-color: var(--th-secondary-solid);
+  }
+  
+  .th-file-error {
+    border-color: var(--th-error-solid);
+  }
+  
+  .th-file-main {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--th-space-3);
+    padding: var(--th-space-4);
+  }
+  
+  .th-file-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    background: var(--th-gray-100);
+    border-radius: var(--th-radius-md);
+    font-size: var(--th-text-xl);
+    flex-shrink: 0;
+  }
+  
+  .th-file-info {
+    flex: 1;
+    min-width: 0;
+  }
+  
+  .th-file-name {
+    font-size: var(--th-text-base);
+    font-weight: 600;
+    color: var(--th-gray-800);
+    margin: 0 0 var(--th-space-1) 0;
+    word-break: break-word;
+  }
+  
+  .th-file-size {
+    font-size: var(--th-text-sm);
+    color: var(--th-gray-500);
+    margin: 0 0 var(--th-space-2) 0;
+  }
+  
+  .th-file-error {
+    font-size: var(--th-text-sm);
+    color: var(--th-error-solid);
+    margin: 0;
+  }
+  
+  /* Progress Bar */
+  .th-file-progress {
+    display: flex;
+    align-items: center;
+    gap: var(--th-space-2);
+  }
+  
+  .th-progress-bar {
+    flex: 1;
+    height: 6px;
+    background: var(--th-gray-200);
+    border-radius: var(--th-radius-full);
+    overflow: hidden;
+  }
+  
+  .th-progress-fill {
+    height: 100%;
+    background: var(--th-accent-solid);
+    border-radius: var(--th-radius-full);
+    transition: width var(--th-transition-base);
+  }
+  
+  .th-progress-text {
+    font-size: var(--th-text-xs);
+    color: var(--th-gray-600);
+    font-weight: 500;
+    min-width: 30px;
+  }
+  
+  /* Status Badges */
+  .th-file-status {
+    flex-shrink: 0;
+  }
+  
+  .th-status-badge {
+    display: flex;
+    align-items: center;
+    gap: var(--th-space-1);
+    padding: var(--th-space-1) var(--th-space-2);
+    border-radius: var(--th-radius-full);
+    font-size: var(--th-text-xs);
+    font-weight: 600;
+  }
+  
+  .th-status-pending {
+    background: rgba(107, 114, 128, 0.1);
+    color: var(--th-gray-600);
+  }
+  
+  .th-status-uploading {
+    background: rgba(52, 152, 219, 0.1);
+    color: var(--th-accent-solid);
+  }
+  
+  .th-status-success {
+    background: rgba(39, 174, 96, 0.1);
+    color: var(--th-secondary-solid);
+  }
+  
+  .th-status-error {
+    background: rgba(231, 76, 60, 0.1);
+    color: var(--th-error-solid);
+  }
+  
+  .th-status-icon {
+    font-size: var(--th-text-xs);
+  }
+  
+  .th-spinning {
+    animation: spin 1s linear infinite;
+  }
+  
+  @keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+  
+  .th-file-remove {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    background: transparent;
+    border: 1px solid var(--th-gray-300);
+    border-radius: var(--th-radius-md);
+    color: var(--th-gray-600);
+    cursor: pointer;
+    transition: all var(--th-transition-base);
+    flex-shrink: 0;
+  }
+  
+  .th-file-remove:hover:not(:disabled) {
+    background: var(--th-error-solid);
+    border-color: var(--th-error-solid);
+    color: white;
+  }
+  
+  .th-file-remove:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  
+  /* File Metadata */
+  .th-file-metadata {
+    padding: var(--th-space-4);
+    border-top: 1px solid var(--th-gray-200);
+    background: var(--th-gray-50);
+  }
+  
+  .th-metadata-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--th-space-3);
+    margin-bottom: var(--th-space-3);
+  }
+  
+  .th-metadata-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--th-space-1);
+  }
+  
+  .th-metadata-full {
+    grid-column: 1 / -1;
+  }
+  
+  .th-metadata-label {
+    font-size: var(--th-text-sm);
+    font-weight: 500;
+    color: var(--th-gray-700);
+  }
+  
+  .th-metadata-select,
+  .th-metadata-textarea {
+    padding: var(--th-space-2);
+    border: 1px solid var(--th-gray-300);
+    border-radius: var(--th-radius-md);
+    background: white;
+    font-size: var(--th-text-sm);
+    color: var(--th-gray-700);
+    transition: all var(--th-transition-base);
+  }
+  
+  .th-metadata-select:focus,
+  .th-metadata-textarea:focus {
+    outline: none;
+    border-color: var(--th-primary-solid);
+    box-shadow: 0 0 0 3px rgba(230, 126, 34, 0.1);
+  }
+  
+  .th-metadata-select:disabled,
+  .th-metadata-textarea:disabled {
+    background: var(--th-gray-100);
+    color: var(--th-gray-500);
+    cursor: not-allowed;
+  }
+  
+  .th-metadata-textarea {
+    resize: vertical;
+    min-height: 60px;
+  }
+  
+  /* Upload Footer */
+  .th-upload-error {
+    display: flex;
+    align-items: center;
+    gap: var(--th-space-2);
+    color: var(--th-error-solid);
+    font-size: var(--th-text-sm);
+    font-weight: 500;
+  }
+  
+  .th-error-icon {
+    font-size: var(--th-text-sm);
+  }
+  
+  .th-upload-actions {
+    display: flex;
+    gap: var(--th-space-3);
+    margin-left: auto;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .th-upload-area {
+      padding: var(--th-space-6);
+    }
+  
+    .th-upload-icon {
+      width: 60px;
+      height: 60px;
+      font-size: var(--th-text-2xl);
+    }
+  
+    .th-file-main {
+      flex-direction: column;
+      gap: var(--th-space-2);
+    }
+  
+    .th-file-icon {
+      width: 40px;
+      height: 40px;
+      font-size: var(--th-text-lg);
+    }
+  
+    .th-metadata-grid {
+      grid-template-columns: 1fr;
+    }
+  
+    .th-upload-actions {
+      flex-direction: column-reverse;
+      width: 100%;
+      margin-left: 0;
+    }
+  }

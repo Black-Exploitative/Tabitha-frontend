@@ -1,0 +1,87 @@
+/* src/components/Dashboard/DashboardCharts.css */
+.th-dashboard-charts {
+    margin: 2rem 0;
+  }
+  
+  .th-charts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+  }
+  
+  .th-chart-card {
+    background: var(--th-glass);
+    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 1.5rem;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+  
+  .th-chart-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--th-shadow-lg);
+  }
+  
+  .th-chart-card-wide {
+    grid-column: 1 / -1;
+  }
+  
+  .th-chart-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .th-chart-title {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: var(--th-text-primary);
+    font-size: 1.1rem;
+    font-weight: 600;
+  }
+  
+  .th-chart-icon {
+    color: var(--th-primary);
+    font-size: 1.2rem;
+  }
+  
+  .th-chart-container {
+    flex: 1;
+    position: relative;
+    min-height: 0;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 1024px) {
+    .th-charts-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .th-chart-card {
+      height: 350px;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .th-charts-grid {
+      gap: 1rem;
+    }
+    
+    .th-chart-card {
+      padding: 1rem;
+      height: 300px;
+    }
+    
+    .th-chart-title {
+      font-size: 1rem;
+    }
+  }

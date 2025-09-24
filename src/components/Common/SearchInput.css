@@ -1,0 +1,203 @@
+/* src/components/Common/SearchInput.css */
+.th-search-input {
+    position: relative;
+    width: 100%;
+  }
+  
+  .th-search-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    background: white;
+    border: 2px solid #e5e7eb;
+    border-radius: 12px;
+    transition: all 0.2s ease;
+    overflow: hidden;
+  }
+  
+  .th-search-wrapper:hover {
+    border-color: #d1d5db;
+  }
+  
+  .th-search-wrapper.focused {
+    border-color: #E67E22;
+    box-shadow: 0 0 0 3px rgba(230, 126, 34, 0.1);
+  }
+  
+  .th-search-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-left: 1rem;
+    color: #6b7280;
+    transition: color 0.2s ease;
+  }
+  
+  .th-search-wrapper.focused .th-search-icon {
+    color: #E67E22;
+  }
+  
+  .th-search-field {
+    flex: 1;
+    border: none;
+    outline: none;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    color: #1f2937;
+    background: transparent;
+    font-family: 'Inter', sans-serif;
+  }
+  
+  .th-search-field::placeholder {
+    color: #9ca3af;
+  }
+  
+  .th-search-field:disabled {
+    color: #9ca3af;
+    cursor: not-allowed;
+  }
+  
+  .th-search-clear {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    margin-right: 0.5rem;
+    background: transparent;
+    border: none;
+    border-radius: 6px;
+    color: #6b7280;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  
+  .th-search-clear:hover {
+    background: #f3f4f6;
+    color: #374151;
+  }
+  
+  /* Size variants */
+  .th-search-sm .th-search-field {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.875rem;
+  }
+  
+  .th-search-sm .th-search-icon {
+    padding-left: 0.75rem;
+    font-size: 0.875rem;
+  }
+  
+  .th-search-lg .th-search-field {
+    padding: 1rem 1.25rem;
+    font-size: 1.125rem;
+  }
+  
+  .th-search-lg .th-search-icon {
+    padding-left: 1.25rem;
+    font-size: 1.125rem;
+  }
+  
+  /* Suggestions dropdown */
+  .th-suggestions-list {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    max-height: 300px;
+    overflow-y: auto;
+    z-index: 50;
+    margin-top: 4px;
+  }
+  
+  .th-suggestion-item {
+    padding: 0.75rem 1rem;
+    cursor: pointer;
+    border-bottom: 1px solid #f3f4f6;
+    transition: background-color 0.2s ease;
+  }
+  
+  .th-suggestion-item:last-child {
+    border-bottom: none;
+  }
+  
+  .th-suggestion-item:hover,
+  .th-suggestion-item.selected {
+    background: #f8fafc;
+  }
+  
+  .th-suggestion-text {
+    display: block;
+    font-weight: 500;
+    color: #1f2937;
+  }
+  
+  .th-suggestion-description {
+    display: block;
+    font-size: 0.875rem;
+    color: #6b7280;
+    margin-top: 2px;
+  }
+  
+  /* Loading spinner */
+  .th-spinner {
+    animation: spin 1s linear infinite;
+  }
+  
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  
+  /* Dark theme */
+  [data-theme="dark"] .th-search-wrapper {
+    background: #374151;
+    border-color: #4b5563;
+  }
+  
+  [data-theme="dark"] .th-search-wrapper:hover {
+    border-color: #6b7280;
+  }
+  
+  [data-theme="dark"] .th-search-wrapper.focused {
+    border-color: #F39C12;
+    box-shadow: 0 0 0 3px rgba(243, 156, 18, 0.1);
+  }
+  
+  [data-theme="dark"] .th-search-field {
+    color: #f9fafb;
+  }
+  
+  [data-theme="dark"] .th-search-field::placeholder {
+    color: #9ca3af;
+  }
+  
+  [data-theme="dark"] .th-suggestions-list {
+    background: #374151;
+    border-color: #4b5563;
+  }
+  
+  [data-theme="dark"] .th-suggestion-item {
+    border-bottom-color: #4b5563;
+  }
+  
+  [data-theme="dark"] .th-suggestion-item:hover,
+  [data-theme="dark"] .th-suggestion-item.selected {
+    background: #4b5563;
+  }
+  
+  [data-theme="dark"] .th-suggestion-text {
+    color: #f9fafb;
+  }
+  
+  [data-theme="dark"] .th-suggestion-description {
+    color: #d1d5db;
+  }

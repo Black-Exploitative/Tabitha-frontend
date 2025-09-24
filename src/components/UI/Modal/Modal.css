@@ -1,0 +1,223 @@
+/* src/components/UI/Modal/Modal.css */
+.th-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    -webkit-backdrop-filter: blur(4px);
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    z-index: 1000;
+    animation: th-fade-in 0.2s ease-out;
+  }
+  
+  .th-modal {
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    max-height: 90vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    animation: th-scale-up 0.2s ease-out;
+    position: relative;
+  }
+  
+  /* Modal sizes */
+  .th-modal-sm {
+    max-width: 400px;
+    width: 100%;
+  }
+  
+  .th-modal-md {
+    max-width: 600px;
+    width: 100%;
+  }
+  
+  .th-modal-lg {
+    max-width: 900px;
+    width: 100%;
+  }
+  
+  .th-modal-xl {
+    max-width: 1200px;
+    width: 100%;
+  }
+  
+  .th-modal-full {
+    max-width: 95vw;
+    max-height: 95vh;
+    width: 100%;
+    height: 100%;
+  }
+  
+  /* Modal header */
+  .th-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 2rem 1rem 2rem;
+    border-bottom: 1px solid #e5e7eb;
+    flex-shrink: 0;
+  }
+  
+  .th-modal-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #1f2937;
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  .th-modal-close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    background: transparent;
+    border: none;
+    border-radius: 8px;
+    color: #6b7280;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  
+  .th-modal-close:hover {
+    background: #f3f4f6;
+    color: #374151;
+  }
+  
+  .th-modal-close:focus {
+    outline: 2px solid #E67E22;
+    outline-offset: 2px;
+  }
+  
+  /* Modal body */
+  .th-modal-body {
+    padding: 1.5rem 2rem;
+    overflow-y: auto;
+    flex: 1;
+  }
+  
+  /* Modal footer */
+  .th-modal-footer {
+    padding: 1rem 2rem 1.5rem 2rem;
+    border-top: 1px solid #e5e7eb;
+    flex-shrink: 0;
+  }
+  
+  .th-modal-actions {
+    display: flex;
+    gap: 0.75rem;
+    justify-content: flex-end;
+  }
+  
+  /* Confirm modal specific styles */
+  .th-confirm-message {
+    margin: 0;
+    color: #374151;
+    line-height: 1.6;
+  }
+  
+  /* Animations */
+  @keyframes th-fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  @keyframes th-scale-up {
+    from {
+      opacity: 0;
+      transform: scale(0.95) translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+  }
+  
+  /* Mobile responsiveness */
+  @media (max-width: 640px) {
+    .th-modal-overlay {
+      padding: 0.5rem;
+    }
+    
+    .th-modal {
+      border-radius: 12px;
+      max-height: 95vh;
+    }
+    
+    .th-modal-header {
+      padding: 1rem 1.5rem 0.75rem 1.5rem;
+    }
+    
+    .th-modal-body {
+      padding: 1rem 1.5rem;
+    }
+    
+    .th-modal-footer {
+      padding: 0.75rem 1.5rem 1rem 1.5rem;
+    }
+    
+    .th-modal-title {
+      font-size: 1.125rem;
+    }
+    
+    .th-modal-actions {
+      flex-direction: column-reverse;
+    }
+    
+    .th-modal-actions button {
+      width: 100%;
+    }
+  }
+  
+  /* Dark theme support */
+  [data-theme="dark"] .th-modal {
+    background: #1f2937;
+    color: #f9fafb;
+  }
+  
+  [data-theme="dark"] .th-modal-header {
+    border-bottom-color: #374151;
+  }
+  
+  [data-theme="dark"] .th-modal-footer {
+    border-top-color: #374151;
+  }
+  
+  [data-theme="dark"] .th-modal-title {
+    color: #f9fafb;
+  }
+  
+  [data-theme="dark"] .th-modal-close {
+    color: #9ca3af;
+  }
+  
+  [data-theme="dark"] .th-modal-close:hover {
+    background: #374151;
+    color: #f3f4f6;
+  }
+  
+  /* Accessibility improvements */
+  @media (prefers-reduced-motion: reduce) {
+    .th-modal-overlay,
+    .th-modal {
+      animation: none;
+    }
+  }
+  
+  /* Focus trap styling */
+  .th-modal:focus {
+    outline: none;
+  }

@@ -1,0 +1,321 @@
+/* Compact Dashboard Welcome Widget */
+.th-welcome-widget {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+.th-welcome-content {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.th-welcome-main {
+  flex: 1;
+  min-width: 0;
+}
+
+.th-welcome-greeting {
+  margin-bottom: 16px;
+}
+
+.th-welcome-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #1e293b;
+  margin: 0 0 4px 0;
+  line-height: 1.2;
+}
+
+.th-welcome-subtitle {
+  font-size: 14px;
+  color: #64748b;
+  font-weight: 500;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.th-welcome-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.th-welcome-stat {
+  padding: 12px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+}
+
+.th-stat-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 4px;
+  line-height: 1;
+}
+
+.th-stat-value {
+  font-size: 14px;
+  font-weight: 700;
+  color: #1e293b;
+  line-height: 1.2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.th-welcome-sidebar {
+  flex-shrink: 0;
+  width: 220px;
+}
+
+.th-welcome-info {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  padding: 12px;
+}
+
+.th-info-header {
+  text-align: center;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.th-info-title {
+  font-size: 11px;
+  font-weight: 700;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin: 0;
+}
+
+.th-info-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px;
+  margin-bottom: 4px;
+  background: #f8fafc;
+  border-radius: 4px;
+}
+
+.th-info-item:last-of-type {
+  margin-bottom: 0;
+}
+
+.th-info-icon {
+  width: 24px;
+  height: 24px;
+  background: #3b82f6;
+  color: white;
+  font-size: 12px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.th-info-icon.health {
+  background: #10b981;
+}
+
+.th-info-icon.location {
+  background: #10b981;
+}
+
+.th-info-icon.time {
+  background: #3b82f6;
+}
+
+.th-info-content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+}
+
+.th-info-label {
+  font-size: 10px;
+  font-weight: 600;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  line-height: 1;
+  margin-bottom: 2px;
+}
+
+.th-info-value {
+  font-size: 12px;
+  font-weight: 700;
+  color: #1e293b;
+  line-height: 1.2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.th-weather-widget {
+  margin-top: 12px;
+  padding: 8px;
+  background: #f8fafc;
+  border-radius: 4px;
+  text-align: center;
+}
+
+.th-weather-icon {
+  font-size: 16px;
+  margin-bottom: 4px;
+  color: #3b82f6;
+}
+
+.th-weather-temp {
+  font-size: 16px;
+  font-weight: 700;
+  color: #1e293b;
+  margin: 0;
+  line-height: 1;
+}
+
+.th-weather-desc {
+  font-size: 10px;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 600;
+  margin: 2px 0 0 0;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .th-welcome-content {
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  .th-welcome-sidebar {
+    width: 100%;
+  }
+  
+  .th-welcome-info {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 12px;
+    padding: 12px;
+  }
+  
+  .th-info-header {
+    grid-column: 1 / -1;
+  }
+  
+  .th-weather-widget {
+    grid-column: 1 / -1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    text-align: left;
+  }
+  
+  .th-weather-icon {
+    margin-bottom: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .th-welcome-widget {
+    padding: 12px;
+    margin-bottom: 12px;
+  }
+  
+  .th-welcome-stats {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+  }
+  
+  .th-welcome-stat {
+    padding: 8px;
+  }
+  
+  .th-welcome-title {
+    font-size: 18px;
+  }
+  
+  .th-welcome-subtitle {
+    font-size: 13px;
+  }
+  
+  .th-welcome-info {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .th-welcome-widget {
+    padding: 10px;
+  }
+  
+  .th-welcome-stats {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+  
+  .th-welcome-content {
+    gap: 12px;
+  }
+  
+  .th-welcome-title {
+    font-size: 16px;
+  }
+  
+  .th-welcome-subtitle {
+    font-size: 12px;
+  }
+  
+  .th-stat-value {
+    font-size: 13px;
+  }
+}
+
+/* Dark Mode */
+[data-theme="dark"] .th-welcome-widget,
+[data-theme="dark"] .th-welcome-info,
+[data-theme="dark"] .th-welcome-stat {
+  background: #1e293b;
+  border-color: #475569;
+}
+
+[data-theme="dark"] .th-info-item,
+[data-theme="dark"] .th-weather-widget {
+  background: #334155;
+}
+
+[data-theme="dark"] .th-welcome-title,
+[data-theme="dark"] .th-stat-value,
+[data-theme="dark"] .th-info-value,
+[data-theme="dark"] .th-weather-temp {
+  color: #f1f5f9;
+}
+
+[data-theme="dark"] .th-welcome-subtitle,
+[data-theme="dark"] .th-stat-label,
+[data-theme="dark"] .th-info-label,
+[data-theme="dark"] .th-info-title,
+[data-theme="dark"] .th-weather-desc {
+  color: #94a3b8;
+}
+
+[data-theme="dark"] .th-info-header {
+  border-color: #475569;
+}
