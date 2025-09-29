@@ -87,7 +87,26 @@ export const AuthProvider = ({ children }) => {
           dispatch({ type: 'LOGOUT' });
         }
       } else {
-        dispatch({ type: 'SET_LOADING', payload: false });
+        // Development mode: Auto-login with super admin credentials
+        if (process.env.NODE_ENV === 'development' && process.env.REACT_APP_AUTO_LOGIN === 'true') {
+          try {
+            console.log('🔧 Development mode: Auto-logging in...');
+            const response = await authService.login({
+              email: 'admin@tabithahome.org',
+              password: 'TH-Admin@2025'
+            });
+            dispatch({
+              type: 'LOGIN_SUCCESS',
+              payload: { user: response.user, token: response.token }
+            });
+            console.log('✅ Auto-login successful');
+          } catch (error) {
+            console.error('Auto-login failed:', error);
+            dispatch({ type: 'SET_LOADING', payload: false });
+          }
+        } else {
+          dispatch({ type: 'SET_LOADING', payload: false });
+        }
       }
     };
 

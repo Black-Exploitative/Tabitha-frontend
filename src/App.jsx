@@ -18,11 +18,21 @@ import Dashboard from './pages/Dashboard';
 import ChildrenList from './pages/children/ChildrenList';
 import ChildProfile from './pages/children/ChildProfile';
 import AddChild from './pages/children/AddChild';
+import EditChild from './pages/children/EditChild';
 import StaffList from './pages/staff/StaffList';
-//import Reports from './pages/reports/Reports';
-//import ReportBuilder from './pages/reports/ReportBuilder';
 import StaffProfile from './pages/staff/StaffProfile';
 import AddStaff from './pages/staff/AddStaff';
+import EditStaff from './pages/staff/EditStaff';
+import Settings from './pages/settings/Settings';
+import Health from './pages/health/Health';
+import Education from './pages/education/Education';
+import Activities from './pages/activities/Activities';
+import Reports from './pages/reports/Reports';
+import ReportBuilder from './pages/reports/ReportBuilder';
+import ReportsDashboard from './pages/reports/ReportsDashboard';
+import Calendar from './pages/calender/Calender';
+import Documents from './pages/documents/Documents';
+import Notifications from './pages/notifications/Notifications';
 
 // Components
 import ProtectedRoute from './components/Common/ProtectedRoute';
@@ -76,15 +86,39 @@ function App() {
                           <Route path="/children" element={<ChildrenList />} />
                           <Route path="/children/:id" element={<ChildProfile />} />
                           <Route path="/children/add" element={<AddChild />} />
+                          <Route path="/children/:id/edit" element={<EditChild />} />
                           
                           {/* Staff Routes */}
                           <Route path="/staff" element={<StaffList />} />
                           <Route path="/staff/:id" element={<StaffProfile />} />
                           <Route path="/staff/add" element={<AddStaff />} />
+                          <Route path="/staff/:id/edit" element={<EditStaff />} />
+                          
+                          {/* Health Routes */}
+                          <Route path="/health" element={<Health />} />
+                          
+                          {/* Education Routes */}
+                          <Route path="/education" element={<Education />} />
+                          
+                          {/* Activities Routes */}
+                          <Route path="/activities" element={<Activities />} />
                           
                           {/* Reports Routes */}
-                          {/*<Route path="/reports" element={<Reports />} />
-                          <Route path="/reports/builder" element={<ReportBuilder />} />*/}
+                          <Route path="/reports" element={<ReportsDashboard />} />
+                          <Route path="/reports/builder" element={<ReportBuilder />} />
+                          <Route path="/reports/analytics" element={<Reports />} />
+                          
+                          {/* Calendar Routes */}
+                          <Route path="/calendar" element={<Calendar />} />
+                          
+                          {/* Documents Routes */}
+                          <Route path="/documents" element={<Documents />} />
+                          
+                          {/* Notifications Routes */}
+                          <Route path="/notifications" element={<Notifications />} />
+                          
+                          {/* Settings Routes */}
+                          <Route path="/settings" element={<Settings />} />
                           
                           {/* Default redirect */}
                           <Route path="*" element={<Navigate to="/dashboard" replace />} />

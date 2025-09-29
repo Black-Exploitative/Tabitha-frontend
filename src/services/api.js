@@ -2,7 +2,7 @@
 import axios from 'axios';
 import toast from 'react-hot-toast';
 
-const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:3001/api/v1';
+const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api/v1';
 
 // Create axios instance
 const api = axios.create({
@@ -95,5 +95,109 @@ api.interceptors.response.use(
     return Promise.reject(error);
   }
 );
+
+export const settingsAPI = {
+  // Profile Settings
+  updateProfile: (data) => api.put('/settings/profile', data),
+  uploadProfilePhoto: (formData) => api.post('/settings/profile/photo', formData, {
+    headers: { 'Content-Type': 'multipart/form-data' }
+  }),
+  
+  // Security Settings
+  changePassword: (data) => api.post('/settings/security/password', data),
+  enable2FA: () => api.post('/settings/security/2fa/enable'),
+  disable2FA: () => api.post('/settings/security/2fa/disable'),
+  getSessions: () => api.get('/settings/security/sessions'),
+  revokeSession: (sessionId) => api.delete(`/settings/security/sessions/${sessionId}`),
+  
+  // Notification Settings
+  getNotificationSettings: () => api.get('/settings/notifications'),
+  updateNotificationSettings: (data) => api.put('/settings/notifications', data),
+  
+  // System Settings (Admin only)
+  getSystemSettings: () => api.get('/settings/system'),
+  updateSystem: (data) => api.put('/settings/system', data),
+  
+  // Privacy Settings
+  getPrivacySettings: () => api.get('/settings/privacy'),
+  updatePrivacySettings: (data) => api.put('/settings/privacy', data),
+  
+  // Backup & Restore
+  createBackup: () => api.post('/settings/backup/create'),
+  getBackupHistory: () => api.get('/settings/backup/history'),
+  downloadBackup: (backupId) => api.get(`/settings/backup/download/${backupId}`, {
+    responseType: 'blob'
+  }),
+  restoreBackup: (formData) => api.post('/settings/backup/restore', formData, {
+    headers: { 'Content-Type': 'multipart/form-data' }
+  }),
+  
+  // Account Management
+  deleteAccount: (data) => api.post('/settings/account/delete', data),
+  
+  // System Info
+  getSystemInfo: () => api.get('/settings/info'),
+  checkUpdates: () => api.get('/settings/updates/check'),
+};
+
+export const healthAPI = {
+  // Health Records
+  getHealthRecords: (params) => api.get('/health/records', { params }),
+  getHealthRecord: (id) => api.get(`/health/records/${id}`),
+  createHealthRecord: (data) => api.post('/health/records', data),
+  updateHealthRecord: (id, data) => api.put(`/health/records/${id}`, data),
+  deleteHealthRecord: (id) => api.delete(`/health/records/${id}`),
+  
+  // Medical Checkups
+  getCheckups: (params) => api.get('/health/checkups', { params }),
+  scheduleCheckup: (data) => api.post('/health/checkups', data),
+  updateCheckup: (id, data) => api.put(`/health/checkups/${id}`, data),
+  
+  // Vaccinations
+  getVaccinations: (params) => api.get('/health/vaccinations', { params }),
+  recordVaccination: (data) => api.post('/health/vaccinations', data),
+  
+  // Health Statistics
+  getHealthStats: () => api.get('/health/stats'),
+};
+
+export const educationAPI = {
+  // Education Records
+  getEducationRecords: (params) => api.get('/education/records', { params }),
+  getEducationRecord: (id) => api.get(`/education/records/${id}`),
+  createEducationRecord: (data) => api.post('/education/records', data),
+  updateEducationRecord: (id, data) => api.put(`/education/records/${id}`, data),
+  
+  // School Information
+  getSchools: () => api.get('/education/schools'),
+  addSchool: (data) => api.post('/education/schools', data),
+  
+  // Academic Progress
+  getProgress: (childId) => api.get(`/education/progress/${childId}`),
+  updateProgress: (childId, data) => api.put(`/education/progress/${childId}`, data),
+  
+  // Education Statistics
+  getEducationStats: () => api.get('/education/stats'),
+};
+
+export const activitiesAPI = {
+  // Activities
+  getActivities: (params) => api.get('/activities', { params }),
+  getActivity: (id) => api.get(`/activities/${id}`),
+  createActivity: (data) => api.post('/activities', data),
+  updateActivity: (id, data) => api.put(`/activities/${id}`, data),
+  deleteActivity: (id) => api.delete(`/activities/${id}`),
+  
+  // Activity Participation
+  getParticipants: (activityId) => api.get(`/activities/${activityId}/participants`),
+  addParticipant: (activityId, data) => api.post(`/activities/${activityId}/participants`, data),
+  removeParticipant: (activityId, participantId) => api.delete(`/activities/${activityId}/participants/${participantId}`),
+  
+  // Activity Categories
+  getCategories: () => api.get('/activities/categories'),
+  
+  // Activity Statistics
+  getActivityStats: () => api.get('/activities/stats'),
+};
 
 export default api;

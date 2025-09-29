@@ -6,7 +6,8 @@ export const childrenService = {
   getChildren: async (params = {}) => {
     try {
       const response = await api.get('/children', { params });
-      return response;
+      // Handle nested response structure
+      return response.data?.children || response.data;
     } catch (error) {
       throw new Error(error.response?.data?.message || 'Failed to fetch children');
     }
@@ -16,7 +17,8 @@ export const childrenService = {
   getChild: async (id) => {
     try {
       const response = await api.get(`/children/${id}`);
-      return response.data;
+      // Handle nested response structure
+      return response.data?.child || response.data;
     } catch (error) {
       throw new Error(error.response?.data?.message || 'Failed to fetch child');
     }
@@ -25,8 +27,23 @@ export const childrenService = {
   // Create new child
   createChild: async (childData) => {
     try {
-      const response = await api.post('/children', childData);
-      return response;
+      // Transform data to match backend expectations
+      const transformedData = {
+        ...childData,
+        // Ensure arrays are properly formatted
+        allergies: Array.isArray(childData.allergies) ? childData.allergies : 
+                  (childData.allergies ? [childData.allergies] : []),
+        medical_conditions: Array.isArray(childData.medical_conditions) ? childData.medical_conditions : 
+                           (childData.medical_conditions ? [{ 
+                             condition: childData.medical_conditions,
+                             diagnosed_date: new Date(),
+                             current_treatment: '',
+                             notes: ''
+                           }] : [])
+      };
+      
+      const response = await api.post('/children', transformedData);
+      return response.data?.child || response.data;
     } catch (error) {
       throw new Error(error.response?.data?.message || 'Failed to create child record');
     }
@@ -35,8 +52,23 @@ export const childrenService = {
   // Update child
   updateChild: async (id, updates) => {
     try {
-      const response = await api.patch(`/children/${id}`, updates);
-      return response;
+      // Transform data to match backend expectations
+      const transformedData = {
+        ...updates,
+        // Ensure arrays are properly formatted
+        allergies: Array.isArray(updates.allergies) ? updates.allergies : 
+                  (updates.allergies ? [updates.allergies] : []),
+        medical_conditions: Array.isArray(updates.medical_conditions) ? updates.medical_conditions : 
+                           (updates.medical_conditions ? [{ 
+                             condition: updates.medical_conditions,
+                             diagnosed_date: new Date(),
+                             current_treatment: '',
+                             notes: ''
+                           }] : [])
+      };
+      
+      const response = await api.patch(`/children/${id}`, transformedData);
+      return response.data?.child || response.data;
     } catch (error) {
       throw new Error(error.response?.data?.message || 'Failed to update child');
     }

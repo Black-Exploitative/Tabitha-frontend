@@ -21,7 +21,7 @@ const Header = ({ onToggleSidebar }) => {
   const [notificationsOpen, setNotificationsOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const { user, logout } = useAuth();
-  const { theme, toggleTheme } = useTheme();
+  const { theme, toggleDarkMode } = useTheme();
   const navigate = useNavigate();
   const userMenuRef = useRef(null);
   const notificationsRef = useRef(null);
@@ -53,35 +53,80 @@ const Header = ({ onToggleSidebar }) => {
     }
   };
 
-  // Mock notifications
-  const notifications = [
+  // Mock notifications with more variety
+  const [notifications, setNotifications] = useState([
     {
       id: 1,
       type: 'info',
       title: 'New child admission',
-      message: 'Sarah Adebayo has been admitted',
+      message: 'Sarah Adebayo has been admitted to the home',
       time: '2 minutes ago',
-      unread: true
+      unread: true,
+      action: '/children/1'
     },
     {
       id: 2,
       type: 'warning',
       title: 'Medical checkup due',
-      message: '5 children need medical checkups',
+      message: '5 children need medical checkups this week',
       time: '1 hour ago',
-      unread: true
+      unread: true,
+      action: '/health'
     },
     {
       id: 3,
       type: 'success',
       title: 'Report generated',
-      message: 'Monthly report is ready',
+      message: 'Monthly report is ready for download',
       time: '3 hours ago',
-      unread: false
+      unread: false,
+      action: '/reports'
+    },
+    {
+      id: 4,
+      type: 'info',
+      title: 'Staff meeting scheduled',
+      message: 'Weekly staff meeting tomorrow at 10 AM',
+      time: '5 hours ago',
+      unread: true,
+      action: '/calendar'
+    },
+    {
+      id: 5,
+      type: 'warning',
+      title: 'Documentation overdue',
+      message: '3 children have overdue documentation',
+      time: '1 day ago',
+      unread: false,
+      action: '/documents'
     }
-  ];
+  ]);
 
   const unreadCount = notifications.filter(n => n.unread).length;
+
+  const markAsRead = (notificationId) => {
+    setNotifications(prev => 
+      prev.map(notification => 
+        notification.id === notificationId 
+          ? { ...notification, unread: false }
+          : notification
+      )
+    );
+  };
+
+  const markAllAsRead = () => {
+    setNotifications(prev => 
+      prev.map(notification => ({ ...notification, unread: false }))
+    );
+  };
+
+  const handleNotificationClick = (notification) => {
+    markAsRead(notification.id);
+    if (notification.action) {
+      navigate(notification.action);
+    }
+    setNotificationsOpen(false);
+  };
 
   return (
     <header className="th-header">
@@ -136,7 +181,7 @@ const Header = ({ onToggleSidebar }) => {
           {/* Theme Toggle */}
           <button
             className="th-header-icon-btn"
-            onClick={toggleTheme}
+            onClick={toggleDarkMode}
             aria-label="Toggle theme"
           >
             {theme === 'dark' ? <FaSun /> : <FaMoon />}
@@ -159,31 +204,53 @@ const Header = ({ onToggleSidebar }) => {
               <div className="th-dropdown-menu th-notifications-dropdown">
                 <div className="th-dropdown-header">
                   <h3>Notifications</h3>
-                  <span className="th-notification-count">
-                    {unreadCount} unread
-                  </span>
+                  <div className="th-notification-actions">
+                    {unreadCount > 0 && (
+                      <button
+                        className="th-mark-all-read-btn"
+                        onClick={markAllAsRead}
+                        title="Mark all as read"
+                      >
+                        Mark all read
+                      </button>
+                    )}
+                    <span className="th-notification-count">
+                      {unreadCount} unread
+                    </span>
+                  </div>
                 </div>
                 
                 <div className="th-notifications-list">
-                  {notifications.map(notification => (
-                    <div
-                      key={notification.id}
-                      className={`th-notification-item ${
-                        notification.unread ? 'th-notification-unread' : ''
-                      }`}
-                    >
-                      <div className={`th-notification-icon th-notification-${notification.type}`}>
-                        <div className="th-notification-dot"></div>
+                  {notifications.length > 0 ? (
+                    notifications.map(notification => (
+                      <div
+                        key={notification.id}
+                        className={`th-notification-item ${
+                          notification.unread ? 'th-notification-unread' : ''
+                        }`}
+                        onClick={() => handleNotificationClick(notification)}
+                        style={{ cursor: 'pointer' }}
+                      >
+                        <div className={`th-notification-icon th-notification-${notification.type}`}>
+                          <div className="th-notification-dot"></div>
+                        </div>
+                        <div className="th-notification-content">
+                          <h4>{notification.title}</h4>
+                          <p>{notification.message}</p>
+                          <span className="th-notification-time">
+                            {notification.time}
+                          </span>
+                        </div>
+                        {notification.unread && (
+                          <div className="th-unread-indicator"></div>
+                        )}
                       </div>
-                      <div className="th-notification-content">
-                        <h4>{notification.title}</h4>
-                        <p>{notification.message}</p>
-                        <span className="th-notification-time">
-                          {notification.time}
-                        </span>
-                      </div>
+                    ))
+                  ) : (
+                    <div className="th-no-notifications">
+                      <p>No notifications</p>
                     </div>
-                  ))}
+                  )}
                 </div>
                 
                 <div className="th-dropdown-footer">

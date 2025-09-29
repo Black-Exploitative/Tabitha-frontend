@@ -20,6 +20,8 @@ import {
   NIGERIAN_LANGUAGES, 
   GENOTYPES, 
   BLOOD_TYPES,
+  RELIGIONS,
+  EDUCATION_LEVELS,
   COMMON_NIGERIAN_NAMES 
 } from '../../utils/nigerianData';
 import './ChildForm.css';
@@ -62,8 +64,8 @@ const ChildForm = ({
       genotype: '',
       height_cm: '',
       weight_kg: '',
-      allergies: '',
-      medical_conditions: '',
+      allergies: [],
+      medical_conditions: [],
       education_level: '',
       school_name: '',
       ambition: '',
@@ -123,10 +125,43 @@ const ChildForm = ({
   // Nigerian LGAs data (simplified for example)
   const getLGAs = (state) => {
     const lgaData = {
-      'lagos': ['Ikeja', 'Lagos Island', 'Lagos Mainland', 'Surulere', 'Alimosho'],
-      'kano': ['Kano Municipal', 'Fagge', 'Dala', 'Gwale', 'Nasarawa'],
-      'abuja': ['Abuja Municipal', 'Gwagwalada', 'Kuje', 'Bwari', 'Kwali'],
-      // Add more states and their LGAs
+      'Lagos': ['Ikeja', 'Lagos Island', 'Lagos Mainland', 'Surulere', 'Alimosho'],
+      'Kano': ['Kano Municipal', 'Fagge', 'Dala', 'Gwale', 'Nasarawa'],
+      'FCT': ['Abuja Municipal', 'Gwagwalada', 'Kuje', 'Bwari', 'Kwali'],
+      'Anambra': ['Awka South', 'Awka North', 'Onitsha North', 'Onitsha South', 'Nnewi North'],
+      'Kaduna': ['Kaduna North', 'Kaduna South', 'Chikun', 'Igabi', 'Ikara'],
+      'Rivers': ['Port Harcourt', 'Obio-Akpor', 'Eleme', 'Oyigbo', 'Okrika'],
+      'Oyo': ['Ibadan North', 'Ibadan South-West', 'Ibadan South-East', 'Ibadan North-East', 'Ibadan North-West'],
+      'Kano': ['Kano Municipal', 'Fagge', 'Dala', 'Gwale', 'Nasarawa'],
+      'Katsina': ['Katsina', 'Dutsin-Ma', 'Mani', 'Mashi', 'Kankara'],
+      'Borno': ['Maiduguri', 'Konduga', 'Bama', 'Gwoza', 'Dikwa'],
+      'Bauchi': ['Bauchi', 'Katagum', 'Misau', 'Ningi', 'Toro'],
+      'Plateau': ['Jos North', 'Jos South', 'Jos East', 'Barkin Ladi', 'Riyom'],
+      'Delta': ['Warri North', 'Warri South', 'Warri South-West', 'Udu', 'Uvwie'],
+      'Ogun': ['Abeokuta North', 'Abeokuta South', 'Ijebu North', 'Ijebu East', 'Ijebu Ode'],
+      'Ondo': ['Akure North', 'Akure South', 'Ondo East', 'Ondo West', 'Idanre'],
+      'Osun': ['Osogbo', 'Ilesa East', 'Ilesa West', 'Atakunmosa East', 'Atakunmosa West'],
+      'Enugu': ['Enugu North', 'Enugu South', 'Enugu East', 'Nkanu East', 'Nkanu West'],
+      'Imo': ['Owerri Municipal', 'Owerri North', 'Owerri West', 'Aboh Mbaise', 'Ahiazu Mbaise'],
+      'Abia': ['Aba North', 'Aba South', 'Arochukwu', 'Bende', 'Ikwuano'],
+      'Akwa Ibom': ['Uyo', 'Ikot Ekpene', 'Eket', 'Oron', 'Abak'],
+      'Cross River': ['Calabar Municipal', 'Calabar South', 'Akpabuyo', 'Bakassi', 'Bekwarra'],
+      'Edo': ['Oredo', 'Egor', 'Ikpoba-Okha', 'Ovia North-East', 'Ovia South-West'],
+      'Ekiti': ['Ado-Ekiti', 'Ikere', 'Oye', 'Aiyekire', 'Efon'],
+      'Kwara': ['Ilorin East', 'Ilorin South', 'Ilorin West', 'Asa', 'Baruten'],
+      'Nasarawa': ['Lafia', 'Akwanga', 'Karu', 'Keffi', 'Nasarawa'],
+      'Niger': ['Minna', 'Suleja', 'Kontagora', 'Bida', 'Agaie'],
+      'Sokoto': ['Sokoto North', 'Sokoto South', 'Binji', 'Bodinga', 'Dange Shuni'],
+      'Taraba': ['Jalingo', 'Ardo-Kola', 'Bali', 'Donga', 'Gashaka'],
+      'Yobe': ['Damaturu', 'Bade', 'Bursari', 'Geidam', 'Gujba'],
+      'Zamfara': ['Gusau', 'Anka', 'Bakura', 'Birnin Magaji/Kiyaw', 'Bukkuyum'],
+      'Adamawa': ['Yola North', 'Yola South', 'Ganye', 'Girei', 'Gombi'],
+      'Bayelsa': ['Yenagoa', 'Kolokuma/Opokuma', 'Nembe', 'Ogbia', 'Sagbama'],
+      'Benue': ['Makurdi', 'Ado', 'Agatu', 'Apa', 'Buruku'],
+      'Ebonyi': ['Abakaliki', 'Afikpo North', 'Afikpo South', 'Ebonyi', 'Ezza North'],
+      'Gombe': ['Gombe', 'Akko', 'Balanga', 'Billiri', 'Dukku'],
+      'Jigawa': ['Dutse', 'Auyo', 'Babura', 'Biriniwa', 'Birnin Kudu'],
+      'Kebbi': ['Birnin Kebbi', 'Aleiro', 'Arewa Dandi', 'Argungu', 'Augie']
     };
     return lgaData[state] || [];
   };
