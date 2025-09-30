@@ -14,7 +14,7 @@ import {
   FaEye
 } from 'react-icons/fa';
 import Button from '../UI/Button/Button';
-import FileUpload from '../Common/FileUpload';
+import PhotoUpload from '../Common/PhotoUpload';
 import { 
   NIGERIAN_STATES, 
   NIGERIAN_LANGUAGES, 
@@ -75,7 +75,9 @@ const ChildForm = ({
       next_of_kin_contact: '',
       emergency_contact: '',
       birth_certificate_number: '',
-      arrival_circumstances: ''
+      arrival_circumstances: '',
+      admission_date: new Date().toISOString().split('T')[0], // Today's date as default
+      current_status: 'Active'
     }
   });
 
@@ -118,7 +120,7 @@ const ChildForm = ({
       title: 'Photo & Final Details',
       subtitle: 'Photo upload and circumstances',
       icon: FaCamera,
-      fields: ['arrival_circumstances']
+      fields: ['arrival_circumstances', 'admission_date', 'current_status']
     }
   ];
 
@@ -384,7 +386,7 @@ const ChildForm = ({
                           },
                           reasonable: value => {
                             const age = calculateAge(value);
-                            return (age >= 0 && age <= 18) || 'Age must be between 0 and 18 years';
+                            return (age >= 0 && age <= 21) || 'Age must be between 0 and 21 years';
                           }
                         }
                       })}
@@ -439,10 +441,12 @@ const ChildForm = ({
 
                 <div className="th-form-row">
                   <div className="th-form-group">
-                    <label className="th-label">Local Government Area</label>
+                    <label className="th-label th-label-required">Local Government Area</label>
                     <select
-                      className="th-select"
-                      {...register('lga')}
+                      className={`th-select ${errors.lga ? 'th-input-error' : ''}`}
+                      {...register('lga', {
+                        required: 'Local Government Area is required'
+                      })}
                       disabled={!watchedValues.state_of_origin}
                     >
                       <option value="">Select LGA</option>
@@ -450,6 +454,9 @@ const ChildForm = ({
                         <option key={lga} value={lga}>{lga}</option>
                       ))}
                     </select>
+                    {errors.lga && (
+                      <span className="th-error-text">{errors.lga.message}</span>
+                    )}
                   </div>
 
                   <div className="th-form-group">
@@ -513,10 +520,12 @@ const ChildForm = ({
                   </div>
 
                   <div className="th-form-group">
-                    <label className="th-label">Genotype</label>
+                    <label className="th-label th-label-required">Genotype</label>
                     <select
-                      className="th-select"
-                      {...register('genotype')}
+                      className={`th-select ${errors.genotype ? 'th-input-error' : ''}`}
+                      {...register('genotype', {
+                        required: 'Genotype is required'
+                      })}
                     >
                       <option value="">Select genotype</option>
                       {GENOTYPES.map(type => (
@@ -525,6 +534,9 @@ const ChildForm = ({
                         </option>
                       ))}
                     </select>
+                    {errors.genotype && (
+                      <span className="th-error-text">{errors.genotype.message}</span>
+                    )}
                     {genotypeWarning && (
                       <div className="th-warning-text">
                         ⚠️ {genotypeWarning}
@@ -735,7 +747,7 @@ const ChildForm = ({
               <div className="th-form-step th-slide-in-right">
                 <div className="th-form-group">
                   <label className="th-label">Child Photo</label>
-                  <FileUpload
+                  <PhotoUpload
                     accept="image/*"
                     maxSize={5 * 1024 * 1024} // 5MB
                     onFileSelect={setUploadedPhoto}
@@ -767,6 +779,50 @@ const ChildForm = ({
                   <div className="th-help-text">
                     Include relevant details about family situation, reasons for admission, 
                     and any other important background information.
+                  </div>
+                </div>
+
+                <div className="th-form-row">
+                  <div className="th-form-group">
+                    <label className="th-label th-label-required">Admission Date</label>
+                    <input
+                      type="date"
+                      className={`th-input ${errors.admission_date ? 'th-input-error' : ''}`}
+                      max={new Date().toISOString().split('T')[0]}
+                      {...register('admission_date', {
+                        required: 'Admission date is required',
+                        validate: {
+                          notFuture: value => {
+                            const today = new Date();
+                            const admissionDate = new Date(value);
+                            return admissionDate <= today || 'Admission date cannot be in the future';
+                          }
+                        }
+                      })}
+                    />
+                    {errors.admission_date && (
+                      <span className="th-error-text">{errors.admission_date.message}</span>
+                    )}
+                  </div>
+
+                  <div className="th-form-group">
+                    <label className="th-label th-label-required">Current Status</label>
+                    <select
+                      className={`th-select ${errors.current_status ? 'th-input-error' : ''}`}
+                      {...register('current_status', {
+                        required: 'Current status is required'
+                      })}
+                    >
+                      <option value="">Select status</option>
+                      <option value="Active">Active</option>
+                      <option value="Exited">Exited</option>
+                      <option value="Transferred">Transferred</option>
+                      <option value="Adopted">Adopted</option>
+                      <option value="Inactive">Inactive</option>
+                    </select>
+                    {errors.current_status && (
+                      <span className="th-error-text">{errors.current_status.message}</span>
+                    )}
                   </div>
                 </div>
               </div>

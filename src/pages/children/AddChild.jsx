@@ -5,23 +5,31 @@ import { FaChild, FaArrowLeft, FaSave, FaEye } from 'react-icons/fa';
 import Button from '../../components/UI/Button/Button';
 import ChildForm from '../../components/Children/ChildForm';
 import { childrenService } from '../../services/children';
-import { useAuth } from '../../context/AuthContext';
 import toast from 'react-hot-toast';
 import './AddChild.css';
 
 const AddChild = () => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
-  const { user } = useAuth();
   const [isPreview, setIsPreview] = useState(false);
   const [formData, setFormData] = useState({});
 
+  
   // Create child mutation
   const createChildMutation = useMutation({
     mutationFn: (childData) => childrenService.createChild(childData),
     onSuccess: (newChild) => {
       // Update the children list cache
-      queryClient.invalidateQueries({ queryKey: ['children'] });
+      queryClient.invalidateQueries({ 
+        queryKey: ['children'],
+        exact: false 
+      });
+      
+      // Also refetch the children list to ensure fresh data
+      queryClient.refetchQueries({ 
+        queryKey: ['children'],
+        exact: false 
+      });
       
       toast.success(
         `${newChild.first_name} ${newChild.last_name} has been successfully added to Tabitha Home!`,
@@ -43,19 +51,95 @@ const AddChild = () => {
     }
   });
 
-  const handleSubmit = async (data) => {
-    try {
-      // Add metadata
-      const childData = {
-        ...data,
-        created_by: user?.id,
-        admission_date: data.admission_date || new Date().toISOString().split('T')[0],
-        current_status: 'Active'
-      };
+  const validateForm = (data) => {
+    const newErrors = {};
 
-      await createChildMutation.mutateAsync(childData);
+    // Only validate essential fields - let the backend handle detailed validation
+    if (!data.first_name?.trim()) {
+      newErrors.first_name = 'First name is required';
+    }
+    
+    if (!data.last_name?.trim()) {
+      newErrors.last_name = 'Last name is required';
+    }
+    
+    if (!data.date_of_birth) {
+      newErrors.date_of_birth = 'Date of birth is required';
+    }
+    
+    if (!data.gender) {
+      newErrors.gender = 'Gender is required';
+    }
+    
+    if (!data.state_of_origin) {
+      newErrors.state_of_origin = 'State of origin is required';
+    }
+    
+    if (!data.lga) {
+      newErrors.lga = 'Local Government Area is required';
+    }
+    
+    if (!data.genotype) {
+      newErrors.genotype = 'Genotype is required';
+    }
+    
+    if (!data.arrival_circumstances?.trim()) {
+      newErrors.arrival_circumstances = 'Arrival circumstances are required';
+    }
+
+    return { isValid: Object.keys(newErrors).length === 0, errors: newErrors };
+  };
+
+  // Enhanced submit handler with better error handling
+  const handleSubmit = async (formData) => {
+    // Handle both event objects and direct form data
+    if (formData && formData.preventDefault) {
+      formData.preventDefault();
+    }
+    
+    // Update form data state
+    setFormData(formData);
+    
+    // Validate form with the actual form data
+    const validation = validateForm(formData);
+    
+    if (!validation.isValid) {
+      // Show specific error messages
+      const errorMessages = Object.values(validation.errors);
+      if (errorMessages.length > 0) {
+        toast.error(errorMessages[0]); // Show first error
+      } else {
+        toast.error('Please fix all errors before submitting');
+      }
+      
+      // Scroll to first error field
+      const firstErrorField = Object.keys(validation.errors)[0];
+      if (firstErrorField) {
+        const errorElement = document.querySelector(`[name="${firstErrorField}"]`) || 
+                           document.querySelector(`#${firstErrorField}`) ||
+                           document.querySelector('.th-form-error');
+        if (errorElement) {
+          errorElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          errorElement.focus();
+        }
+      }
+      return;
+    }
+
+    try {
+      await createChildMutation.mutateAsync(formData);
+      // Success handled in mutation onSuccess
     } catch (error) {
-      // Error handling is done in the mutation
+      console.error('Submit error:', error);
+      
+      // Handle specific validation errors from backend
+      if (error.response?.data?.errors) {
+        const backendErrors = error.response.data.errors;
+        const firstError = backendErrors[0];
+        toast.error(firstError?.msg || 'Please fix validation errors');
+      } else {
+        toast.error(error.message || 'Failed to add child. Please try again.');
+      }
     }
   };
 
@@ -177,7 +261,7 @@ const ChildPreview = ({ data, onEdit, onSubmit, loading }) => {
         <div className="th-preview-header">
           <div className="th-preview-photo">
             {data.photo ? (
-              <img src={URL.createObjectURL(data.photo)} alt="Child photo" />
+              <img src={URL.createObjectURL(data.photo)} alt="Child" />
             ) : (
               <div className="th-photo-placeholder">
                 <FaChild />

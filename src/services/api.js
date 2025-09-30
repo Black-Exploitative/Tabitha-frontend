@@ -30,39 +30,52 @@ api.interceptors.request.use(
 // Response interceptor for error handling
 api.interceptors.response.use(
   (response) => {
-    // Handle 304 Not Modified responses
+    // Handle 304 Not Modified
     if (response.status === 304) {
-      console.log('Received 304 Not Modified, using cached data');
-      // For 304 responses, axios typically includes the cached data
+      console.log('304 Not Modified - using cached data');
       return response.data || response;
     }
     
-    // Return the full response data for successful requests
+    // Handle 200-299 success responses
     return response.data;
   },
   (error) => {
-    // Handle network errors
+    // Enhanced error handling
+    console.error('API Error:', {
+      url: error.config?.url,
+      method: error.config?.method,
+      status: error.response?.status,
+      data: error.response?.data
+    });
+
+    // Network errors
     if (!error.response) {
-      toast.error('Network error. Please check your connection.');
-      return Promise.reject(error);
+      toast.error('Network error. Please check your internet connection.');
+      return Promise.reject(new Error('Network error'));
     }
 
     const { status, data } = error.response;
 
-    // Handle specific error codes
+    // Handle specific status codes
     switch (status) {
       case 400:
-        toast.error(data?.message || 'Bad request.');
+        // Validation errors
+        if (data?.errors && Array.isArray(data.errors)) {
+          // Show first error only in toast
+          const firstError = data.errors[0];
+          toast.error(firstError.msg || firstError.message || data.message);
+        } else {
+          toast.error(data?.message || 'Bad request. Please check your input.');
+        }
         break;
         
       case 401:
-        // Unauthorized - clear token and redirect to login
+        // Unauthorized - clear token and redirect
         localStorage.removeItem('th_token');
         localStorage.removeItem('th_user');
-        // Only redirect if not already on login page
         if (!window.location.pathname.includes('/auth/login')) {
           window.location.href = '/auth/login';
-          toast.error('Session expired. Please login again.');
+          toast.error('Your session has expired. Please login again.');
         }
         break;
       
@@ -71,11 +84,17 @@ api.interceptors.response.use(
         break;
       
       case 404:
-        // Don't show toast for 404s as they're often handled by components
+        // Let components handle 404s
+        console.log('Resource not found:', error.config?.url);
+        break;
+      
+      case 409:
+        // Conflict (e.g., duplicate entry)
+        toast.error(data?.message || 'This record already exists.');
         break;
       
       case 422:
-        // Validation errors
+        // Unprocessable entity (validation)
         if (data?.errors && Array.isArray(data.errors)) {
           data.errors.forEach(err => toast.error(err.msg || err.message));
         } else {
@@ -84,12 +103,15 @@ api.interceptors.response.use(
         break;
       
       case 500:
-        toast.error('Server error. Please try again later.');
+        toast.error('Server error. Please try again later or contact support.');
+        break;
+      
+      case 503:
+        toast.error('Service temporarily unavailable. Please try again later.');
         break;
       
       default:
-        // Don't show toast for other errors as they might be handled by components
-        break;
+        toast.error(data?.message || 'An unexpected error occurred.');
     }
 
     return Promise.reject(error);

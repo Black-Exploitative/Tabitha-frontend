@@ -21,8 +21,41 @@ const ChildStatsWidget = ({ child, derived }) => {
     return { category: 'Obese', color: 'error', trend: 'up' };
   };
 
-  // Calculate days since admission
-  const daysSinceAdmission = differenceInDays(new Date(), new Date(child.admission_date));
+  // Handle immunization status object
+  const getImmunizationStatus = (immunizationData) => {
+    if (!immunizationData) return 'Unknown';
+    
+    // If it's already a string, return it
+    if (typeof immunizationData === 'string') {
+      return immunizationData;
+    }
+    
+    // If it's an object, check the vaccination status
+    if (typeof immunizationData === 'object') {
+      const vaccinations = ['bcg', 'polio', 'dpt', 'measles', 'yellow_fever', 'hepatitis_b'];
+      const completedVaccinations = vaccinations.filter(vaccine => immunizationData[vaccine] === true);
+      
+      if (completedVaccinations.length === vaccinations.length) {
+        return 'Up to date';
+      } else if (completedVaccinations.length > 0) {
+        return 'Partially complete';
+      } else {
+        return 'Pending';
+      }
+    }
+    
+    return 'Unknown';
+  };
+
+  // Calculate days since admission with safe date handling
+  const parseDate = (dateString) => {
+    if (!dateString) return null;
+    const date = new Date(dateString);
+    return isNaN(date.getTime()) ? null : date;
+  };
+
+  const admissionDate = parseDate(child.admission_date);
+  const daysSinceAdmission = admissionDate ? differenceInDays(new Date(), admissionDate) : 0;
   
   // Calculate health score based on various factors
   const calculateHealthScore = () => {
@@ -85,8 +118,8 @@ const ChildStatsWidget = ({ child, derived }) => {
     {
       id: 'behavioral',
       label: 'Behavioral Score',
-      value: child.behavioral_assessment_score,
-      unit: '/10',
+      value: child.behavioral_assessment_score || 'N/A',
+      unit: child.behavioral_assessment_score ? '/10' : '',
       icon: FaHeart,
       color: child.behavioral_assessment_score >= 8 ? 'success' : child.behavioral_assessment_score >= 6 ? 'primary' : 'warning',
       description: 'Social and behavioral assessment'
@@ -137,7 +170,7 @@ const ChildStatsWidget = ({ child, derived }) => {
             <FaRuler className="th-metric-icon" />
             <div className="th-metric-info">
               <span className="th-metric-label">Height</span>
-              <span className="th-metric-value">{child.height_cm} cm</span>
+              <span className="th-metric-value">{child.height_cm || 'N/A'} cm</span>
             </div>
           </div>
           
@@ -145,15 +178,15 @@ const ChildStatsWidget = ({ child, derived }) => {
             <FaWeight className="th-metric-icon" />
             <div className="th-metric-info">
               <span className="th-metric-label">Weight</span>
-              <span className="th-metric-value">{child.weight_kg} kg</span>
+              <span className="th-metric-value">{child.weight_kg || 'N/A'} kg</span>
             </div>
           </div>
         </div>
         
         <div className="th-immunization-status">
           <span className="th-immunization-label">Immunization Status:</span>
-          <span className={`th-immunization-value ${child.immunization_status === 'Up to date' ? 'th-status-current' : 'th-status-pending'}`}>
-            {child.immunization_status}
+          <span className={`th-immunization-value ${getImmunizationStatus(child.immunization_status) === 'Up to date' ? 'th-status-current' : 'th-status-pending'}`}>
+            {getImmunizationStatus(child.immunization_status)}
           </span>
         </div>
       </div>

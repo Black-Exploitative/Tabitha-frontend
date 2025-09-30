@@ -3,7 +3,6 @@ import { useQuery } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 import { 
   FaPlus, 
-  FaFilter,
   FaDownload,
   FaPrint,
   FaChild,
@@ -50,7 +49,34 @@ const ChildrenList = () => {
     refetch 
   } = useQuery({
     queryKey: ['children', { searchQuery, sortBy, sortOrder, filters }],
-    queryFn: () => childrenService.getChildren({ searchQuery, sortBy, sortOrder, filters }),
+    queryFn: () => {
+      // Only send non-default values to avoid backend issues
+      const params = {};
+      
+      // Only add searchQuery if it's not empty
+      if (searchQuery.trim()) {
+        params.searchQuery = searchQuery.trim();
+      }
+      
+      // Only add sortBy if it's not the default
+      if (sortBy !== 'admission_date') {
+        params.sortBy = sortBy;
+      }
+      
+      // Only add sortOrder if it's not the default
+      if (sortOrder !== 'desc') {
+        params.sortOrder = sortOrder;
+      }
+      
+      // Only add filter values that are not 'all'
+      Object.entries(filters).forEach(([key, value]) => {
+        if (value !== 'all' && value !== '') {
+          params[key] = value;
+        }
+      });
+      
+      return childrenService.getChildren(params);
+    },
     staleTime: 2 * 60 * 1000,
     placeholderData: (previousData) => previousData,
   });

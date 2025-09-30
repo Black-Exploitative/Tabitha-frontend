@@ -115,27 +115,41 @@ const ChildProfile = () => {
     last_modified_by: 'Nurse Joy Okeke'
   };
 
-  const childData = child || mockChild;
+  // Only use mock data if there's an error and we're in development
+  const childData = child || (error && process.env.NODE_ENV === 'development' ? mockChild : null);
 
   // Calculate derived data
   const derivedData = useMemo(() => {
     if (!childData) return {};
 
-    const age = differenceInYears(new Date(), new Date(childData.date_of_birth));
-    const timeAtHome = formatDistanceToNow(new Date(childData.admission_date), { addSuffix: true });
-    const lastContact = childData.last_family_contact_date 
-      ? formatDistanceToNow(new Date(childData.last_family_contact_date), { addSuffix: true })
+    // Safe date parsing with validation
+    const parseDate = (dateString) => {
+      if (!dateString) return null;
+      const date = new Date(dateString);
+      return isNaN(date.getTime()) ? null : date;
+    };
+
+    const birthDate = parseDate(childData.date_of_birth);
+    const admissionDate = parseDate(childData.admission_date);
+    const lastContactDate = parseDate(childData.last_family_contact_date);
+
+    const age = birthDate ? differenceInYears(new Date(), birthDate) : 'N/A';
+    const timeAtHome = admissionDate ? formatDistanceToNow(admissionDate, { addSuffix: true }) : 'N/A';
+    const lastContact = lastContactDate 
+      ? formatDistanceToNow(lastContactDate, { addSuffix: true })
       : 'No recent contact';
     
-    // BMI calculation
-    const heightInM = childData.height_cm / 100;
-    const bmi = childData.weight_kg / (heightInM * heightInM);
+    // BMI calculation with safe numeric handling
+    const height = parseFloat(childData.height_cm) || 0;
+    const weight = parseFloat(childData.weight_kg) || 0;
+    const heightInM = height / 100;
+    const bmi = height > 0 && weight > 0 ? weight / (heightInM * heightInM) : 0;
     
     return {
       age,
       timeAtHome,
       lastContact,
-      bmi: bmi.toFixed(1)
+      bmi: bmi > 0 ? bmi.toFixed(1) : 'N/A'
     };
   }, [childData]);
 
@@ -186,6 +200,18 @@ const ChildProfile = () => {
       <div className="th-child-profile-error">
         <h2>Error loading child profile</h2>
         <p>Child not found or you don't have permission to view this profile.</p>
+        <Button onClick={() => navigate('/children')} variant="primary">
+          Back to Children List
+        </Button>
+      </div>
+    );
+  }
+
+  if (!childData) {
+    return (
+      <div className="th-child-profile-error">
+        <h2>No child data available</h2>
+        <p>Unable to load child information.</p>
         <Button onClick={() => navigate('/children')} variant="primary">
           Back to Children List
         </Button>
@@ -390,7 +416,7 @@ const ChildProfile = () => {
                       <div className="th-info-item">
                         <span className="th-info-label">Date of Birth</span>
                         <span className="th-info-value">
-                          {format(new Date(childData.date_of_birth), 'MMMM dd, yyyy')}
+                          {childData.date_of_birth ? format(new Date(childData.date_of_birth), 'MMMM dd, yyyy') : 'N/A'}
                         </span>
                       </div>
                       <div className="th-info-item">
@@ -476,17 +502,53 @@ const ChildProfile = () => {
                         </div>
                       </div>
                       
-                      {childData.allergies && (
+                      {childData.allergies && childData.allergies.length > 0 && (
                         <div className="th-medical-item">
                           <span className="th-medical-label">Allergies</span>
-                          <span className="th-medical-value">{childData.allergies}</span>
+                          <div className="th-medical-value">
+                            {Array.isArray(childData.allergies) ? (
+                              <ul className="th-allergies-list">
+                                {childData.allergies.map((allergy, index) => (
+                                  <li key={index} className="th-allergy-item">
+                                    {allergy}
+                                  </li>
+                                ))}
+                              </ul>
+                            ) : (
+                              <span>{childData.allergies}</span>
+                            )}
+                          </div>
                         </div>
                       )}
                       
-                      {childData.medical_conditions && (
+                      {childData.medical_conditions && childData.medical_conditions.length > 0 && (
                         <div className="th-medical-item">
                           <span className="th-medical-label">Medical Conditions</span>
-                          <span className="th-medical-value">{childData.medical_conditions}</span>
+                          <div className="th-medical-value">
+                            {Array.isArray(childData.medical_conditions) ? (
+                              <ul className="th-medical-conditions-list">
+                                {childData.medical_conditions.map((condition, index) => (
+                                  <li key={condition._id || condition.id || index} className="th-medical-condition">
+                                    <div className="th-condition-name">
+                                      {typeof condition === 'string' ? condition : condition.condition}
+                                    </div>
+                                    {typeof condition === 'object' && condition.current_treatment && (
+                                      <div className="th-condition-treatment">
+                                        Treatment: {condition.current_treatment}
+                                      </div>
+                                    )}
+                                    {typeof condition === 'object' && condition.notes && (
+                                      <div className="th-condition-notes">
+                                        Notes: {condition.notes}
+                                      </div>
+                                    )}
+                                  </li>
+                                ))}
+                              </ul>
+                            ) : (
+                              <span>{childData.medical_conditions}</span>
+                            )}
+                          </div>
                         </div>
                       )}
                     </div>
@@ -494,7 +556,7 @@ const ChildProfile = () => {
                     <div className="th-last-checkup">
                       <span className="th-checkup-label">Last Checkup:</span>
                       <span className="th-checkup-date">
-                        {format(new Date(childData.last_checkup), 'MMM dd, yyyy')}
+                        {childData.last_checkup ? format(new Date(childData.last_checkup), 'MMM dd, yyyy') : 'N/A'}
                       </span>
                     </div>
                   </div>
@@ -548,7 +610,7 @@ const ChildProfile = () => {
                       <div className="th-admin-item">
                         <span className="th-admin-label">Admission Date</span>
                         <span className="th-admin-value">
-                          {format(new Date(childData.admission_date), 'MMMM dd, yyyy')}
+                          {childData.admission_date ? format(new Date(childData.admission_date), 'MMMM dd, yyyy') : 'N/A'}
                         </span>
                       </div>
                       <div className="th-admin-item">

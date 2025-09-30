@@ -783,4 +783,73 @@
   
   [data-theme="dark"] .th-circumstances-text {
     color: var(--th-gray-400);
+  }
+
+  /* Medical Conditions and Allergies Lists */
+  .th-medical-conditions-list,
+  .th-allergies-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--th-space-2);
+  }
+
+  .th-medical-condition,
+  .th-allergy-item {
+    background: var(--th-gray-50);
+    border: 1px solid var(--th-gray-200);
+    border-radius: 8px;
+    padding: var(--th-space-3);
+    transition: var(--th-transition-fast);
+  }
+
+  .th-medical-condition:hover,
+  .th-allergy-item:hover {
+    background: var(--th-gray-100);
+    border-color: var(--th-primary-light);
+  }
+
+  .th-condition-name {
+    font-weight: 600;
+    color: var(--th-gray-800);
+    margin-bottom: var(--th-space-1);
+  }
+
+  .th-condition-treatment,
+  .th-condition-notes {
+    font-size: var(--th-text-sm);
+    color: var(--th-gray-600);
+    margin-top: var(--th-space-1);
+  }
+
+  .th-condition-treatment {
+    font-weight: 500;
+  }
+
+  .th-condition-notes {
+    font-style: italic;
+  }
+
+  /* Dark mode for medical lists */
+  [data-theme="dark"] .th-medical-condition,
+  [data-theme="dark"] .th-allergy-item {
+    background: var(--th-gray-700);
+    border-color: var(--th-gray-600);
+  }
+
+  [data-theme="dark"] .th-medical-condition:hover,
+  [data-theme="dark"] .th-allergy-item:hover {
+    background: var(--th-gray-600);
+    border-color: var(--th-primary-light);
+  }
+
+  [data-theme="dark"] .th-condition-name {
+    color: var(--th-gray-200);
+  }
+
+  [data-theme="dark"] .th-condition-treatment,
+  [data-theme="dark"] .th-condition-notes {
+    color: var(--th-gray-400);
   } 

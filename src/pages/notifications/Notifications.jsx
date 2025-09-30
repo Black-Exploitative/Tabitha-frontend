@@ -12,7 +12,7 @@ const Notifications = () => {
       message: 'Sarah Adebayo has been admitted to the home',
       time: '2 minutes ago',
       unread: true,
-      action: '/children/1'
+      action: '/children'
     },
     {
       id: 2,
