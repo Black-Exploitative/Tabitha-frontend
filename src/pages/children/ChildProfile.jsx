@@ -390,275 +390,270 @@ const ChildProfile = () => {
       {/* Profile Content */}
       <div className="th-profile-content">
         {/* Overview Tab */}
-        {activeTab === 'overview' && (
-          <div className="th-tab-content th-overview-tab">
-            <div className="th-overview-grid">
-              {/* Left Column */}
-              <div className="th-overview-left">
-                <ChildStatsWidget child={childData} derived={derivedData} />
-                
-                {/* Personal Information Card */}
-                <div className="th-info-card">
-                  <div className="th-card-header">
-                    <h3 className="th-card-title">
-                      <FaUser className="th-card-icon" />
-                      Personal Information
-                    </h3>
-                  </div>
-                  <div className="th-card-body">
-                    <div className="th-info-grid">
-                      <div className="th-info-item">
-                        <span className="th-info-label">Full Name</span>
-                        <span className="th-info-value">
-                          {childData.first_name} {childData.middle_name} {childData.last_name}
-                        </span>
-                      </div>
-                      <div className="th-info-item">
-                        <span className="th-info-label">Date of Birth</span>
-                        <span className="th-info-value">
-                          {childData.date_of_birth ? format(new Date(childData.date_of_birth), 'MMMM dd, yyyy') : 'N/A'}
-                        </span>
-                      </div>
-                      <div className="th-info-item">
-                        <span className="th-info-label">Gender</span>
-                        <span className="th-info-value">{childData.gender}</span>
-                      </div>
-                      <div className="th-info-item">
-                        <span className="th-info-label">Nationality</span>
-                        <span className="th-info-value">{childData.nationality}</span>
-                      </div>
-                      <div className="th-info-item">
-                        <span className="th-info-label">State of Origin</span>
-                        <span className="th-info-value">{childData.state_of_origin}</span>
-                      </div>
-                      <div className="th-info-item">
-                        <span className="th-info-label">LGA</span>
-                        <span className="th-info-value">{childData.lga}</span>
-                      </div>
-                      <div className="th-info-item">
-                        <span className="th-info-label">Preferred Language</span>
-                        <span className="th-info-value">{childData.preferred_language}</span>
-                      </div>
-                      <div className="th-info-item">
-                        <span className="th-info-label">Religion</span>
-                        <span className="th-info-value">{childData.religion}</span>
-                      </div>
-                    </div>
-                    
-                    {childData.tribal_marks && (
-                      <div className="th-info-section">
-                        <span className="th-info-label">Tribal Marks / Identifying Features</span>
-                        <p className="th-info-text">{childData.tribal_marks}</p>
-                      </div>
-                    )}
-                  </div>
-                </div>
+{activeTab === 'overview' && (
+  <div className="th-tab-content th-overview-tab">
+    <div className="th-overview-grid">
+      {/* Stats Widget */}
+      <ChildStatsWidget child={childData} derived={derivedData} />
+      
+      {/* Personal Information Card */}
+      <div className="th-info-card">
+        <div className="th-card-header">
+          <h3 className="th-card-title">
+            <FaUser className="th-card-icon" />
+            Personal Information
+          </h3>
+        </div>
+        <div className="th-card-body">
+          <div className="th-info-grid">
+            <div className="th-info-item">
+              <span className="th-info-label">Full Name</span>
+              <span className="th-info-value">
+                {childData.first_name} {childData.middle_name} {childData.last_name}
+              </span>
+            </div>
+            <div className="th-info-item">
+              <span className="th-info-label">Date of Birth</span>
+              <span className="th-info-value">
+                {childData.date_of_birth ? format(new Date(childData.date_of_birth), 'MMMM dd, yyyy') : 'N/A'}
+              </span>
+            </div>
+            <div className="th-info-item">
+              <span className="th-info-label">Gender</span>
+              <span className="th-info-value">{childData.gender}</span>
+            </div>
+            <div className="th-info-item">
+              <span className="th-info-label">Nationality</span>
+              <span className="th-info-value">{childData.nationality}</span>
+            </div>
+            <div className="th-info-item">
+              <span className="th-info-label">State of Origin</span>
+              <span className="th-info-value">{childData.state_of_origin}</span>
+            </div>
+            <div className="th-info-item">
+              <span className="th-info-label">LGA</span>
+              <span className="th-info-value">{childData.lga}</span>
+            </div>
+            <div className="th-info-item">
+              <span className="th-info-label">Preferred Language</span>
+              <span className="th-info-value">{childData.preferred_language}</span>
+            </div>
+            <div className="th-info-item">
+              <span className="th-info-label">Religion</span>
+              <span className="th-info-value">{childData.religion}</span>
+            </div>
+          </div>
+          
+          {childData.tribal_marks && (
+            <div className="th-info-section">
+              <span className="th-info-label">Tribal Marks / Identifying Features</span>
+              <p className="th-info-text">{childData.tribal_marks}</p>
+            </div>
+          )}
+        </div>
+      </div>
 
-                {/* Health Summary Card */}
-                <div className="th-info-card">
-                  <div className="th-card-header">
-                    <h3 className="th-card-title">
-                      <FaStethoscope className="th-card-icon" />
-                      Health Summary
-                    </h3>
-                    <span className={`th-health-status th-status-${healthColor}`}>
-                      {childData.health_status}
-                    </span>
-                  </div>
-                  <div className="th-card-body">
-                    <div className="th-health-metrics">
-                      <div className="th-metric">
-                        <FaRuler className="th-metric-icon" />
-                        <div className="th-metric-content">
-                          <span className="th-metric-label">Height</span>
-                          <span className="th-metric-value">{childData.height_cm} cm</span>
-                        </div>
-                      </div>
-                      <div className="th-metric">
-                        <FaWeight className="th-metric-icon" />
-                        <div className="th-metric-content">
-                          <span className="th-metric-label">Weight</span>
-                          <span className="th-metric-value">{childData.weight_kg} kg</span>
-                        </div>
-                      </div>
-                      <div className="th-metric">
-                        <FaArrowUp className="th-metric-icon" />
-                        <div className="th-metric-content">
-                          <span className="th-metric-label">BMI</span>
-                          <span className="th-metric-value">{derivedData.bmi}</span>
-                        </div>
-                      </div>
-                    </div>
-                    
-                    <div className="th-medical-info">
-                      <div className="th-medical-row">
-                        <div className="th-medical-item">
-                          <span className="th-medical-label">Blood Type</span>
-                          <span className="th-medical-value">{childData.blood_type}</span>
-                        </div>
-                        <div className="th-medical-item">
-                          <span className="th-medical-label">Genotype</span>
-                          <span className="th-medical-value">{childData.genotype}</span>
-                        </div>
-                      </div>
-                      
-                      {childData.allergies && childData.allergies.length > 0 && (
-                        <div className="th-medical-item">
-                          <span className="th-medical-label">Allergies</span>
-                          <div className="th-medical-value">
-                            {Array.isArray(childData.allergies) ? (
-                              <ul className="th-allergies-list">
-                                {childData.allergies.map((allergy, index) => (
-                                  <li key={index} className="th-allergy-item">
-                                    {allergy}
-                                  </li>
-                                ))}
-                              </ul>
-                            ) : (
-                              <span>{childData.allergies}</span>
-                            )}
-                          </div>
-                        </div>
-                      )}
-                      
-                      {childData.medical_conditions && childData.medical_conditions.length > 0 && (
-                        <div className="th-medical-item">
-                          <span className="th-medical-label">Medical Conditions</span>
-                          <div className="th-medical-value">
-                            {Array.isArray(childData.medical_conditions) ? (
-                              <ul className="th-medical-conditions-list">
-                                {childData.medical_conditions.map((condition, index) => (
-                                  <li key={condition._id || condition.id || index} className="th-medical-condition">
-                                    <div className="th-condition-name">
-                                      {typeof condition === 'string' ? condition : condition.condition}
-                                    </div>
-                                    {typeof condition === 'object' && condition.current_treatment && (
-                                      <div className="th-condition-treatment">
-                                        Treatment: {condition.current_treatment}
-                                      </div>
-                                    )}
-                                    {typeof condition === 'object' && condition.notes && (
-                                      <div className="th-condition-notes">
-                                        Notes: {condition.notes}
-                                      </div>
-                                    )}
-                                  </li>
-                                ))}
-                              </ul>
-                            ) : (
-                              <span>{childData.medical_conditions}</span>
-                            )}
-                          </div>
-                        </div>
-                      )}
-                    </div>
-
-                    <div className="th-last-checkup">
-                      <span className="th-checkup-label">Last Checkup:</span>
-                      <span className="th-checkup-date">
-                        {childData.last_checkup ? format(new Date(childData.last_checkup), 'MMM dd, yyyy') : 'N/A'}
-                      </span>
-                    </div>
-                  </div>
-                </div>
+      {/* Health Summary Card */}
+      <div className="th-info-card">
+        <div className="th-card-header">
+          <h3 className="th-card-title">
+            <FaStethoscope className="th-card-icon" />
+            Health Summary
+          </h3>
+          <span className={`th-health-status th-status-${healthColor}`}>
+            {childData.health_status}
+          </span>
+        </div>
+        <div className="th-card-body">
+          <div className="th-health-metrics">
+            <div className="th-metric">
+              <FaRuler className="th-metric-icon" />
+              <div className="th-metric-content">
+                <span className="th-metric-label">Height</span>
+                <span className="th-metric-value">{childData.height_cm} cm</span>
               </div>
-
-              {/* Right Column */}
-              <div className="th-overview-right">
-                {/* Education Card */}
-                <div className="th-info-card">
-                  <div className="th-card-header">
-                    <h3 className="th-card-title">
-                      <FaGraduationCap className="th-card-icon" />
-                      Education & Development
-                    </h3>
-                  </div>
-                  <div className="th-card-body">
-                    <div className="th-education-info">
-                      <div className="th-education-item">
-                        <span className="th-edu-label">Current Level</span>
-                        <span className="th-edu-value">{childData.education_level}</span>
-                      </div>
-                      {childData.school_name && (
-                        <div className="th-education-item">
-                          <span className="th-edu-label">School</span>
-                          <span className="th-edu-value">{childData.school_name}</span>
-                        </div>
-                      )}
-                      <div className="th-education-item">
-                        <span className="th-edu-label">Career Ambition</span>
-                        <span className="th-edu-value">{childData.ambition}</span>
-                      </div>
-                      <div className="th-education-item">
-                        <span className="th-edu-label">Behavioral Score</span>
-                        <span className="th-edu-value">{childData.behavioral_assessment_score}/10</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Administrative Info Card */}
-                <div className="th-info-card">
-                  <div className="th-card-header">
-                    <h3 className="th-card-title">
-                      <FaFileAlt className="th-card-icon" />
-                      Administrative Information
-                    </h3>
-                  </div>
-                  <div className="th-card-body">
-                    <div className="th-admin-info">
-                      <div className="th-admin-item">
-                        <span className="th-admin-label">Admission Date</span>
-                        <span className="th-admin-value">
-                          {childData.admission_date ? format(new Date(childData.admission_date), 'MMMM dd, yyyy') : 'N/A'}
-                        </span>
-                      </div>
-                      <div className="th-admin-item">
-                        <span className="th-admin-label">Case Worker</span>
-                        <span className="th-admin-value">{childData.case_worker}</span>
-                      </div>
-                      <div className="th-admin-item">
-                        <span className="th-admin-label">Room Assignment</span>
-                        <span className="th-admin-value">{childData.room_assignment}, {childData.bed_number}</span>
-                      </div>
-                      <div className="th-admin-item">
-                        <span className="th-admin-label">Monthly Allowance</span>
-                        <span className="th-admin-value">₦{childData.monthly_allowance?.toLocaleString()}</span>
-                      </div>
-                      {childData.chores_assigned && (
-                        <div className="th-admin-item">
-                          <span className="th-admin-label">Assigned Chores</span>
-                          <span className="th-admin-value">{childData.chores_assigned}</span>
-                        </div>
-                      )}
-                      {childData.mentorship_program && (
-                        <div className="th-admin-item">
-                          <span className="th-admin-label">Mentorship</span>
-                          <span className="th-admin-value">{childData.mentorship_program}</span>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                </div>
-
-                {/* Arrival Circumstances Card */}
-                <div className="th-info-card">
-                  <div className="th-card-header">
-                    <h3 className="th-card-title">
-                      <FaFlag className="th-card-icon" />
-                      Arrival Circumstances
-                    </h3>
-                  </div>
-                  <div className="th-card-body">
-                    <p className="th-circumstances-text">
-                      {childData.arrival_circumstances}
-                    </p>
-                  </div>
-                </div>
+            </div>
+            <div className="th-metric">
+              <FaWeight className="th-metric-icon" />
+              <div className="th-metric-content">
+                <span className="th-metric-label">Weight</span>
+                <span className="th-metric-value">{childData.weight_kg} kg</span>
+              </div>
+            </div>
+            <div className="th-metric">
+              <FaArrowUp className="th-metric-icon" />
+              <div className="th-metric-content">
+                <span className="th-metric-label">BMI</span>
+                <span className="th-metric-value">{derivedData.bmi}</span>
               </div>
             </div>
           </div>
-        )}
+          
+          <div className="th-medical-info">
+            <div className="th-medical-row">
+              <div className="th-medical-item">
+                <span className="th-medical-label">Blood Type</span>
+                <span className="th-medical-value">{childData.blood_type}</span>
+              </div>
+              <div className="th-medical-item">
+                <span className="th-medical-label">Genotype</span>
+                <span className="th-medical-value">{childData.genotype}</span>
+              </div>
+            </div>
+            
+            {childData.allergies && childData.allergies.length > 0 && (
+              <div className="th-medical-item">
+                <span className="th-medical-label">Allergies</span>
+                <div className="th-medical-value">
+                  {Array.isArray(childData.allergies) ? (
+                    <ul className="th-allergies-list">
+                      {childData.allergies.map((allergy, index) => (
+                        <li key={index} className="th-allergy-item">
+                          {allergy}
+                        </li>
+                      ))}
+                    </ul>
+                  ) : (
+                    <span>{childData.allergies}</span>
+                  )}
+                </div>
+              </div>
+            )}
+            
+            {childData.medical_conditions && childData.medical_conditions.length > 0 && (
+              <div className="th-medical-item">
+                <span className="th-medical-label">Medical Conditions</span>
+                <div className="th-medical-value">
+                  {Array.isArray(childData.medical_conditions) ? (
+                    <ul className="th-medical-conditions-list">
+                      {childData.medical_conditions.map((condition, index) => (
+                        <li key={condition._id || condition.id || index} className="th-medical-condition">
+                          <div className="th-condition-name">
+                            {typeof condition === 'string' ? condition : condition.condition}
+                          </div>
+                          {typeof condition === 'object' && condition.current_treatment && (
+                            <div className="th-condition-treatment">
+                              Treatment: {condition.current_treatment}
+                            </div>
+                          )}
+                          {typeof condition === 'object' && condition.notes && (
+                            <div className="th-condition-notes">
+                              Notes: {condition.notes}
+                            </div>
+                          )}
+                        </li>
+                      ))}
+                    </ul>
+                  ) : (
+                    <span>{childData.medical_conditions}</span>
+                  )}
+                </div>
+              </div>
+            )}
+          </div>
+
+          <div className="th-last-checkup">
+            <span className="th-checkup-label">Last Checkup:</span>
+            <span className="th-checkup-date">
+              {childData.last_checkup ? format(new Date(childData.last_checkup), 'MMM dd, yyyy') : 'N/A'}
+            </span>
+          </div>
+        </div>
+      </div>
+
+      {/* Education Card */}
+      <div className="th-info-card">
+        <div className="th-card-header">
+          <h3 className="th-card-title">
+            <FaGraduationCap className="th-card-icon" />
+            Education & Development
+          </h3>
+        </div>
+        <div className="th-card-body">
+          <div className="th-education-info">
+            <div className="th-education-item">
+              <span className="th-edu-label">Current Level</span>
+              <span className="th-edu-value">{childData.education_level}</span>
+            </div>
+            {childData.school_name && (
+              <div className="th-education-item">
+                <span className="th-edu-label">School</span>
+                <span className="th-edu-value">{childData.school_name}</span>
+              </div>
+            )}
+            <div className="th-education-item">
+              <span className="th-edu-label">Career Ambition</span>
+              <span className="th-edu-value">{childData.ambition}</span>
+            </div>
+            <div className="th-education-item">
+              <span className="th-edu-label">Behavioral Score</span>
+              <span className="th-edu-value">{childData.behavioral_assessment_score}/10</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Administrative Info Card */}
+      <div className="th-info-card">
+        <div className="th-card-header">
+          <h3 className="th-card-title">
+            <FaFileAlt className="th-card-icon" />
+            Administrative Information
+          </h3>
+        </div>
+        <div className="th-card-body">
+          <div className="th-admin-info">
+            <div className="th-admin-item">
+              <span className="th-admin-label">Admission Date</span>
+              <span className="th-admin-value">
+                {childData.admission_date ? format(new Date(childData.admission_date), 'MMMM dd, yyyy') : 'N/A'}
+              </span>
+            </div>
+            <div className="th-admin-item">
+              <span className="th-admin-label">Case Worker</span>
+              <span className="th-admin-value">{childData.case_worker}</span>
+            </div>
+            <div className="th-admin-item">
+              <span className="th-admin-label">Room Assignment</span>
+              <span className="th-admin-value">{childData.room_assignment}, {childData.bed_number}</span>
+            </div>
+            <div className="th-admin-item">
+              <span className="th-admin-label">Monthly Allowance</span>
+              <span className="th-admin-value">₦{childData.monthly_allowance?.toLocaleString()}</span>
+            </div>
+            {childData.chores_assigned && (
+              <div className="th-admin-item">
+                <span className="th-admin-label">Assigned Chores</span>
+                <span className="th-admin-value">{childData.chores_assigned}</span>
+              </div>
+            )}
+            {childData.mentorship_program && (
+              <div className="th-admin-item">
+                <span className="th-admin-label">Mentorship</span>
+                <span className="th-admin-value">{childData.mentorship_program}</span>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+
+      {/* Arrival Circumstances Card - Full Width */}
+      <div className="th-info-card th-full-width">
+        <div className="th-card-header">
+          <h3 className="th-card-title">
+            <FaFlag className="th-card-icon" />
+            Arrival Circumstances
+          </h3>
+        </div>
+        <div className="th-card-body">
+          <p className="th-circumstances-text">
+            {childData.arrival_circumstances}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+)}
 
         {/* Medical Tab */}
         {activeTab === 'medical' && (

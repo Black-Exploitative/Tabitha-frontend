@@ -1,855 +1,881 @@
 .th-child-profile {
-    width: 100%;
-    max-width: none;
-    padding: 0;
+  width: 100%;
+  max-width: none;
+  padding: 0;
+}
+
+.th-child-profile-loading,
+.th-child-profile-error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  background: var(--th-white);
+  border-radius: 8px;
+  padding: 24px;
+  text-align: center;
+  border: 1px solid var(--th-gray-200);
+}
+
+.th-child-profile-error h2 {
+  color: var(--th-error-solid);
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.th-child-profile-error p {
+  color: var(--th-gray-600);
+  margin-bottom: 16px;
+}
+
+/* Profile Header */
+.th-profile-header {
+  background: var(--th-white);
+  border-radius: 8px;
+  margin-bottom: 16px;
+  border: 1px solid var(--th-gray-200);
+}
+
+.th-header-content {
+  padding: 20px;
+}
+
+.th-header-navigation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--th-gray-200);
+}
+
+.th-back-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background: var(--th-white);
+  border: 1px solid var(--th-gray-300);
+  border-radius: 4px;
+  color: var(--th-gray-700);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 600;
+  transition: all 0.15s ease;
+}
+
+.th-back-btn:hover {
+  background: var(--th-gray-50);
+  border-color: var(--th-accent-solid);
+  color: var(--th-accent-solid);
+}
+
+.th-header-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.th-profile-main {
+  display: flex;
+  gap: 24px;
+}
+
+.th-profile-photo-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.th-profile-photo {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 2px solid var(--th-gray-200);
+}
+
+.th-profile-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.th-photo-placeholder {
+  width: 100%;
+  height: 100%;
+  background: var(--th-gray-200);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--th-gray-500);
+  font-size: 32px;
+}
+
+.th-status-indicator {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 3px solid var(--th-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.th-status-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.th-status-success .th-status-dot { background: var(--th-secondary-solid); }
+.th-status-primary .th-status-dot { background: var(--th-accent-solid); }
+.th-status-info .th-status-dot { background: var(--th-accent-solid); }
+.th-status-warning .th-status-dot { background: #F39C12; }
+.th-status-muted .th-status-dot { background: var(--th-gray-400); }
+
+.th-photo-edit-btn {
+  margin-top: 4px;
+}
+
+.th-profile-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.th-profile-basic {
+  margin-bottom: 16px;
+}
+
+.th-profile-name {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--th-gray-800);
+  margin-bottom: 8px;
+  line-height: 1.2;
+}
+
+.th-profile-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+
+.th-child-id {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--th-accent-solid);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  background: rgba(52, 152, 219, 0.1);
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+.th-age-gender {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--th-gray-700);
+}
+
+.th-gender-icon {
+  color: var(--th-accent-solid);
+}
+
+.th-profile-badges {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+.th-status-badge,
+.th-health-badge,
+.th-language-badge {
+  font-size: 10px;
+  font-weight: 600;
+  padding: 4px 8px;
+  border-radius: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.th-badge-success {
+  background: rgba(39, 174, 96, 0.1);
+  color: var(--th-secondary-solid);
+}
+
+.th-badge-primary {
+  background: rgba(52, 152, 219, 0.1);
+  color: var(--th-accent-solid);
+}
+
+.th-badge-warning {
+  background: rgba(243, 156, 18, 0.1);
+  color: #F39C12;
+}
+
+.th-badge-info {
+  background: rgba(52, 152, 219, 0.1);
+  color: var(--th-accent-solid);
+}
+
+.th-language-badge {
+  background: rgba(39, 174, 96, 0.1);
+  color: var(--th-secondary-solid);
+}
+
+.th-profile-quick-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+.th-quick-stat {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px;
+  background: var(--th-gray-50);
+  border: 1px solid var(--th-gray-200);
+  border-radius: 6px;
+  transition: all 0.15s ease;
+}
+
+.th-quick-stat:hover {
+  border-color: var(--th-accent-solid);
+}
+
+.th-stat-icon {
+  width: 32px;
+  height: 32px;
+  background: var(--th-accent-solid);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+.th-stat-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+  flex: 1;
+}
+
+.th-stat-label {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--th-gray-500);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.th-stat-value {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--th-gray-800);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Profile Navigation */
+.th-profile-nav {
+  background: var(--th-white);
+  border-radius: 8px;
+  padding: 8px;
+  margin-bottom: 16px;
+  border: 1px solid var(--th-gray-200);
+  overflow-x: auto;
+}
+
+.th-nav-tabs {
+  display: flex;
+  gap: 4px;
+  min-width: max-content;
+}
+
+.th-nav-tab {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  background: transparent;
+  border: none;
+  border-radius: 4px;
+  color: var(--th-gray-600);
+  font-weight: 600;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+
+.th-nav-tab:hover {
+  background: var(--th-gray-100);
+  color: var(--th-gray-800);
+}
+
+.th-tab-active {
+  background: var(--th-accent-solid);
+  color: white;
+}
+
+.th-tab-icon {
+  font-size: 14px;
+}
+
+.th-tab-label {
+  font-weight: 600;
+}
+
+/* Profile Content */
+.th-profile-content {
+  /* min-height: 400px; */
+}
+
+.th-tab-content {
+  animation: th-fade-in 0.2s ease;
+}
+
+@keyframes th-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Overview Tab */
+.th-overview-tab {
+  /* display: flex;
+  flex-direction: row;
+  gap: 16px; */
+  width: 100%;
+}
+
+.th-overview-grid {
+  /* display: grid;
+  grid-template-columns: repeat(2, 1fr); 
+  gap: 16px;
+  width: 100%; */
+}
+
+/* Info Cards */
+.th-info-card {
+  background: var(--th-white);
+  border: 1px solid var(--th-gray-200);
+  border-radius: 8px;
+  overflow: hidden;
+  transition: all 0.15s ease;
+}
+
+.th-info-card:hover {
+  border-color: var(--th-accent-solid);
+}
+
+.th-info-card.th-full-width,
+.th-child-stats-widget {
+  grid-column: 1 / -1;
+}
+
+.th-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--th-gray-200);
+  background: var(--th-gray-50);
+}
+
+.th-card-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--th-gray-800);
+  margin: 0;
+}
+
+.th-card-icon {
+  color: var(--th-accent-solid);
+  font-size: 14px;
+}
+
+.th-health-status {
+  font-size: 10px;
+  font-weight: 600;
+  padding: 4px 8px;
+  border-radius: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.th-status-success { background: rgba(39, 174, 96, 0.1); color: var(--th-secondary-solid); }
+.th-status-primary { background: rgba(52, 152, 219, 0.1); color: var(--th-accent-solid); }
+.th-status-warning { background: rgba(243, 156, 18, 0.1); color: #F39C12; }
+.th-status-error { background: rgba(231, 76, 60, 0.1); color: var(--th-error-solid); }
+
+.th-card-body {
+  padding: 16px;
+}
+
+.th-info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.th-info-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.th-info-label {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--th-gray-500);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.th-info-value {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--th-gray-800);
+}
+
+.th-info-section {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid var(--th-gray-200);
+}
+
+.th-info-text {
+  font-size: 13px;
+  color: var(--th-gray-600);
+  line-height: 1.5;
+  margin: 8px 0 0;
+}
+
+/* Health Summary */
+.th-health-metrics {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.th-metric {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+}
+
+.th-metric-icon {
+  color: var(--th-accent-solid);
+  font-size: 16px;
+}
+
+.th-metric-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.th-metric-label {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--th-gray-500);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.th-metric-value {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--th-gray-800);
+}
+
+.th-medical-info {
+  margin-bottom: 12px;
+}
+
+.th-medical-row {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 8px;
+}
+
+.th-medical-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+  flex: 1;
+}
+
+.th-medical-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--th-gray-600);
+}
+
+.th-medical-value {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--th-gray-800);
+}
+
+.th-last-checkup {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 12px;
+  background: rgba(52, 152, 219, 0.05);
+  border-radius: 6px;
+  border: 1px solid rgba(52, 152, 219, 0.1);
+}
+
+.th-checkup-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--th-gray-600);
+}
+
+.th-checkup-date {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--th-accent-solid);
+}
+
+/* Education */
+.th-education-info {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.th-education-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.th-edu-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--th-gray-600);
+}
+
+.th-edu-value {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--th-gray-800);
+}
+
+/* Administrative */
+.th-admin-info {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.th-admin-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.th-admin-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--th-gray-600);
+}
+
+.th-admin-value {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--th-gray-800);
+}
+
+/* Circumstances */
+.th-circumstances-text {
+  font-size: 13px;
+  color: var(--th-gray-700);
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Medical Conditions and Allergies Lists */
+.th-medical-conditions-list,
+.th-allergies-list {
+  list-style: none;
+  padding: 0;
+  margin: 8px 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.th-medical-condition,
+.th-allergy-item {
+  background: var(--th-gray-50);
+  border: 1px solid var(--th-gray-200);
+  border-radius: 4px;
+  padding: 8px;
+  transition: all 0.15s ease;
+}
+
+.th-medical-condition:hover,
+.th-allergy-item:hover {
+  border-color: var(--th-accent-solid);
+}
+
+.th-condition-name {
+  font-weight: 600;
+  color: var(--th-gray-800);
+  margin-bottom: 4px;
+  font-size: 12px;
+}
+
+.th-condition-treatment,
+.th-condition-notes {
+  font-size: 11px;
+  color: var(--th-gray-600);
+  margin-top: 4px;
+}
+
+.th-condition-treatment {
+  font-weight: 500;
+}
+
+.th-condition-notes {
+  font-style: italic;
+}
+
+.th-profile-content {
+  /* min-height: 400px;
+  width: 100%; */
+}
+
+.th-tab-content {
+  animation: th-fade-in 0.2s ease;
+  width: 100%;
+}
+
+/* For larger screens, allow 3 columns */
+@media (min-width: 1600px) {
+  . {
+    grid-template-columns: repeat(3, 1fr);
   }
-  
-  .th-child-profile-loading,
-  .th-child-profile-error {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 60vh;
-    background: var(--th-white);
-    border-radius: 16px;
-    padding: var(--th-space-8);
-    text-align: center;
-    box-shadow: var(--th-shadow-lg);
-    -webkit-backdrop-filter: blur(8px);
-    backdrop-filter: blur(8px);
-    
-  }
-  
-  .th-child-profile-error h2 {
-    color: var(--th-warm);
-    font-size: var(--th-text-2xl);
-    font-weight: 700;
-    margin-bottom: var(--th-space-4);
-  }
-  
-  .th-child-profile-error p {
-    color: var(--th-gray-600);
-    margin-bottom: var(--th-space-6);
-  }
-  
-  /* Profile Header */
-  .th-profile-header {
-    position: relative;
-    background: var(--th-white);
-    border-radius: 24px;
-    margin-bottom: var(--th-space-6);
-    overflow: hidden;
-    box-shadow: var(--th-shadow-luxury);
-    border: 1px solid rgba(230, 126, 34, 0.1);
-  }
-  
-  .th-header-background {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 0;
-  }
-  
-  .th-header-gradient {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(
-      135deg,
-      rgba(230, 126, 34, 0.1) 0%,
-      rgba(52, 152, 219, 0.08) 25%,
-      rgba(39, 174, 96, 0.1) 50%,
-      rgba(230, 126, 34, 0.12) 75%,
-      transparent 100%
-    );
-  }
-  
-  .th-header-content {
-    position: relative;
-    z-index: 1;
-    padding: var(--th-space-8);
-  }
-  
-  .th-header-navigation {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: var(--th-space-8);
-  }
-  
-  .th-back-btn {
-    display: flex;
-    align-items: center;
-    gap: var(--th-space-2);
-    padding: var(--th-space-3) var(--th-space-4);
-    background: rgba(255, 255, 255, 0.8);
-    border: 1px solid rgba(230, 126, 34, 0.2);
-    border-radius: 12px;
-    color: var(--th-gray-700);
-    text-decoration: none;
-    font-weight: 600;
-    transition: var(--th-transition-luxury);
-    -webkit-backdrop-filter: blur(8px);
-    backdrop-filter: blur(8px);
-  }
-  
-  .th-back-btn:hover {
-    background: var(--th-white);
-    color: var(--th-primary-solid);
-    transform: translateX(-4px);
-    box-shadow: var(--th-shadow-lg);
-  }
-  
-  .th-header-actions {
-    display: flex;
-    gap: var(--th-space-3);
-  }
-  
-  .th-profile-main {
-    display: flex;
-    gap: var(--th-space-8);
-  }
-  
-  .th-profile-photo-section {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: var(--th-space-4);
-  }
-  
-  .th-profile-photo {
-    position: relative;
-    width: 160px;
-    height: 160px;
-    border-radius: 24px;
-    overflow: hidden;
-    box-shadow: var(--th-shadow-luxury);
-    border: 4px solid var(--th-white);
-  }
-  
-  .th-profile-photo img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-  
-  .th-photo-placeholder {
-    width: 100%;
-    height: 100%;
-    background: var(--th-primary);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--th-white);
-    font-size: var(--th-text-4xl);
-  }
-  
-  .th-status-indicator {
-    position: absolute;
-    top: -8px;
-    right: -8px;
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    border: 4px solid var(--th-white);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: var(--th-shadow-lg);
-  }
-  
-  .th-status-dot {
-    width: 16px;
-    height: 16px;
-    border-radius: 50%;
-    animation: th-status-pulse 2s infinite;
-  }
-  
-  .th-status-success .th-status-dot { background: var(--th-secondary-solid); }
-  .th-status-primary .th-status-dot { background: var(--th-primary-solid); }
-  .th-status-info .th-status-dot { background: var(--th-accent-solid); }
-  .th-status-warning .th-status-dot { background: #F39C12; }
-  .th-status-muted .th-status-dot { background: var(--th-gray-400); }
-  
-  @keyframes th-status-pulse {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.7; transform: scale(1.1); }
-  }
-  
-  .th-photo-edit-btn {
-    margin-top: var(--th-space-2);
-  }
-  
-  .th-profile-info {
-    flex: 1;
-    min-width: 0;
-  }
-  
-  .th-profile-basic {
-    margin-bottom: var(--th-space-6);
-  }
-  
-  .th-profile-name {
-    font-family: var(--th-font-luxury);
-    font-size: var(--th-text-4xl);
-    font-weight: 800;
-    background: linear-gradient(135deg, var(--th-primary-solid) 0%, var(--th-accent-solid) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    margin-bottom: var(--th-space-3);
-    line-height: var(--th-leading-tight);
-  }
-  
-  .th-profile-meta {
-    display: flex;
-    align-items: center;
-    gap: var(--th-space-4);
-    margin-bottom: var(--th-space-4);
-  }
-  
-  .th-child-id {
-    font-size: var(--th-text-sm);
-    font-weight: 700;
-    color: var(--th-primary-solid);
-    text-transform: uppercase;
-    letter-spacing: var(--th-tracking-wide);
-    background: rgba(230, 126, 34, 0.1);
-    padding: var(--th-space-1) var(--th-space-3);
-    border-radius: 8px;
-  }
-  
-  .th-age-gender {
-    display: flex;
-    align-items: center;
-    gap: var(--th-space-2);
-    font-size: var(--th-text-lg);
-    font-weight: 600;
-    color: var(--th-gray-700);
-  }
-  
-  .th-gender-icon {
-    color: var(--th-primary-solid);
-  }
-  
-  .th-profile-badges {
-    display: flex;
-    gap: var(--th-space-3);
-    flex-wrap: wrap;
-    margin-bottom: var(--th-space-6);
-  }
-  
-  .th-status-badge,
-  .th-health-badge,
-  .th-language-badge {
-    font-size: var(--th-text-sm);
-    font-weight: 600;
-    padding: var(--th-space-2) var(--th-space-4);
-    border-radius: 12px;
-    text-transform: capitalize;
-    -webkit-backdrop-filter: blur(8px);
-    backdrop-filter: blur(8px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-  }
-  
-  .th-badge-success {
-    background: rgba(39, 174, 96, 0.15);
-    color: var(--th-secondary-dark);
-  }
-  
-  .th-badge-primary {
-    background: rgba(230, 126, 34, 0.15);
-    color: var(--th-primary-dark);
-  }
-  
-  .th-badge-warning {
-    background: rgba(243, 156, 18, 0.15);
-    color: #D68910;
-  }
-  
-  .th-badge-info {
-    background: rgba(52, 152, 219, 0.15);
-    color: var(--th-accent-dark);
-  }
-  
-  .th-language-badge {
-    background: rgba(39, 174, 96, 0.15);
-    color: var(--th-secondary-dark);
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .th-overview-grid {
+    grid-template-columns: 1fr; /* Single column on smaller screens */
   }
   
   .th-profile-quick-stats {
-    display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: var(--th-space-4);
+  }
+}
+
+/* Better responsive breakpoint - single column only on tablets and below */
+@media (max-width: 1024px) {
+  .th-overview-grid {
+    grid-template-columns: 1fr;
   }
   
-  .th-quick-stat {
-    display: flex;
-    align-items: center;
-    gap: var(--th-space-3);
-    padding: var(--th-space-4);
-    background: rgba(255, 255, 255, 0.8);
-    border: 1px solid rgba(230, 126, 34, 0.1);
-    border-radius: 16px;
-    -webkit-backdrop-filter: blur(8px);
-    backdrop-filter: blur(8px);
-    transition: var(--th-transition-fast);
+  .th-profile-quick-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .th-header-content {
+    padding: 16px;
   }
   
-  .th-quick-stat:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--th-shadow-lg);
-  }
-  
-  .th-stat-icon {
-    width: 40px;
-    height: 40px;
-    background: var(--th-primary);
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--th-white);
-    font-size: var(--th-text-lg);
-    box-shadow: var(--th-shadow-md);
-    flex-shrink: 0;
-  }
-  
-  .th-stat-content {
-    display: flex;
+  .th-header-navigation {
     flex-direction: column;
-    gap: var(--th-space-1);
-    min-width: 0;
+    gap: 12px;
+    align-items: stretch;
   }
   
-  .th-stat-label {
-    font-size: var(--th-text-xs);
-    font-weight: 600;
-    color: var(--th-gray-500);
-    text-transform: uppercase;
-    letter-spacing: var(--th-tracking-wide);
+  .th-header-actions {
+    flex-wrap: wrap;
+    justify-content: center;
   }
   
-  .th-stat-value {
-    font-size: var(--th-text-base);
-    font-weight: 700;
-    color: var(--th-gray-800);
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+  .th-profile-main {
+    flex-direction: column;
+    text-align: center;
   }
   
-  /* Profile Navigation */
-  .th-profile-nav {
-    background: var(--th-white);
-    border-radius: 16px;
-    padding: var(--th-space-2);
-    margin-bottom: var(--th-space-6);
-    box-shadow: var(--th-shadow-lg);
-    border: 1px solid rgba(230, 126, 34, 0.1);
-    overflow-x: auto;
+  .th-profile-photo-section {
+    align-items: center;
+  }
+  
+  .th-profile-photo {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .th-profile-name {
+    font-size: 20px;
+  }
+  
+  .th-profile-meta {
+    justify-content: center;
+  }
+  
+  .th-profile-badges {
+    justify-content: center;
+  }
+  
+  .th-profile-quick-stats {
+    grid-template-columns: 1fr;
   }
   
   .th-nav-tabs {
-    display: flex;
-    gap: var(--th-space-2);
-    min-width: max-content;
+    flex-wrap: nowrap;
   }
   
   .th-nav-tab {
-    display: flex;
-    align-items: center;
-    gap: var(--th-space-2);
-    padding: var(--th-space-3) var(--th-space-5);
-    background: transparent;
-    border: none;
-    border-radius: 12px;
-    color: var(--th-gray-600);
-    font-weight: 600;
-    font-size: var(--th-text-sm);
-    cursor: pointer;
-    transition: var(--th-transition-luxury);
-    white-space: nowrap;
-  }
-  
-  .th-nav-tab:hover {
-    background: rgba(230, 126, 34, 0.1);
-    color: var(--th-primary-solid);
-  }
-  
-  .th-tab-active {
-    background: var(--th-primary);
-    color: var(--th-white);
-    box-shadow: var(--th-shadow-md);
-  }
-  
-  .th-tab-icon {
-    font-size: var(--th-text-base);
-  }
-  
-  .th-tab-label {
-    font-weight: 600;
-  }
-  
-  /* Profile Content */
-  .th-profile-content {
-    min-height: 400px;
-  }
-  
-  .th-tab-content {
-    animation: th-tab-enter 0.4s ease-out;
-  }
-  
-  @keyframes th-tab-enter {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-  
-  /* Overview Tab */
-  .th-overview-tab {
-    display: flex;
-    flex-direction: column;
-    gap: var(--th-space-6);
-  }
-  
-  .th-overview-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--th-space-8);
-  }
-  
-  .th-overview-left,
-  .th-overview-right {
-    display: flex;
-    flex-direction: column;
-    gap: var(--th-space-6);
-  }
-  
-  /* Info Cards */
-  .th-info-card {
-    background: var(--th-white);
-    border: 1px solid rgba(230, 126, 34, 0.1);
-    border-radius: 20px;
-    overflow: hidden;
-    box-shadow: var(--th-shadow-lg);
-    -webkit-backdrop-filter: blur(16px);
-    backdrop-filter: blur(16px);
-    transition: var(--th-transition-luxury);
-  }
-  
-  .th-info-card:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--th-shadow-luxury);
-    border-color: rgba(230, 126, 34, 0.2);
-  }
-  
-  .th-card-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: var(--th-space-6);
-    border-bottom: 1px solid rgba(230, 126, 34, 0.1);
-    background: rgba(230, 126, 34, 0.02);
-  }
-  
-  .th-card-title {
-    display: flex;
-    align-items: center;
-    gap: var(--th-space-3);
-    font-family: var(--th-font-heading);
-    font-size: var(--th-text-lg);
-    font-weight: 700;
-    color: var(--th-gray-800);
-    margin: 0;
-  }
-  
-  .th-card-icon {
-    color: var(--th-primary-solid);
-    font-size: var(--th-text-lg);
-  }
-  
-  .th-health-status {
-    font-size: var(--th-text-sm);
-    font-weight: 600;
-    padding: var(--th-space-1) var(--th-space-3);
-    border-radius: 8px;
-    text-transform: capitalize;
-  }
-  
-  .th-status-success { background: rgba(39, 174, 96, 0.1); color: var(--th-secondary-solid); }
-  .th-status-primary { background: rgba(230, 126, 34, 0.1); color: var(--th-primary-solid); }
-  .th-status-warning { background: rgba(243, 156, 18, 0.1); color: #E67E22; }
-  .th-status-error { background: rgba(231, 76, 60, 0.1); color: var(--th-warm); }
-  
-  .th-card-body {
-    padding: var(--th-space-6);
+    flex: 1;
+    min-width: 100px;
+    justify-content: center;
   }
   
   .th-info-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--th-space-4);
+    grid-template-columns: 1fr;
   }
   
-  .th-info-item {
-    display: flex;
-    flex-direction: column;
-    gap: var(--th-space-1);
-  }
-  
-  .th-info-label {
-    font-size: var(--th-text-xs);
-    font-weight: 600;
-    color: var(--th-gray-500);
-    text-transform: uppercase;
-    letter-spacing: var(--th-tracking-wide);
-  }
-  
-  .th-info-value {
-    font-size: var(--th-text-base);
-    font-weight: 600;
-    color: var(--th-gray-800);
-  }
-  
-  .th-info-section {
-    margin-top: var(--th-space-4);
-    padding-top: var(--th-space-4);
-    border-top: 1px solid rgba(230, 126, 34, 0.1);
-  }
-  
-  .th-info-text {
-    font-size: var(--th-text-sm);
-    color: var(--th-gray-600);
-    line-height: var(--th-leading-relaxed);
-    margin: var(--th-space-2) 0 0;
-  }
-  
-  /* Health Summary Specific */
   .th-health-metrics {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: var(--th-space-4);
-  }
-  
-  .th-metric {
-    display: flex;
-    align-items: center;
-    gap: var(--th-space-2);
-  }
-  
-  .th-metric-icon {
-    color: var(--th-primary-solid);
-    font-size: var(--th-text-lg);
-  }
-  
-  .th-metric-content {
-    display: flex;
     flex-direction: column;
-    gap: var(--th-space-1);
-  }
-  
-  .th-metric-label {
-    font-size: var(--th-text-xs);
-    font-weight: 600;
-    color: var(--th-gray-500);
-    text-transform: uppercase;
-    letter-spacing: var(--th-tracking-wide);
-  }
-  
-  .th-metric-value {
-    font-size: var(--th-text-lg);
-    font-weight: 700;
-    color: var(--th-gray-800);
-  }
-  
-  .th-medical-info {
-    margin-bottom: var(--th-space-4);
   }
   
   .th-medical-row {
-    display: flex;
-    gap: var(--th-space-6);
-    margin-bottom: var(--th-space-3);
-  }
-  
-  .th-medical-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: var(--th-space-2);
-  }
-  
-  .th-medical-label {
-    font-size: var(--th-text-sm);
-    font-weight: 600;
-    color: var(--th-gray-600);
-  }
-  
-  .th-medical-value {
-    font-size: var(--th-text-sm);
-    font-weight: 600;
-    color: var(--th-gray-800);
-  }
-  
-  .th-last-checkup {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: var(--th-space-3);
-    background: rgba(52, 152, 219, 0.05);
-    border-radius: 8px;
-    border: 1px solid rgba(52, 152, 219, 0.1);
-  }
-  
-  .th-checkup-label {
-    font-size: var(--th-text-sm);
-    font-weight: 600;
-    color: var(--th-gray-600);
-  }
-  
-  .th-checkup-date {
-    font-size: var(--th-text-sm);
-    font-weight: 600;
-    color: var(--th-accent-solid);
-  }
-  
-  /* Education specific */
-  .th-education-info {
-    display: flex;
     flex-direction: column;
-    gap: var(--th-space-3);
+    gap: 8px;
   }
-  
-  .th-education-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .th-edu-label {
-    font-size: var(--th-text-sm);
-    font-weight: 600;
-    color: var(--th-gray-600);
-  }
-  
-  .th-edu-value {
-    font-size: var(--th-text-sm);
-    font-weight: 600;
-    color: var(--th-gray-800);
-  }
-  
-  /* Administrative specific */
-  .th-admin-info {
-    display: flex;
-    flex-direction: column;
-    gap: var(--th-space-3);
-  }
-  
-  .th-admin-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .th-admin-label {
-    font-size: var(--th-text-sm);
-    font-weight: 600;
-    color: var(--th-gray-600);
-  }
-  
-  .th-admin-value {
-    font-size: var(--th-text-sm);
-    font-weight: 600;
-    color: var(--th-gray-800);
-  }
-  
-  /* Circumstances */
-  .th-circumstances-text {
-    font-size: var(--th-text-base);
-    color: var(--th-gray-700);
-    line-height: var(--th-leading-relaxed);
-    margin: 0;
-  }
-  
-  /* Responsive Design */
-  @media (max-width: 1024px) {
-    .th-overview-grid {
-      grid-template-columns: 1fr;
-    }
-    
-    .th-profile-main {
-      flex-direction: column;
-      text-align: center;
-    }
-    
-    .th-profile-quick-stats {
-      grid-template-columns: 1fr;
-    }
-  }
-  
-  @media (max-width: 768px) {
-    .th-header-content {
-      padding: var(--th-space-6);
-    }
-    
-    .th-header-navigation {
-      flex-direction: column;
-      gap: var(--th-space-4);
-    }
-    
-    .th-header-actions {
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-    
-    .th-profile-photo {
-      width: 120px;
-      height: 120px;
-    }
-    
-    .th-profile-name {
-      font-size: var(--th-text-3xl);
-    }
-    
-    .th-profile-meta {
-      flex-direction: column;
-      gap: var(--th-space-2);
-    }
-    
-    .th-nav-tabs {
-      flex-wrap: wrap;
-    }
-    
-    .th-nav-tab {
-      flex: 1;
-      min-width: 120px;
-      justify-content: center;
-    }
-    
-    .th-info-grid {
-      grid-template-columns: 1fr;
-    }
-    
-    .th-health-metrics {
-      flex-direction: column;
-      gap: var(--th-space-3);
-    }
-    
-    .th-medical-row {
-      flex-direction: column;
-      gap: var(--th-space-3);
-    }
-  }
-  
-  /* Dark Mode */
-  [data-theme="dark"] .th-profile-header {
-    background: var(--th-gray-800);
-    border-color: rgba(255, 255, 255, 0.1);
-  }
-  
-  [data-theme="dark"] .th-profile-name {
-    color: var(--th-gray-200);
-    background: linear-gradient(135deg, var(--th-gray-200) 0%, var(--th-primary-solid) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-  
-  [data-theme="dark"] .th-info-card {
-    background: var(--th-gray-800);
-    border-color: rgba(255, 255, 255, 0.1);
-  }
-  
-  [data-theme="dark"] .th-card-title {
-    color: var(--th-gray-200);
-  }
-  
-  [data-theme="dark"] .th-info-value,
-  [data-theme="dark"] .th-metric-value,
-  [data-theme="dark"] .th-medical-value {
-    color: var(--th-gray-200);
-  }
-  
-  [data-theme="dark"] .th-circumstances-text {
-    color: var(--th-gray-400);
-  }
+}
 
-  /* Medical Conditions and Allergies Lists */
-  .th-medical-conditions-list,
-  .th-allergies-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: var(--th-space-2);
+@media (max-width: 480px) {
+  .th-header-content {
+    padding: 12px;
   }
-
-  .th-medical-condition,
-  .th-allergy-item {
-    background: var(--th-gray-50);
-    border: 1px solid var(--th-gray-200);
-    border-radius: 8px;
-    padding: var(--th-space-3);
-    transition: var(--th-transition-fast);
+  
+  .th-back-btn {
+    font-size: 12px;
+    padding: 6px 10px;
   }
-
-  .th-medical-condition:hover,
-  .th-allergy-item:hover {
-    background: var(--th-gray-100);
-    border-color: var(--th-primary-light);
+  
+  .th-profile-name {
+    font-size: 18px;
   }
-
-  .th-condition-name {
-    font-weight: 600;
-    color: var(--th-gray-800);
-    margin-bottom: var(--th-space-1);
+  
+  .th-quick-stat {
+    padding: 10px;
   }
-
-  .th-condition-treatment,
-  .th-condition-notes {
-    font-size: var(--th-text-sm);
-    color: var(--th-gray-600);
-    margin-top: var(--th-space-1);
+  
+  .th-stat-icon {
+    width: 28px;
+    height: 28px;
+    font-size: 12px;
   }
-
-  .th-condition-treatment {
-    font-weight: 500;
+  
+  .th-card-header {
+    padding: 10px 12px;
   }
-
-  .th-condition-notes {
-    font-style: italic;
+  
+  .th-card-body {
+    padding: 12px;
   }
+}
 
-  /* Dark mode for medical lists */
-  [data-theme="dark"] .th-medical-condition,
-  [data-theme="dark"] .th-allergy-item {
-    background: var(--th-gray-700);
-    border-color: var(--th-gray-600);
-  }
+/* Dark Mode */
+[data-theme="dark"] .th-child-profile-loading,
+[data-theme="dark"] .th-child-profile-error,
+[data-theme="dark"] .th-profile-header,
+[data-theme="dark"] .th-info-card,
+[data-theme="dark"] .th-profile-nav {
+  background: var(--th-gray-800);
+  border-color: var(--th-gray-700);
+}
 
-  [data-theme="dark"] .th-medical-condition:hover,
-  [data-theme="dark"] .th-allergy-item:hover {
-    background: var(--th-gray-600);
-    border-color: var(--th-primary-light);
-  }
+[data-theme="dark"] .th-profile-name,
+[data-theme="dark"] .th-card-title {
+  color: var(--th-gray-200);
+}
 
-  [data-theme="dark"] .th-condition-name {
-    color: var(--th-gray-200);
-  }
+[data-theme="dark"] .th-info-value,
+[data-theme="dark"] .th-metric-value,
+[data-theme="dark"] .th-medical-value,
+[data-theme="dark"] .th-edu-value,
+[data-theme="dark"] .th-admin-value {
+  color: var(--th-gray-200);
+}
 
-  [data-theme="dark"] .th-condition-treatment,
-  [data-theme="dark"] .th-condition-notes {
-    color: var(--th-gray-400);
-  } 
+[data-theme="dark"] .th-circumstances-text {
+  color: var(--th-gray-400);
+}
+
+[data-theme="dark"] .th-medical-condition,
+[data-theme="dark"] .th-allergy-item {
+  background: var(--th-gray-700);
+  border-color: var(--th-gray-600);
+}
+
+[data-theme="dark"] .th-medical-condition:hover,
+[data-theme="dark"] .th-allergy-item:hover {
+  border-color: var(--th-accent-solid);
+}
+
+[data-theme="dark"] .th-condition-name {
+  color: var(--th-gray-200);
+}
+
+[data-theme="dark"] .th-condition-treatment,
+[data-theme="dark"] .th-condition-notes {
+  color: var(--th-gray-400);
+}
+
+[data-theme="dark"] .th-card-header {
+  background: var(--th-gray-700);
+  border-color: var(--th-gray-600);
+}
+
+[data-theme="dark"] .th-quick-stat {
+  background: var(--th-gray-700);
+  border-color: var(--th-gray-600);
+}
+
+[data-theme="dark"] .th-back-btn {
+  background: var(--th-gray-700);
+  border-color: var(--th-gray-600);
+  color: var(--th-gray-300);
+}
+
+[data-theme="dark"] .th-back-btn:hover {
+  background: var(--th-gray-600);
+}

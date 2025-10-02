@@ -1,19 +1,12 @@
 .th-main-layout {
   min-height: 100vh;
-  background: linear-gradient(
-    135deg,
-    var(--th-gray-50) 0%,
-    rgba(230, 126, 34, 0.03) 25%,
-    rgba(52, 152, 219, 0.02) 50%,
-    rgba(39, 174, 96, 0.03) 75%,
-    var(--th-gray-50) 100%
-  );
+  background: var(--th-gray-50);
   position: relative;
 }
 
 .th-layout-container {
   display: flex;
-  padding-top: 70px; /* Account for fixed header */
+  padding-top: 70px;
   min-height: calc(100vh - 70px);
   position: relative;
 }
@@ -21,25 +14,23 @@
 .th-main-content {
   flex: 1;
   min-width: 0;
-  transition: var(--th-transition-luxury);
+  transition: var(--th-transition-fast);
   width: 100%;
 }
 
 .th-content-wrapper {
-  padding: var(--th-space-8) var(--th-space-6);
-  max-width: 100%;
-  margin: 0 auto;
-  animation: th-content-enter 0.6s ease-out;
+  padding: 24px;
+  width: 100%;
+  max-width: none;
+  animation: th-content-enter 0.3s ease-out;
 }
 
 @keyframes th-content-enter {
   from {
     opacity: 0;
-    transform: translateY(20px);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
   }
 }
 
@@ -68,11 +59,11 @@
 /* Desktop: Sidebar takes space in the layout */
 @media (min-width: 769px) {
   .th-layout-container {
-    padding-left: 280px; /* Space for sidebar */
+    padding-left: 280px;
   }
   
   .th-main-content {
-    width: calc(100% - 280px);
+    width: 100%; /* CHANGED: Remove the calc, just use 100% */
   }
   
   .th-sidebar-overlay {
@@ -91,56 +82,49 @@
   }
   
   .th-content-wrapper {
-    padding: var(--th-space-6) var(--th-space-4);
+    padding: 16px;
   }
 }
 
 @media (max-width: 480px) {
   .th-content-wrapper {
-    padding: var(--th-space-4) var(--th-space-3);
+    padding: 12px;
   }
 }
 
 /* Page Content Containers */
 .th-page-container {
-  max-width: var(--th-container-xl);
-  margin: 0 auto;
+  width: 100%;
+  max-width: none;
 }
 
 .th-page-header {
-  margin-bottom: var(--th-space-8);
-  padding-bottom: var(--th-space-6);
-  border-bottom: 1px solid rgba(230, 126, 34, 0.1);
-  background: rgba(255, 255, 255, 0.6);
-  -webkit-backdrop-filter: blur(8px);
-  backdrop-filter: blur(8px);
-  border-radius: 16px;
-  padding: var(--th-space-6);
-  box-shadow: var(--th-shadow-sm);
+  margin-bottom: 24px;
+  padding: 20px;
+  border-bottom: 1px solid var(--th-gray-200);
+  background: var(--th-white);
+  border-radius: 8px;
+  border: 1px solid var(--th-gray-200);
 }
 
 .th-page-title {
-  font-family: var(--th-font-luxury);
-  font-size: var(--th-text-4xl);
-  font-weight: 800;
-  background: var(--th-primary);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  margin-bottom: var(--th-space-3);
-  line-height: var(--th-leading-tight);
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--th-gray-800);
+  margin-bottom: 8px;
+  line-height: 1.2;
 }
 
 .th-page-subtitle {
-  font-size: var(--th-text-lg);
+  font-size: 14px;
   color: var(--th-gray-600);
-  margin-bottom: var(--th-space-6);
-  line-height: var(--th-leading-relaxed);
+  margin-bottom: 16px;
+  line-height: 1.5;
 }
 
 .th-page-actions {
   display: flex;
-  gap: var(--th-space-3);
+  gap: 12px;
   flex-wrap: wrap;
   align-items: center;
 }
@@ -148,7 +132,7 @@
 /* Grid Layouts */
 .th-grid {
   display: grid;
-  gap: var(--th-space-6);
+  gap: 16px;
 }
 
 .th-grid-cols-1 { grid-template-columns: repeat(1, 1fr); }
@@ -177,7 +161,7 @@
   }
   
   .th-page-title {
-    font-size: var(--th-text-3xl);
+    font-size: 20px;
   }
   
   .th-page-actions {
@@ -192,17 +176,10 @@
 
 /* Dark Mode */
 [data-theme="dark"] .th-main-layout {
-  background: linear-gradient(
-    135deg,
-    var(--th-gray-900) 0%,
-    rgba(230, 126, 34, 0.05) 25%,
-    rgba(52, 152, 219, 0.03) 50%,
-    rgba(39, 174, 96, 0.05) 75%,
-    var(--th-gray-900) 100%
-  );
+  background: var(--th-gray-900);
 }
 
 [data-theme="dark"] .th-page-header {
-  background: rgba(255, 255, 255, 0.1);
-  border-bottom-color: rgba(255, 255, 255, 0.1);
+  background: var(--th-gray-800);
+  border-color: var(--th-gray-700);
 }

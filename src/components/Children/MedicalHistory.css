@@ -1,10 +1,34 @@
 /* src/components/Children/MedicalHistory.css */
 
 .th-medical-history {
-    padding: var(--th-space-6);
-    background: var(--th-gray-50);
-    min-height: 100vh;
+  padding: 0; /* Remove padding since it's already inside a padded container */
+  background: transparent; /* Let parent background show through */
+  width: 100%; /* Ensure full width */
+}
+
+.th-overview-content,
+.th-records-content,
+.th-vaccinations-content {
+  padding: 0; /* Remove internal padding */
+}
+
+.th-overview-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Match ChildProfile grid */
+  gap: var(--th-space-6);
+}
+
+@media (min-width: 1600px) {
+  .th-overview-grid {
+    grid-template-columns: repeat(3, 1fr);
   }
+}
+
+@media (max-width: 1024px) {
+  .th-overview-grid {
+    grid-template-columns: 1fr;
+  }
+}
   
   /* Header */
   .th-medical-header {

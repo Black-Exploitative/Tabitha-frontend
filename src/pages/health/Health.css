@@ -76,7 +76,6 @@
   .th-stat-value {
     font-size: var(--th-text-3xl);
     font-weight: 700;
-    color: var(--th-text-primary);
     margin: 0 0 var(--th-space-1) 0;
     line-height: 1;
   }
