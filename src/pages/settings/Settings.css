@@ -127,7 +127,7 @@
   /* Profile Section */
   .th-profile-content {
     display: grid;
-    grid-template-columns: 100% 1fr;
+    grid-template-columns: auto 1fr;
     gap: var(--th-space-6);
   }
   
