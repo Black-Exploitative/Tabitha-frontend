@@ -1,5 +1,5 @@
-import React, { useState, useMemo } from 'react';
-import { useQuery } from '@tanstack/react-query';
+import React, { useState, useMemo, useRef, useEffect } from 'react';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 import { 
   FaPlus, 
@@ -12,27 +12,81 @@ import {
   FaTh,
   FaList,
   FaSortAmountDown,
-  FaSortAmountUp
+  FaSortAmountUp,
+  FaEye,
+  FaEdit,
+  FaTrash,
+  FaChevronDown,
+  FaExclamationTriangle
 } from 'react-icons/fa';
 import Button from '../../components/UI/Button/Button';
 import ChildCard from '../../components/Children/ChildCard';
 import ChildrenTable from '../../components/Children/ChildrenTable';
 import SearchInput from '../../components/Common/SearchInput';
-import FilterDropdown from '../../components/Common/FilterDropdown';
 import LoadingSpinner from '../../components/UI/Loading/LoadingSpinner';
 import { childrenService } from '../../services/children';
 import { useAuth } from '../../context/AuthContext';
 import { NIGERIAN_STATES } from '../../utils/nigerianData';
 import './ChildrenList.css';
 
+const FilterDropdown = ({ label, value, options, onChange }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  const selectedOption = options.find(opt => opt.value === value);
+  const isActive = value !== 'all';
+
+  return (
+    <div className="th-filter-dropdown" ref={dropdownRef}>
+      <button
+        className={`th-filter-btn ${isActive ? 'active' : ''}`}
+        onClick={() => setIsOpen(!isOpen)}
+      >
+        {selectedOption?.label || label}
+        <FaChevronDown style={{ transform: isOpen ? 'rotate(180deg)' : 'rotate(0)', transition: 'transform 0.2s' }} />
+      </button>
+      
+      {isOpen && (
+        <div className="th-filter-dropdown-menu">
+          {options.map(option => (
+            <div
+              key={option.value}
+              className={`th-filter-option ${value === option.value ? 'selected' : ''}`}
+              onClick={() => {
+                onChange(option.value);
+                setIsOpen(false);
+              }}
+            >
+              {option.label}
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+};
+
 const ChildrenList = () => {
   const navigate = useNavigate();
   const { user } = useAuth();
+  const queryClient = useQueryClient();
   
   const [viewMode, setViewMode] = useState('cards');
   const [searchQuery, setSearchQuery] = useState('');
   const [sortBy, setSortBy] = useState('admission_date');
   const [sortOrder, setSortOrder] = useState('desc');
+  const [deleteConfirm, setDeleteConfirm] = useState(null);
   const [filters, setFilters] = useState({
     status: 'all',
     ageRange: 'all',
@@ -50,25 +104,20 @@ const ChildrenList = () => {
   } = useQuery({
     queryKey: ['children', { searchQuery, sortBy, sortOrder, filters }],
     queryFn: () => {
-      // Only send non-default values to avoid backend issues
       const params = {};
       
-      // Only add searchQuery if it's not empty
       if (searchQuery.trim()) {
         params.searchQuery = searchQuery.trim();
       }
       
-      // Only add sortBy if it's not the default
       if (sortBy !== 'admission_date') {
         params.sortBy = sortBy;
       }
       
-      // Only add sortOrder if it's not the default
       if (sortOrder !== 'desc') {
         params.sortOrder = sortOrder;
       }
       
-      // Only add filter values that are not 'all'
       Object.entries(filters).forEach(([key, value]) => {
         if (value !== 'all' && value !== '') {
           params[key] = value;
@@ -81,7 +130,17 @@ const ChildrenList = () => {
     placeholderData: (previousData) => previousData,
   });
 
-  // Mock data
+  const deleteMutation = useMutation({
+    mutationFn: (childId) => childrenService.deleteChild(childId),
+    onSuccess: () => {
+      queryClient.invalidateQueries(['children']);
+      setDeleteConfirm(null);
+    },
+    onError: (error) => {
+      console.error('Failed to delete child:', error);
+    }
+  });
+
   const mockChildren = [
     {
       id: 1,
@@ -250,6 +309,31 @@ const ChildrenList = () => {
     console.log(`Exporting children data as ${format}`);
   };
 
+  const handleQuickDelete = (childId) => {
+    setDeleteConfirm(childId);
+  };
+
+  const confirmDelete = () => {
+    if (deleteConfirm) {
+      deleteMutation.mutate(deleteConfirm);
+    }
+  };
+
+  const cancelDelete = () => {
+    setDeleteConfirm(null);
+  };
+
+  const getChildAge = (dateOfBirth) => {
+    const today = new Date();
+    const birthDate = new Date(dateOfBirth);
+    let age = today.getFullYear() - birthDate.getFullYear();
+    const monthDiff = today.getMonth() - birthDate.getMonth();
+    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+      age--;
+    }
+    return age;
+  };
+
   if (isLoading) {
     return (
       <div className="th-children-loading">
@@ -273,6 +357,36 @@ const ChildrenList = () => {
 
   return (
     <div className="th-children-list">
+      {/* Delete Confirmation Modal */}
+      {deleteConfirm && (
+        <div className="th-modal-overlay">
+          <div className="th-modal">
+            <div className="th-modal-header">
+              <div className="th-modal-icon">
+                <FaExclamationTriangle />
+              </div>
+              <h3>Delete Child Record</h3>
+            </div>
+            <p>
+              Are you sure you want to delete this child's record? This action cannot be undone and all associated data will be permanently removed.
+            </p>
+            <div className="th-modal-actions">
+              <Button variant="outline" onClick={cancelDelete}>
+                Cancel
+              </Button>
+              <Button 
+                variant="danger" 
+                onClick={confirmDelete}
+                loading={deleteMutation.isPending}
+                icon={<FaTrash />}
+              >
+                Delete Permanently
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Page Header */}
       <div className="th-header-content">
         <div className="th-header-main">
@@ -401,7 +515,7 @@ const ChildrenList = () => {
             size="sm"
             onClick={clearFilters}
           >
-            Clear
+            Clear Filters
           </Button>
         </div>
         
@@ -463,14 +577,87 @@ const ChildrenList = () => {
         {children.length > 0 ? (
           viewMode === 'cards' ? (
             <div className="th-children-list-container">
-              {children.map(child => (
-                <ChildCard
-                  key={child.id}
-                  child={child}
-                  onView={() => navigate(`/children/${child.id}`)}
-                  onEdit={() => navigate(`/children/${child.id}/edit`)}
-                />
-              ))}
+              {children.map(child => {
+                const initials = `${child.first_name[0]}${child.last_name[0]}`;
+                const age = getChildAge(child.date_of_birth);
+                
+                return (
+                  <div key={child.id} className="th-child-row">
+                    <div className="th-child-info">
+                      <div className="th-child-main">
+                        <div className="th-child-avatar">
+                          {child.photo_url ? (
+                            <img src={child.photo_url} alt={child.first_name} style={{ width: '100%', height: '100%', borderRadius: '50%', objectFit: 'cover' }} />
+                          ) : (
+                            initials
+                          )}
+                        </div>
+                        <div className="th-child-details">
+                          <h3 className="th-child-name">
+                            {child.first_name} {child.middle_name} {child.last_name}
+                          </h3>
+                          <p className="th-child-id">{child.child_id}</p>
+                        </div>
+                      </div>
+                      
+                      <div className="th-child-meta">
+                        <div className="th-meta-item">
+                          <span className="th-meta-label">Age</span>
+                          <span className="th-meta-value">{age} years</span>
+                        </div>
+                        <div className="th-meta-item">
+                          <span className="th-meta-label">Gender</span>
+                          <span className="th-meta-value">{child.gender}</span>
+                        </div>
+                        <div className="th-meta-item">
+                          <span className="th-meta-label">Education</span>
+                          <span className="th-meta-value">{child.education_level}</span>
+                        </div>
+                        <div className="th-meta-item">
+                          <span className="th-meta-label">Case Worker</span>
+                          <span className="th-meta-value">{child.case_worker}</span>
+                        </div>
+                      </div>
+                      
+                      <div>
+                        <span className={`th-child-status th-status-${child.current_status.toLowerCase()}`}>
+                          {child.current_status}
+                        </span>
+                      </div>
+                    </div>
+                    
+                    <div className="th-quick-actions">
+                      <button
+                        className="th-action-btn"
+                        onClick={() => navigate(`/children/${child.id}`)}
+                        title="View Details"
+                      >
+                        <FaEye />
+                      </button>
+                      
+                      {user?.permissions?.includes('children.update') && (
+                        <button
+                          className="th-action-btn edit"
+                          onClick={() => navigate(`/children/${child.id}/edit`)}
+                          title="Edit Child"
+                        >
+                          <FaEdit />
+                        </button>
+                      )}
+                      
+                      {user?.permissions?.includes('children.delete') && (
+                        <button
+                          className="th-action-btn delete"
+                          onClick={() => handleQuickDelete(child.id)}
+                          title="Delete Child"
+                        >
+                          <FaTrash />
+                        </button>
+                      )}
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           ) : (
             <ChildrenTable
@@ -480,6 +667,7 @@ const ChildrenList = () => {
               sortOrder={sortOrder}
               onView={(child) => navigate(`/children/${child.id}`)}
               onEdit={(child) => navigate(`/children/${child.id}/edit`)}
+              onDelete={(child) => handleQuickDelete(child.id)}
             />
           )
         ) : (
