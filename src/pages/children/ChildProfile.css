@@ -683,7 +683,7 @@
 
 /* For larger screens, allow 3 columns */
 @media (min-width: 1600px) {
-  . {
+  .th{
     grid-template-columns: repeat(3, 1fr);
   }
 }
@@ -878,4 +878,239 @@
 
 [data-theme="dark"] .th-back-btn:hover {
   background: var(--th-gray-600);
+}
+
+
+
+/* Photo Upload Modal Styles */
+.th-photo-modal {
+  background: var(--th-white);
+  border-radius: 16px;
+  max-width: 500px;
+  width: 90%;
+  max-height: 90vh;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+}
+
+.th-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--th-gray-200);
+}
+
+.th-modal-header h3 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--th-gray-800);
+}
+
+.th-modal-close {
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: var(--th-gray-100);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--th-gray-600);
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.th-modal-close:hover {
+  background: var(--th-gray-200);
+  color: var(--th-gray-800);
+}
+
+.th-modal-body {
+  padding: 24px;
+  flex: 1;
+  overflow-y: auto;
+}
+
+.th-photo-upload-area {
+  min-height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.th-upload-prompt {
+  text-align: center;
+  padding: 60px 40px;
+  border: 2px dashed var(--th-gray-300);
+  border-radius: 12px;
+  background: var(--th-gray-50);
+  cursor: pointer;
+  transition: all 0.3s;
+  width: 100%;
+}
+
+.th-upload-prompt:hover {
+  border-color: var(--th-accent-solid);
+  background: rgba(52, 152, 219, 0.05);
+}
+
+.th-upload-icon {
+  font-size: 48px;
+  color: var(--th-accent-solid);
+  margin-bottom: 16px;
+}
+
+.th-upload-text {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--th-gray-800);
+  margin: 0 0 8px 0;
+}
+
+.th-upload-hint {
+  font-size: 14px;
+  color: var(--th-gray-500);
+  margin: 0;
+}
+
+.th-photo-preview-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.th-photo-preview {
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+  max-height: 400px;
+  object-fit: contain;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.th-change-photo-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border: 1px solid var(--th-gray-300);
+  background: var(--th-white);
+  border-radius: 8px;
+  color: var(--th-gray-700);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.th-change-photo-btn:hover {
+  background: var(--th-gray-50);
+  border-color: var(--th-accent-solid);
+  color: var(--th-accent-solid);
+}
+
+.th-modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  padding: 20px 24px;
+  border-top: 1px solid var(--th-gray-200);
+  background: var(--th-gray-50);
+}
+
+/* Dark Mode Support */
+[data-theme="dark"] .th-photo-modal {
+  background: var(--th-gray-800);
+}
+
+[data-theme="dark"] .th-modal-header {
+  border-bottom-color: var(--th-gray-700);
+}
+
+[data-theme="dark"] .th-modal-header h3 {
+  color: var(--th-gray-200);
+}
+
+[data-theme="dark"] .th-modal-close {
+  background: var(--th-gray-700);
+  color: var(--th-gray-300);
+}
+
+[data-theme="dark"] .th-modal-close:hover {
+  background: var(--th-gray-600);
+  color: var(--th-gray-100);
+}
+
+[data-theme="dark"] .th-upload-prompt {
+  border-color: var(--th-gray-600);
+  background: var(--th-gray-750);
+}
+
+[data-theme="dark"] .th-upload-prompt:hover {
+  border-color: var(--th-accent-solid);
+  background: rgba(52, 152, 219, 0.1);
+}
+
+[data-theme="dark"] .th-upload-text {
+  color: var(--th-gray-200);
+}
+
+[data-theme="dark"] .th-upload-hint {
+  color: var(--th-gray-400);
+}
+
+[data-theme="dark"] .th-change-photo-btn {
+  background: var(--th-gray-700);
+  border-color: var(--th-gray-600);
+  color: var(--th-gray-200);
+}
+
+[data-theme="dark"] .th-change-photo-btn:hover {
+  background: var(--th-gray-600);
+  border-color: var(--th-accent-solid);
+}
+
+[data-theme="dark"] .th-modal-footer {
+  border-top-color: var(--th-gray-700);
+  background: var(--th-gray-750);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .th-photo-modal {
+    max-width: 95%;
+  }
+
+  .th-modal-header,
+  .th-modal-body,
+  .th-modal-footer {
+    padding: 16px;
+  }
+
+  .th-upload-prompt {
+    padding: 40px 20px;
+  }
+
+  .th-upload-icon {
+    font-size: 36px;
+  }
+
+  .th-photo-preview {
+    max-height: 300px;
+  }
+
+  .th-modal-footer {
+    flex-direction: column;
+  }
+
+  .th-modal-footer button {
+    width: 100%;
+  }
 }
