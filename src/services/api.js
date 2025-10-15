@@ -2,7 +2,7 @@
 import axios from 'axios';
 import toast from 'react-hot-toast';
 
-const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:8080/api/v1';
+const API_BASE_URL = process.env.REACT_APP_API_URL || 'https://tabitha-backend.vercel.app/';
 
 // Create axios instance
 const api = axios.create({
