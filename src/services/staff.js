@@ -12,6 +12,8 @@ export const staffService = {
     }
   },
 
+  
+
   // Get staff member by ID - Fixed to handle cached responses
   getStaffById: async (id) => {
     try {
