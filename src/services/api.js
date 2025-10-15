@@ -2,7 +2,7 @@
 import axios from 'axios';
 import toast from 'react-hot-toast';
 
-const API_BASE_URL = process.env.REACT_APP_API_URL || 'https://tabitha-backend.vercel.app/';
+const API_BASE_URL = process.env.REACT_APP_API_URL || 'https://tabitha-backend-m9rpt4n4u-deariecybers-projects.vercel.app/api/v1';
 
 // Create axios instance
 const api = axios.create({
@@ -12,8 +12,6 @@ const api = axios.create({
     'Content-Type': 'application/json',
   },
 });
-
-
 
 // Request interceptor to add auth token
 api.interceptors.request.use(
